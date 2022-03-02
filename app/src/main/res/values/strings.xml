@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">BCTN</string>
+
+    <string name="trangchu">Trang chủ</string>
+    <string name="thongbao">Thông báo</string>
+    <string name="thongtin">Thông tin</string>
+    <string name="donhang">Đơn hàng</string>
+    <string name="yeuthich">Yêu thích</string>
+</resources>

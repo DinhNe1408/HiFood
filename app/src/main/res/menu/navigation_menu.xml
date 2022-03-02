@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/TrangChu"
+        android:title="@string/trangchu"
+        android:icon="@drawable/ic_round_home_24"/>
+
+    <item android:id="@+id/DonHang"
+        android:title="@string/donhang"
+        android:icon="@drawable/ic_round_home_24"/>
+
+    <item android:id="@+id/YeuThich"
+        android:title="string/yeuthich"
+        android:icon="@drawable/ic_round_favorite_24"/>
+
+    <item android:id="@+id/ThongBao"
+        android:title="@string/thongbao"
+        android:icon="@drawable/ic_round_notifications_24"/>
+
+    <item android:id="@+id/ThongTin"
+        android:title="@string/thongtin"
+        android:icon="@drawable/ic_round_person_24"/>
+</menu>
