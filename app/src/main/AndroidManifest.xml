@@ -12,7 +12,9 @@
         <activity
             android:name=".activity.MainActivity"
             android:exported="true" />
+        <!--Giúp menu không nhảy khi bấm editext adjustNothing-->
         <activity
+            android:windowSoftInputMode="adjustNothing"
             android:name=".activity.TrangChuAct"
             android:exported="true" >
             <intent-filter>

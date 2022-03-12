@@ -6,10 +6,10 @@
 
     <item android:id="@+id/DonHang"
         android:title="@string/donhang"
-        android:icon="@drawable/ic_round_home_24"/>
+        android:icon="@drawable/ic_round_restaurant_24" />
 
     <item android:id="@+id/YeuThich"
-        android:title="string/yeuthich"
+        android:title="@string/yeuthich"
         android:icon="@drawable/ic_round_favorite_24"/>
 
     <item android:id="@+id/ThongBao"

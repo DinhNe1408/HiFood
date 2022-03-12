@@ -2,21 +2,26 @@ package com.example.bctn.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager2.widget.ViewPager2;
+import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.bctn.R;
-import com.example.bctn.adapter.ViewPager_TC;
+import com.example.bctn.fragment.DonHangFrag;
+import com.example.bctn.fragment.HomeFrag;
+import com.example.bctn.fragment.TaiKhoanFrag;
+import com.example.bctn.fragment.ThongBaoFrag;
+import com.example.bctn.fragment.YeuThichFrag;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class TrangChuAct extends AppCompatActivity {
 
-    private ViewPager2 viewPager2;
+    //private ViewPager2 viewPager2;
     private  BottomNavigationView bottomNavigationView;
-
+    private  long  backPressedTime;
+    private Toast mToast;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,62 +30,50 @@ public class TrangChuAct extends AppCompatActivity {
 
         AnhXa();
 
-        ViewPager_TC viewPager_tc = new ViewPager_TC(this);
-        viewPager2.setAdapter(viewPager_tc);
-        bottomNavigationView.setSelectedItemId(R.id.TrangChu);
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_contrainer,new HomeFrag()).commit();
 
         bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Fragment selFragment = null;
                 switch (item.getItemId()){
                     case R.id.TrangChu:
-                        viewPager2.setCurrentItem(0);
+                        selFragment = new HomeFrag();
                         break;
                     case  R.id.DonHang:
-                        viewPager2.setCurrentItem(1);
+                        selFragment = new DonHangFrag();
                         break;
                     case R.id.YeuThich:
-                        viewPager2.setCurrentItem(2);
+                        selFragment = new YeuThichFrag();
                         break;
                     case R.id.ThongBao:
-                        viewPager2.setCurrentItem(3);
+                        selFragment = new ThongBaoFrag();
                         break;
                     case R.id.ThongTin:
-                        viewPager2.setCurrentItem(4);
+                        selFragment = new TaiKhoanFrag();
                         break;
                 }
+                getSupportFragmentManager().beginTransaction().replace(R.id.frame_contrainer,selFragment).commit();
                 return true;
-            }
-        });
-
-        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-                switch (position){
-                    case 0:
-                        bottomNavigationView.getMenu().findItem(R.id.TrangChu).setChecked(true);
-                        break;
-                    case 1:
-                        bottomNavigationView.getMenu().findItem(R.id.DonHang).setChecked(true);
-                        break;
-                    case 2:
-                        bottomNavigationView.getMenu().findItem(R.id.YeuThich).setChecked(true);
-                        break;
-                    case 3:
-                        bottomNavigationView.getMenu().findItem(R.id.ThongBao).setChecked(true);
-                        break;
-                    case 4:
-                        bottomNavigationView.getMenu().findItem(R.id.ThongTin).setChecked(true);
-                        break;
-
-                }
             }
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        if (backPressedTime + 2000 > System.currentTimeMillis()){
+            mToast.cancel();
+            super.onBackPressed();
+            return;
+        } else {
+            mToast = Toast.makeText(this, "Nhấn back thêm 1 lần nữa để thoát", Toast.LENGTH_SHORT);
+            mToast.show();
+        }
+
+        backPressedTime = System.currentTimeMillis();
+    }
+
     private void AnhXa() {
         bottomNavigationView = findViewById(R.id.navigation_menu);
-        viewPager2 = findViewById(R.id.viewpager_TC);
     }
 }

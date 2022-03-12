@@ -6,4 +6,11 @@
     <string name="thongtin">Thông tin</string>
     <string name="donhang">Đơn hàng</string>
     <string name="yeuthich">Yêu thích</string>
+
+    <string name="banchay">Bán chạy</string>
+    <string name="ganban">Gần bạn</string>
+    <string name="phobien">Phổ biến</string>
+    <string name="khuyenmai">Khuyến mãi</string>
+
+    <string name="tim">Nhập vào món ăn bạn cần tìm</string>
 </resources>

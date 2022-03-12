@@ -11,15 +11,11 @@ import androidx.fragment.app.Fragment;
 
 import com.example.bctn.R;
 
-public class DonHangFragment extends Fragment {
-
-    private View mView;
+public class PhoBienFrag extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.fragment_don_hang,container,false);
-
-        return mView;
+        return inflater.inflate(R.layout.frag_pho_bien, container, false);
     }
 }

@@ -11,14 +11,14 @@ import androidx.fragment.app.Fragment;
 
 import com.example.bctn.R;
 
-public class ThongBaoFragment extends Fragment {
+public class YeuThichFrag extends Fragment {
 
     private View mView;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.fragment_thong_bao,container,false);
+        mView = inflater.inflate(R.layout.frag_yeu_thich,container,false);
 
         return mView;
     }
