@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.bctn.R;
-import com.example.bctn.adapter.MainAdap;
+import com.example.bctn.adapter.TabHomeAdap;
 import com.example.bctn.adapter.Slide_TC;
 import com.example.bctn.adapter.TheLoaiAdap;
 import com.example.bctn.domain.slide_tc;
@@ -37,11 +38,13 @@ public class HomeFrag extends Fragment{
     private Slide_TC slide_TC;
     private List<slide_tc> mListSlide;
     private List<theloai> mListTL;
+
+    TextView txtV_ViTri_home;
     private RecyclerView recV_TheLoai_home;
-    private MainAdap mainAdap;
+    private TabHomeAdap tabHomeAdap;
     // Autorun Slide
-    private Handler mHandler =  new Handler();
-    private Runnable mRunnable = new Runnable() {
+    private final Handler mHandler =  new Handler();
+    private final Runnable mRunnable = new Runnable() {
         @Override
         public void run() {
             if (viewPage2_Slide.getCurrentItem() == mListSlide.size() - 1 ) {
@@ -81,15 +84,11 @@ public class HomeFrag extends Fragment{
         recV_TheLoai_home.setLayoutManager(gridLayoutManager);
         recV_TheLoai_home.setAdapter(theLoaiAdap);
 
-        mainAdap = new MainAdap(getActivity());
-        viewPage2_home_2.setAdapter(mainAdap);
-
+        tabHomeAdap = new TabHomeAdap(getActivity());
+        viewPage2_home_2.setAdapter(tabHomeAdap);
 
         new TabLayoutMediator(tab_home_1, viewPage2_home_2, (tab, position) -> {
             switch (position){
-                case 0:
-                    tab.setText("Gần bạn");
-                    break;
                 case 1:
                     tab.setText("Bán chạy");
                     break;
@@ -126,38 +125,37 @@ public class HomeFrag extends Fragment{
 
         viewPage2_home_2 = mView.findViewById(R.id.viewPage2_home_2);
         tab_home_1 = mView.findViewById(R.id.tab_home_1);
+
+        txtV_ViTri_home = mView.findViewById(R.id.txtV_ViTri_home);
+
     }
 
     private List<slide_tc> getListSlide() {
         List<slide_tc> mList = new ArrayList<>();
-        mList.add(new slide_tc(R.drawable.t1));
-        mList.add(new slide_tc(R.drawable.t1));
-        mList.add(new slide_tc(R.drawable.t1));
-        mList.add(new slide_tc(R.drawable.t1));
+        mList.add(new slide_tc(R.drawable.q5736563));
+        mList.add(new slide_tc(R.drawable.q5736563));
+        mList.add(new slide_tc(R.drawable.q5736563));
+        mList.add(new slide_tc(R.drawable.q5736563));
         return mList;
     }
 
     private List<theloai> getListTL() {
         List<theloai> mList = new ArrayList<>();
-        mList.add(new theloai(1,R.drawable.sale,"Nước"));
-        mList.add(new theloai(2,R.drawable.sale,"Nước"));
-        mList.add(new theloai(3,R.drawable.sale,"Nước"));
-        mList.add(new theloai(4,R.drawable.sale,"Nước"));
+        mList.add(new theloai(1,R.drawable.w42419,"Nước"));
+        mList.add(new theloai(2,R.drawable.e42419,"Nước"));
+        mList.add(new theloai(3,R.drawable.w42419,"Nước"));
+        mList.add(new theloai(4,R.drawable.e42419,"Nước"));
 
-        mList.add(new theloai(5,R.drawable.sale,"Nước"));
-        mList.add(new theloai(6,R.drawable.sale,"Nước"));
-        mList.add(new theloai(7,R.drawable.sale,"Nước"));
-        mList.add(new theloai(8,R.drawable.sale,"Nước"));
+        mList.add(new theloai(5,R.drawable.w42419,"Nước"));
+        mList.add(new theloai(6,R.drawable.e42419,"Nước"));
+        mList.add(new theloai(7,R.drawable.w42419,"Nước"));
+        mList.add(new theloai(8,R.drawable.e42419,"Nước"));
 
-        mList.add(new theloai(5,R.drawable.sale,"Nước"));
-        mList.add(new theloai(6,R.drawable.sale,"Nước"));
-        mList.add(new theloai(7,R.drawable.sale,"Nước"));
-        mList.add(new theloai(8,R.drawable.sale,"Nước"));
+        mList.add(new theloai(5,R.drawable.w42419,"Nước"));
+        mList.add(new theloai(6,R.drawable.e42419,"Nước"));
+        mList.add(new theloai(7,R.drawable.w42419,"Nước"));
+        mList.add(new theloai(8,R.drawable.e42419,"Nước"));
 
-        mList.add(new theloai(5,R.drawable.sale,"Nước"));
-        mList.add(new theloai(6,R.drawable.sale,"Nước"));
-        mList.add(new theloai(7,R.drawable.sale,"Nước"));
-        mList.add(new theloai(8,R.drawable.sale,"Nước"));
         return mList;
     }
 }

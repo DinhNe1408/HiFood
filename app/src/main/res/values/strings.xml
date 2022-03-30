@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BCTN</string>
+    <string name="app_name">HiFood</string>
 
     <string name="trangchu">Trang chủ</string>
     <string name="thongbao">Thông báo</string>
@@ -12,5 +12,23 @@
     <string name="phobien">Phổ biến</string>
     <string name="khuyenmai">Khuyến mãi</string>
 
+    <string name="tongDH_tt">Tổng tiền đơn hàng</string>
+    <string name="phiVC_tt">Phí vận chuyển</string>
+    <string name="tongTien_tt"><b>Tổng thanh toán</b></string>
+
+    <string name="dathang">Đặt hàng</string>
+    <string name="quenmk"><u>Quên mật khẩu</u></string>
+    <string name="dangnhap">Đăng nhập</string>
+    <string name="dangky">Đăng ký</string>
+    <string name="taotk">Tạo tài khoản</string>
+    <string name="cotk">Đã là thành viên? <font color="#FF8B03"><u>Đăng nhập</u></font></string>
+    <string name="chuacotk">Chưa có tài khoản? <font color="#FF8B03"><u>Đăng ký</u></font></string>
+    <string name="hovaten">Họ &amp; tên</string>
+
+    <string name="tieptheo">Tiếp theo</string>
+    <string name="nhaplaimk">Nhập lại mật khẩu</string>
+    <string name="nhapmk">Mật khẩu</string>
+    <string name="nhapsdt">Số điện thoại</string>
     <string name="tim">Nhập vào món ăn bạn cần tìm</string>
+    <string name="check_internet">Vui lòng kiểm tra lại đường truyền</string>
 </resources>

@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bctn.R;
-import com.example.bctn.adapter.TaiKhoanAdap;
+import com.example.bctn.adapter.Menu_op2_Adap;
 import com.example.bctn.domain.key;
 
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ public class TaiKhoanFrag extends Fragment {
     private View mView;
     List<Integer> mListKey;
     RecyclerView recV_MenuTaiKhoan_tk;
-    TaiKhoanAdap taiKhoanAdap;
+    Menu_op2_Adap menuop2Adap;
 
 
     @Nullable
@@ -41,9 +41,9 @@ public class TaiKhoanFrag extends Fragment {
         mListKey.add(key.key_CAIDAT);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false);
-        taiKhoanAdap = new TaiKhoanAdap(getContext(), mListKey);
+        menuop2Adap = new Menu_op2_Adap(getContext(), mListKey);
         recV_MenuTaiKhoan_tk.setLayoutManager(linearLayoutManager);
-        recV_MenuTaiKhoan_tk.setAdapter(taiKhoanAdap);
+        recV_MenuTaiKhoan_tk.setAdapter(menuop2Adap);
 
         return mView;
     }

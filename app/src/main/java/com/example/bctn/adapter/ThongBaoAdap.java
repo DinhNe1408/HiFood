@@ -41,7 +41,6 @@ public class ThongBaoAdap extends RecyclerView.Adapter<ThongBaoAdap.ThongBaoView
 
     @Override
     public void onBindViewHolder(@NonNull ThongBaoViewHolder holder, int position) {
-        Toast.makeText(mContext, String.valueOf(listTB.size()), Toast.LENGTH_SHORT).show();
         thongbao mthongbao = listTB.get(position);
         if(mthongbao == null){
             return;

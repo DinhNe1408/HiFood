@@ -1,16 +1,19 @@
 package com.example.bctn.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bctn.R;
+import com.example.bctn.activity.QuanAnAct;
 import com.example.bctn.domain.monan;
 
 import java.util.List;
@@ -37,6 +40,13 @@ public class MonAn1Adap extends RecyclerView.Adapter<MonAn1Adap.MonAn1AdapViewHo
 
         holder.hMA_1.setImageResource(monan.getHMA());
         holder.tenMA_1.setText(monan.getTenMA());
+        holder.relative_ma.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mIntent = new Intent(mContext, QuanAnAct.class);
+                mContext.startActivity(mIntent);
+            }
+        });
     }
 
     @Override
@@ -49,14 +59,16 @@ public class MonAn1Adap extends RecyclerView.Adapter<MonAn1Adap.MonAn1AdapViewHo
 
     public class MonAn1AdapViewHolder extends RecyclerView.ViewHolder{
 
-        TextView tenMA_1;
+        TextView tenMA_1, dcQA;
         ImageView hMA_1;
+        RelativeLayout relative_ma;
 
         public MonAn1AdapViewHolder(@NonNull View itemView) {
             super(itemView);
 
             tenMA_1 = itemView.findViewById(R.id.tenMA_1);
             hMA_1 = itemView.findViewById(R.id.hMA_1);
+            relative_ma = itemView.findViewById(R.id.relative_ma);
         }
     }
 }

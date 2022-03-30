@@ -8,18 +8,43 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.bctn.R;
+import com.example.bctn.adapter.TabYeuThichAdap;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
+
+import java.util.Objects;
 
 public class YeuThichFrag extends Fragment {
 
     private View mView;
+    private TabLayout tab_YeuThich;
+    private ViewPager2 viewPage2_YeuThich;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.frag_yeu_thich,container,false);
+        AnhXa();
 
+        TabYeuThichAdap tabYeuThichAdap = new TabYeuThichAdap(requireActivity());
+        viewPage2_YeuThich.setAdapter(tabYeuThichAdap);
+
+        new TabLayoutMediator(tab_YeuThich, viewPage2_YeuThich, (tab, position) -> {
+            if (position == 1) {
+                tab.setText("Gần bạn");
+            } else {
+                tab.setText("Mới lưu");
+            }
+        }).attach();
         return mView;
+    }
+
+    private void AnhXa() {
+        tab_YeuThich = mView.findViewById(R.id.tab_YeuThich);
+        viewPage2_YeuThich = mView.findViewById(R.id.viewPage2_YeuThich);
+
     }
 }

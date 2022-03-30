@@ -2,6 +2,8 @@ package com.example.bctn.domain;
 
 import android.os.Build;
 
+import com.example.bctn.DAO;
+
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -18,6 +20,8 @@ public class key {
     public static final int key_LICHSUDONHANG = 956;
     public static final int key_GOPY = 778;
     public static final int key_GIOITHIEU = 120;
+    public static final int key_KHUYENMAI = 809;
+    public static final int key_PHUONGTHUCTHANHTOAN = 132;
 
     //
 

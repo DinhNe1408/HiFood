@@ -4,11 +4,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.bctn.DAO;
 import com.example.bctn.R;
+import com.example.bctn.check_internet.NetworkChangeListener;
+import com.example.bctn.domain.taikhoan;
 import com.example.bctn.fragment.DonHangFrag;
 import com.example.bctn.fragment.HomeFrag;
 import com.example.bctn.fragment.TaiKhoanFrag;
@@ -22,14 +27,19 @@ public class TrangChuAct extends AppCompatActivity {
     private  BottomNavigationView bottomNavigationView;
     private  long  backPressedTime;
     private Toast mToast;
+    public static taikhoan mTaiKhoan;
+
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+    DAO mDao;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_trang_chu);
-
+        mDao = new DAO(this);
         AnhXa();
 
+        mTaiKhoan = new taikhoan();
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_contrainer,new HomeFrag()).commit();
 
         bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -75,5 +85,19 @@ public class TrangChuAct extends AppCompatActivity {
 
     private void AnhXa() {
         bottomNavigationView = findViewById(R.id.navigation_menu);
+    }
+
+    @Override
+    protected void onStart() {
+        IntentFilter intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        //registerReceiver(networkChangeListener,intentFilter);
+
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        //unregisterReceiver(networkChangeListener);
     }
 }

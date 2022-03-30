@@ -42,20 +42,16 @@ public class GanBanFrag extends Fragment {
 
     private List<monan> getListMA() {
         List<monan> mList = new ArrayList<>();
-        mList.add(new monan(R.drawable.t1,"Banhs"));
-        mList.add(new monan(R.drawable.t1,"Banhs"));
-        mList.add(new monan(R.drawable.t1,"Banhs"));
-        mList.add(new monan(R.drawable.t1,"Banhs"));
+        mList.add(new monan(R.drawable.w42419,"Banhs"));
+        mList.add(new monan(R.drawable.w42419,"Banhs"));
+        mList.add(new monan(R.drawable.w42419,"Banhs"));
+        mList.add(new monan(R.drawable.w42419,"Banhs"));
 
-        mList.add(new monan(R.drawable.t1,"Keos"));
-        mList.add(new monan(R.drawable.t1,"Keos"));
-        mList.add(new monan(R.drawable.t1,"Keos"));
-        mList.add(new monan(R.drawable.t1,"Keos"));
+        mList.add(new monan(R.drawable.w42419,"Keos"));
+        mList.add(new monan(R.drawable.w42419,"Keos"));
+        mList.add(new monan(R.drawable.w42419,"Keos"));
+        mList.add(new monan(R.drawable.w42419,"Keos"));
 
-        mList.add(new monan(R.drawable.t1,"Banhs"));
-        mList.add(new monan(R.drawable.t1,"Banhs"));
-        mList.add(new monan(R.drawable.t1,"Banhs"));
-        mList.add(new monan(R.drawable.t1,"Banhs"));
         return mList;
     }
 
