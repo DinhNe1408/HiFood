@@ -34,7 +34,7 @@ public class DonHangFrag extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.frag,container,false);
+        mView = inflater.inflate(R.layout.frag_don_hang,container,false);
         AnhXa();
 
 //        btn_DonHang_dh.setOnClickListener(view -> {
