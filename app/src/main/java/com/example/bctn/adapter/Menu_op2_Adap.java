@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bctn.R;
 import com.example.bctn.activity.DangNhapAct;
+import com.example.bctn.activity.TheoDoiDonHang;
 import com.example.bctn.domain.key;
 
 import java.util.List;
@@ -61,6 +62,9 @@ public class Menu_op2_Adap extends RecyclerView.Adapter<Menu_op2_Adap.Menu_op2_A
                 case key.key_GIOITHIEU:
                     Intent intent = new Intent(mContext, DangNhapAct.class);
                     mContext.startActivity(intent);
+                case key.key_CAIDAT:
+                    Intent intent1 = new Intent(mContext, TheoDoiDonHang.class);
+                    mContext.startActivity(intent1);
             }
         });
     }

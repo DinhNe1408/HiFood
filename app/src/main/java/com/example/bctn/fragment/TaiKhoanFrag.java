@@ -26,7 +26,6 @@ public class TaiKhoanFrag extends Fragment {
     RecyclerView recV_MenuTaiKhoan_tk;
     Menu_op2_Adap menuop2Adap;
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -35,7 +34,6 @@ public class TaiKhoanFrag extends Fragment {
 
         mListKey = new ArrayList<>();
         mListKey.add(key.key_THONGTINCANHAN);
-        mListKey.add(key.key_LICHSUDONHANG);
         mListKey.add(key.key_GOPY);
         mListKey.add(key.key_GIOITHIEU);
         mListKey.add(key.key_CAIDAT);

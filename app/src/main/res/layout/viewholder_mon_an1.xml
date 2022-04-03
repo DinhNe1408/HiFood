@@ -1,81 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/relative_ma"
+    android:id="@+id/relative1_ma1"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="10dp">
 
     <ImageView
-        android:id="@+id/hMA_1"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:id="@+id/imgV_HinhMA_ma1"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="5dp" />
+        android:src="@drawable/w42419"/>
 
     <TextView
-        android:id="@+id/tenMA_1"
+        android:id="@+id/txtV_TenMA_ma1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_toEndOf="@+id/hMA_1"
-        android:text="Tên món ăn" />
-
-    <TextView
-        android:id="@+id/vitriQA_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tenMA_1"
-        android:layout_marginEnd="5dp"
-        android:layout_toStartOf="@+id/khcachQA_1"
-        android:layout_toEndOf="@+id/hMA_1"
-        android:text="Vị trí quán" />
-
-    <TextView
-        android:id="@+id/khcachQA_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/tgianQA"
+        android:layout_above="@+id/relative2_ma1"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="5dp"
-        android:text="2.5km" />
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="10dp"
+        android:layout_toEndOf="@+id/imgV_HinhMA_ma1"
+        android:text="Banh" />
 
-    <LinearLayout
-        android:id="@+id/line2"
+    <RelativeLayout
+        android:id="@+id/relative2_ma1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/vitriQA_1"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_toStartOf="@+id/tgianQA"
-        android:layout_toEndOf="@+id/hMA_1">
+        android:layout_alignBottom="@+id/imgV_HinhMA_ma1"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@+id/imgV_HinhMA_ma1">
 
         <TextView
-            android:id="@+id/giaMA_1"
+            android:id="@+id/txtv_GiaMA_ma1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="30.000đ" />
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:text="10.000đ" />
 
-        <TextView
-            android:id="@+id/saoMA"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:drawableLeft="@drawable/favourite"
-            android:drawablePadding="2dp"
-            android:text="4.1" />
-    </LinearLayout>
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="0dp">
 
-    <TextView
-        android:id="@+id/tgianQA"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/vitriQA_1"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="5dp"
-        android:drawableStart="@drawable/stopwatch"
-        android:drawablePadding="2dp"
-        android:text="25'" />
+            <ImageButton
+                android:id="@+id/imgB_Giam_ma1"
+                android:layout_width="30dp"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_round_remove_24"/>
+
+            <TextView
+                android:id="@+id/txtV_SoL_ma1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="3dp"
+                android:text="1" />
+
+            <ImageButton
+                android:id="@+id/imgB_Tang_ma1"
+                android:layout_width="30dp"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_round_add_24" />
+        </LinearLayout>
+    </RelativeLayout>
+
+
+
 </RelativeLayout>

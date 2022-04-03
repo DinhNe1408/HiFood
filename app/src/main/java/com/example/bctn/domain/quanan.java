@@ -1,16 +1,32 @@
 package com.example.bctn.domain;
 
-public class quanan {
+import java.io.Serializable;
+import java.util.List;
+
+public class quanan implements Serializable {
     private int idQA;
-    private String tenQA;
-    private double poslat,poslong, khcachQA;
+    private String tenQA, thgianQA;
+    private byte[] hinhQA;
+    private vitri vitriQA;
+    private double khcachQA, saoQA;
+    private List<monan> dsMA;
 
+    public quanan() {
+    }
 
-    public quanan(int idQA, String tenQA, double poslat, double poslong) {
+    public quanan(int idQA, String tenQA, byte[] hinhQA, vitri vitriQA) {
         this.idQA = idQA;
         this.tenQA = tenQA;
-        this.poslat = poslat;
-        this.poslong = poslong;
+        this.hinhQA = hinhQA;
+        this.vitriQA = vitriQA;
+    }
+
+    public quanan(int idQA, String tenQA, byte[] hinhQA, vitri vitriQA, List<monan> dsMA) {
+        this.idQA = idQA;
+        this.tenQA = tenQA;
+        this.hinhQA = hinhQA;
+        this.vitriQA = vitriQA;
+        this.dsMA = dsMA;
     }
 
     public int getIdQA() {
@@ -29,19 +45,51 @@ public class quanan {
         this.tenQA = tenQA;
     }
 
-    public double getPoslat() {
-        return poslat;
+    public String getThgianQA() {
+        return thgianQA;
     }
 
-    public void setPoslat(double poslat) {
-        this.poslat = poslat;
+    public void setThgianQA(String thgianQA) {
+        this.thgianQA = thgianQA;
     }
 
-    public double getPoslong() {
-        return poslong;
+    public byte[] getHinhQA() {
+        return hinhQA;
     }
 
-    public void setPoslong(double poslong) {
-        this.poslong = poslong;
+    public void setHinhQA(byte[] hinhQA) {
+        this.hinhQA = hinhQA;
+    }
+
+    public vitri getVitriQA() {
+        return vitriQA;
+    }
+
+    public void setVitriQA(vitri vitriQA) {
+        this.vitriQA = vitriQA;
+    }
+
+    public double getKhcachQA() {
+        return khcachQA;
+    }
+
+    public void setKhcachQA(double khcachQA) {
+        this.khcachQA = khcachQA;
+    }
+
+    public double getSaoQA() {
+        return saoQA;
+    }
+
+    public void setSaoQA(double saoQA) {
+        this.saoQA = saoQA;
+    }
+
+    public List<monan> getDsMA() {
+        return dsMA;
+    }
+
+    public void setDsMA(List<monan> dsMA) {
+        this.dsMA = dsMA;
     }
 }

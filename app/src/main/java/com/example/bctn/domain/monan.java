@@ -1,15 +1,28 @@
 package com.example.bctn.domain;
 
 public class monan {
-    private int idMA,giaMA,gtgMA,hMA, saoMA, loaiMA;
+    private int idMA,gtgMA,hMA, saoMA, loaiMA;
     private String maMA, tenMA, motaMA;
-
+    private double giaMA;
     public monan(int hMA, String tenMA) {
         this.hMA = hMA;
         this.tenMA = tenMA;
     }
 
-    public monan(int idMA, int giaMA, int gtgMA, int hMA, int saoMA, int loaiMA, String maMA, String tenMA, String motaMA) {
+    public monan(int idMA, String maMA, double giaMA, String tenMA) {
+        this.idMA = idMA;
+        this.giaMA = giaMA;
+        this.maMA = maMA;
+        this.tenMA = tenMA;
+    }
+
+    public monan(int idMA,String tenMA, double giaMA) {
+        this.idMA = idMA;
+        this.giaMA = giaMA;
+        this.tenMA = tenMA;
+    }
+
+    public monan(int idMA, double giaMA, int gtgMA, int hMA, int saoMA, int loaiMA, String maMA, String tenMA, String motaMA) {
         this.idMA = idMA;
         this.giaMA = giaMA;
         this.gtgMA = gtgMA;
@@ -29,11 +42,11 @@ public class monan {
         this.idMA = idMA;
     }
 
-    public int getGiaMA() {
+    public double getGiaMA() {
         return giaMA;
     }
 
-    public void setGiaMA(int giaMA) {
+    public void setGiaMA(double giaMA) {
         this.giaMA = giaMA;
     }
 

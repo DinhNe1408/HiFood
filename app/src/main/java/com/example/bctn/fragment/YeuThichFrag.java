@@ -11,11 +11,9 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.bctn.R;
-import com.example.bctn.adapter.TabYeuThichAdap;
+import com.example.bctn.adapter.TablayoutAdapter.TabYeuThichAdap;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
-
-import java.util.Objects;
 
 public class YeuThichFrag extends Fragment {
 
@@ -39,12 +37,12 @@ public class YeuThichFrag extends Fragment {
                 tab.setText("Mới lưu");
             }
         }).attach();
+        viewPage2_YeuThich.setUserInputEnabled(false);
         return mView;
     }
 
     private void AnhXa() {
         tab_YeuThich = mView.findViewById(R.id.tab_YeuThich);
         viewPage2_YeuThich = mView.findViewById(R.id.viewPage2_YeuThich);
-
     }
 }

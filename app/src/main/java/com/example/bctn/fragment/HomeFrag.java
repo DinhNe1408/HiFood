@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.bctn.R;
-import com.example.bctn.adapter.TabHomeAdap;
+import com.example.bctn.adapter.TablayoutAdapter.TabHomeAdap;
 import com.example.bctn.adapter.Slide_TC;
 import com.example.bctn.adapter.TheLoaiAdap;
 import com.example.bctn.domain.slide_tc;

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.TheoDoiDonHang">
+    <include
+        android:id="@+id/tool3_TheoDoiDonHang"
+        layout="@layout/toolbar_option_1" />
+
+    <com.kofigyan.stateprogressbar.StateProgressBar
+        android:id="@+id/progress3_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tool3_TheoDoiDonHang"
+        android:layout_marginTop="40dp"
+        app:spb_checkStateCompleted="true"
+        app:spb_currentStateDescriptionColor="@color/hifood1"
+        app:spb_descriptionTopSpaceIncrementer="5dp"
+        app:spb_maxStateNumber="four"
+        app:spb_stateBackgroundColor="#BDBDBD"
+        app:spb_stateDescriptionColor="#808080"
+        app:spb_stateForegroundColor="@color/hifood1"
+        app:spb_stateNumberBackgroundColor="#808080"
+        app:spb_stateNumberForegroundColor="#eeeeee" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/CircleImgV_hinhTaiXe"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/w42419"
+            android:layout_margin="10dp"/>
+
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

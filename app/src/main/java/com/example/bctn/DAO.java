@@ -6,7 +6,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 
+import com.example.bctn.domain.monan;
+import com.example.bctn.domain.quanan;
 import com.example.bctn.domain.taikhoan;
+import com.example.bctn.domain.vitri;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DAO {
     Context mContext;
@@ -73,5 +79,51 @@ public class DAO {
         mDatabase.Query("INSERT INTO TaiKhoan(SDT, MATKHAU, TENTK, QUYEN) VALUES ('"
                 + SDT + "','" + MK + "','" + TENTK + "','" + QUYEN + "')");
     }
+    // endregion
+
+
+    // region Quán Ăn
+    public quanan QA(int IDQA){
+
+        List<monan> list = new ArrayList<>();
+        Cursor tro1 = mDatabase.Get("SELECT * FROM MonAn WHERE IDQA = " + IDQA);
+        while (tro1.moveToNext()){
+            list.add(new monan(tro1.getInt(1),
+                        tro1.getString(3),
+                    tro1.getDouble(4)));
+        }
+
+        Cursor tro2 = mDatabase.Get("SELECT * FROM QuanAn WHERE IDQA = " + IDQA);
+        while (tro2.moveToNext()) {
+            return new quanan(
+                    tro2.getInt(0),
+                    tro2.getString(1),
+                    null,
+                    new vitri(tro2.getString(3),0,0),
+                    list
+            );
+        }
+        return null;
+    }
+
+    public List<quanan> ListQAGanBan(){
+        List<quanan> list = new ArrayList<>();
+        Cursor tro = mDatabase.Get("SELECT * FROM QuanAn LIMIT 8");
+        while (tro.moveToNext()) {
+            list.add(new quanan(
+                    tro.getInt(0),
+                    tro.getString(1),
+                    null,
+                    new vitri(tro.getString(3),0,0)
+            ));
+        }
+        return list;
+    }
+
+    // endregion
+
+    // region Món Ăn
+
+
     // endregion
 }

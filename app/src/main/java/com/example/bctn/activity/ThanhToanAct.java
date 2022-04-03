@@ -35,7 +35,7 @@ public class ThanhToanAct extends AppCompatActivity {
         setContentView(R.layout.activity_thanh_toan);
         AnhXa();
 
-        //tool3_ThanhToan.setTitle("Thanh toán");
+
         tool3_ThanhToan.setNavigationOnClickListener(view -> onBackPressed());
         txtV_toolbar_title = tool3_ThanhToan.findViewById(R.id.txtV_toolbar_title);
         txtV_toolbar_title.setText("Thanh toán");

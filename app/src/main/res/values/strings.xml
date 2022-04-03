@@ -31,4 +31,5 @@
     <string name="nhapsdt">Số điện thoại</string>
     <string name="tim">Nhập vào món ăn bạn cần tìm</string>
     <string name="check_internet">Vui lòng kiểm tra lại đường truyền</string>
+    <string name="xoatat"><font color="#FF8B03">Xóa tất cả</font></string>
 </resources>

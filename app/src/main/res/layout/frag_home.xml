@@ -31,11 +31,11 @@
             android:layout_marginHorizontal="10dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="10dp"
-            android:drawableLeft="@drawable/ic_round_location_on_24"
 
             android:drawableTint="#FFFFFF"
             android:text="426 Bình Nhâm, Thuận An, Bình Dương"
-            android:textColor="#FFFFFF" />
+            android:textColor="#FFFFFF"
+            app:drawableLeftCompat="@drawable/ic_round_location_on_24" />
     </LinearLayout>
 
     <ScrollView

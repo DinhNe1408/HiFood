@@ -4,6 +4,7 @@ import android.os.Build;
 
 import com.example.bctn.DAO;
 
+import java.text.DecimalFormat;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -22,6 +23,7 @@ public class key {
     public static final int key_GIOITHIEU = 120;
     public static final int key_KHUYENMAI = 809;
     public static final int key_PHUONGTHUCTHANHTOAN = 132;
+    public static final String key_A2F_QA = "quanan";
 
     //
 
@@ -48,5 +50,10 @@ public class key {
             return "Vài giây trước";
         }
         //return String.valueOf(Duration.between(mTime,LocalDateTime.now()));
+    }
+
+    public static String Dou2Money (double money){
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,##0 đ");
+        return decimalFormat.format(money);
     }
 }
