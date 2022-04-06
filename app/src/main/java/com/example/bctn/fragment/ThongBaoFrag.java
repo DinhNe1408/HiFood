@@ -30,7 +30,7 @@ public class ThongBaoFrag extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.frag_h_thong_bao,container,false);
+        mView = inflater.inflate(R.layout.frag_thong_bao,container,false);
 
         AnhXa();
 

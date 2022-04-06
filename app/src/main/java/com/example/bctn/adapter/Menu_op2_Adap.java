@@ -43,9 +43,6 @@ public class Menu_op2_Adap extends RecyclerView.Adapter<Menu_op2_Adap.Menu_op2_A
             case key.key_THONGTINCANHAN :
                 holder.txtV_MenuTaiKhoan.setText("Thông tin tài khoản");
                 break;
-            case key.key_LICHSUDONHANG:
-                holder.txtV_MenuTaiKhoan.setText("Lịch sử đơn hàng");
-                break;
             case key.key_GOPY:
                 holder.txtV_MenuTaiKhoan.setText("Góp ý");
                 break;
@@ -62,9 +59,7 @@ public class Menu_op2_Adap extends RecyclerView.Adapter<Menu_op2_Adap.Menu_op2_A
                 case key.key_GIOITHIEU:
                     Intent intent = new Intent(mContext, DangNhapAct.class);
                     mContext.startActivity(intent);
-                case key.key_CAIDAT:
-                    Intent intent1 = new Intent(mContext, TheoDoiDonHang.class);
-                    mContext.startActivity(intent1);
+
             }
         });
     }

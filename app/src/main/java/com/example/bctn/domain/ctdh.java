@@ -1,6 +1,8 @@
 package com.example.bctn.domain;
 
-public class ctdh {
+import java.io.Serializable;
+
+public class ctdh implements Serializable {
     private int IDMA, SLMA;
     private String GhiChu;
 

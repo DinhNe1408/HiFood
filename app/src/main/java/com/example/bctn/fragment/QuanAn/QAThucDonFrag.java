@@ -7,14 +7,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.PluralsRes;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.bctn.MyAppication;
 import com.example.bctn.R;
 import com.example.bctn.activity.QuanAnAct;
 import com.example.bctn.adapter.RecyclerAdapter.MonAn1Adap;
@@ -34,6 +37,7 @@ public class QAThucDonFrag extends Fragment {
     private RecyclerView recV_ThucDon_QA;
     private quanan quanan;
     private RelativeLayout relative1_QA;
+    private TextView txtV_TSoL_gh;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -47,13 +51,15 @@ public class QAThucDonFrag extends Fragment {
         relative1_QA.setOnClickListener(view -> {
             OpenBotSheet();
         });
+
+
         //OpenBotSheet();
         return mView;
     }
 
     private void getData_RecV() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
-        MonAn1Adap monAn1Adap = new MonAn1Adap(getContext(), quanan.getDsMA());
+        MonAn1Adap monAn1Adap = new MonAn1Adap(getContext(), quanan.getDsMA(), quanan.getIdQA());
         RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(mView.getContext(),DividerItemDecoration.VERTICAL);
 
         recV_ThucDon_QA.setLayoutManager(linearLayoutManager);
@@ -79,6 +85,7 @@ public class QAThucDonFrag extends Fragment {
     private void AnhXa() {
         recV_ThucDon_QA = mView.findViewById(R.id.recV_ThucDon_QA);
         relative1_QA = mView.findViewById(R.id.relative1_QA);
+        txtV_TSoL_gh = mView.findViewById(R.id.txtV_TSoL_gh);
     }
 
 }

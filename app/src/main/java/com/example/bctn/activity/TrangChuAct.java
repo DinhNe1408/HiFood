@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.example.bctn.DAO;
 import com.example.bctn.R;
 import com.example.bctn.check_internet.NetworkChangeListener;
+import com.example.bctn.domain.key;
 import com.example.bctn.domain.taikhoan;
 import com.example.bctn.fragment.DonHangFrag;
 import com.example.bctn.fragment.HomeFrag;
@@ -27,29 +28,22 @@ public class TrangChuAct extends AppCompatActivity {
     private  BottomNavigationView bottomNavigationView;
     private  long  backPressedTime;
     private Toast mToast;
-    public static taikhoan mTaiKhoan;
 
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
-    DAO mDao;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_trang_chu);
-        mDao = new DAO(this);
         AnhXa();
 
-        mTaiKhoan = new taikhoan();
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_contrainer,new HomeFrag()).commit();
-
+        //key.sendNotification(this,"Khuyến mãi cực sốc","Bữa trưa tràn đầy năng lượng");
         bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Fragment selFragment = null;
+                Fragment selFragment;
                 switch (item.getItemId()){
-                    case R.id.TrangChu:
-                        selFragment = new HomeFrag();
-                        break;
                     case  R.id.DonHang:
                         selFragment = new DonHangFrag();
                         break;
@@ -62,8 +56,10 @@ public class TrangChuAct extends AppCompatActivity {
                     case R.id.ThongTin:
                         selFragment = new TaiKhoanFrag();
                         break;
+                    default:
+                        selFragment = new HomeFrag();
                 }
-                getSupportFragmentManager().beginTransaction().replace(R.id.frame_contrainer,selFragment).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.frame_contrainer, selFragment).commit();
                 return true;
             }
         });

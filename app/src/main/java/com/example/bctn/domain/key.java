@@ -1,28 +1,51 @@
 package com.example.bctn.domain;
 
-import android.os.Build;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.RingtoneManager;
+import android.net.Uri;
+import android.text.Spanned;
 
-import com.example.bctn.DAO;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.core.text.HtmlCompat;
+
+import com.example.bctn.R;
 
 import java.text.DecimalFormat;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
 public class key {
+    public static final String key_ThongBao = "ThongBao";
+
     private static final String PATTERN_DATE_TIME = "dd.MM.yyyy HH:mm:ss";
     private static final String PATTERN_TIME_DATE = "HH:mm:ss dd.MM.yyyy";
-    // key TaiKhoan
+    // key Menu
     public static final int key_THONGTINCANHAN= 861;
     public static final int key_CAIDAT = 280;
-    public static final int key_LICHSUDONHANG = 956;
     public static final int key_GOPY = 778;
     public static final int key_GIOITHIEU = 120;
     public static final int key_KHUYENMAI = 809;
     public static final int key_PHUONGTHUCTHANHTOAN = 132;
+
+    // Đơn hàng
+    public static final String key_dh_HoanThanh = "HoanThanh";
+    public static final String key_dh_DangGiao = "DangGiao";
+    public static final String key_dh_Nhap = "Nhap";
+
+    // Chuyển Dữ liệu
+    public static final String key_IDQA = "IDQA";
+    public static final String key_DonHang_ = "DonHang";
     public static final String key_A2F_QA = "quanan";
 
     //
@@ -55,5 +78,37 @@ public class key {
     public static String Dou2Money (double money){
         DecimalFormat decimalFormat = new DecimalFormat("###,###,##0 đ");
         return decimalFormat.format(money);
+    }
+
+    public static Spanned TienvaSL(double money, int SL){
+        return HtmlCompat.fromHtml("<b>" +Dou2Money(money) + "</b> (" + SL + " phần)",HtmlCompat.FROM_HTML_MODE_LEGACY) ;
+    }
+
+    public static void sendNotification(Context mContext,String title, String text){
+        Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(), R.mipmap.hifood);
+        Uri url = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
+//        Intent intent = new Intent(this,ChiTietSanPham.class);
+//        intent.putExtra("IDSP_CTSP",1);
+//        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+//
+//        PendingIntent pendingIntent = PendingIntent.getActivity(this,getThongbaoID(),intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+
+        Notification notification = new NotificationCompat.Builder(mContext, key.key_ThongBao)
+                .setContentTitle(title)
+                .setContentText(text)
+                .setSmallIcon(R.drawable.khongchu)
+                .setSound(url)
+                .setAutoCancel(true)
+                //.setContentIntent(pendingIntent)
+                .setColor(mContext.getResources().getColor(R.color.hifood1))
+                .build();
+
+        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(mContext);
+        notificationManagerCompat.notify(getThongbaoID(),notification);
+    }
+    private static int getThongbaoID(){
+        return (int) new Date().getTime();
     }
 }

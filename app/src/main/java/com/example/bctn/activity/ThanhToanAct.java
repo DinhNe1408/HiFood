@@ -6,8 +6,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -28,6 +30,8 @@ public class ThanhToanAct extends AppCompatActivity {
     private List<menu_option> mListMenuOp;
     private DsMA_tt_Adap dsMA_tt_adap;
     private Toolbar tool3_ThanhToan;
+    private Button btn_DatHang_tt;
+
     TextView txtV_toolbar_title;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +62,14 @@ public class ThanhToanAct extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         recV_Menu_tt.setLayoutManager(linearLayoutManager1);
         recV_Menu_tt.setAdapter(menu_op1_adap);
+        btn_DatHang_tt.setOnClickListener(view -> {
+            Intent mIntent = new Intent(ThanhToanAct.this,TheoDoiDonHang.class);
+            startActivity(mIntent);
+        });
     }
 
     private void AnhXa() {
+        btn_DatHang_tt = findViewById(R.id.btn_DatHang_tt);
         recV_DsMA_tt = findViewById(R.id.recV_DsMA_tt);
         tool3_ThanhToan = findViewById(R.id.tool3_ThanhToan);
         recV_Menu_tt = findViewById(R.id.recV_Menu_tt);

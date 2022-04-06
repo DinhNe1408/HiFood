@@ -1,25 +1,43 @@
 package com.example.bctn.domain;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class taikhoan {
     private int idTK;
     private byte[] hinhTK;
-    private String tenTK, sdtTK, vitriTK,mkTK, role;
-    private double posLat, posLong;
+    private String tenTK, sdtTK,mkTK, role;
+    private boolean khoa;
+    private vitri Vitri, CurVitri;
+    private List<donhang> donhangList = new ArrayList<>();
+    private Map<Integer,donhang> donhangMap;
 
     public taikhoan() {
         this.idTK = -1;
     }
 
-    public taikhoan(int idTK,String sdtTK,String mkTK, String tenTK , byte[] hinhTK, String vitriTK, double posLat, double posLong, String role) {
+    public taikhoan(int idTK,String sdtTK,String mkTK, String tenTK , byte[] hinhTK,vitri vitri, String role,boolean khoa) {
         this.idTK = idTK;
         this.hinhTK = hinhTK;
         this.role = role;
         this.tenTK = tenTK;
         this.sdtTK = sdtTK;
-        this.vitriTK = vitriTK;
-        this.posLat = posLat;
-        this.posLong = posLong;
+        this.Vitri = vitri;
         this.mkTK = mkTK;
+        this.khoa = khoa;
+
+    }
+
+    public boolean isdonhangList(){
+        return donhangList.size() == 0;
+    }
+    public ctdh getListHDinTK(int IDQA,int IDMA){
+        if(!isdonhangList()){
+            return donhangMap.get(IDQA).getCTDHinDH(IDMA);
+        }
+        return null;
     }
 
     public int getIdTK() {
@@ -54,22 +72,6 @@ public class taikhoan {
         this.sdtTK = sdtTK;
     }
 
-    public Double getPosLat() {
-        return posLat;
-    }
-
-    public void setPosLat(double posLat) {
-        this.posLat = posLat;
-    }
-
-    public Double getPosLong() {
-        return posLong;
-    }
-
-    public void setPosLong(double posLong) {
-        this.posLong = posLong;
-    }
-
     public String getRole() {
         return role;
     }
@@ -78,19 +80,47 @@ public class taikhoan {
         this.role = role;
     }
 
-    public String getVitriTK() {
-        return vitriTK;
-    }
-
-    public void setVitriTK(String vitriTK) {
-        this.vitriTK = vitriTK;
-    }
-
     public String getMkTK() {
         return mkTK;
     }
 
     public void setMkTK(String mkTK) {
         this.mkTK = mkTK;
+    }
+
+    public boolean isKhoa() {
+        return khoa;
+    }
+
+    public void setKhoa(boolean khoa) {
+        this.khoa = khoa;
+    }
+
+    public vitri getVitri() {
+        return Vitri;
+    }
+
+    public void setVitri(vitri vitri) {
+        Vitri = vitri;
+    }
+
+    public vitri getCurVitri() {
+        return CurVitri;
+    }
+
+    public void setCurVitri(vitri curVitri) {
+        CurVitri = curVitri;
+    }
+
+    public List<donhang> getDonhangList() {
+        return donhangList;
+    }
+
+    public void setDonhangList(List<donhang> donhangList) {
+        this.donhangList = donhangList;
+        donhangMap = new HashMap<>();
+        for (donhang val : donhangList) {
+            donhangMap.put(val.getIDDH(), val);
+        }
     }
 }

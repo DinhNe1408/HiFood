@@ -93,7 +93,6 @@
                 android:text="25'" />
         </LinearLayout>
 
-
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_qa"
             android:layout_width="match_parent"

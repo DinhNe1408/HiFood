@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -13,7 +14,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.bctn.MyAppication;
 import com.example.bctn.R;
+import com.example.bctn.domain.ctdh;
 import com.example.bctn.domain.key;
 import com.example.bctn.domain.monan;
 
@@ -23,10 +26,12 @@ public class MonAn1Adap extends RecyclerView.Adapter<MonAn1Adap.MonAn1AdapViewHo
 
     private Context mContext;
     private List<monan> mListMA;
+    private int IDQA;
 
-    public MonAn1Adap(Context mContext, List<monan> mListMA) {
+    public MonAn1Adap(Context mContext, List<monan> mListMA, int IDQA) {
         this.mContext = mContext;
         this.mListMA = mListMA;
+        this.IDQA = IDQA;
     }
 
 
@@ -41,17 +46,44 @@ public class MonAn1Adap extends RecyclerView.Adapter<MonAn1Adap.MonAn1AdapViewHo
     @Override
     public void onBindViewHolder(@NonNull MonAn1AdapViewHolder holder, int position) {
         monan monan = mListMA.get(position);
-        int x = 0;
+        final int[] SL = {0};
+
+        if (!MyAppication.mTaiKhoan.isdonhangList()) {
+            ctdh ctdh = MyAppication.mTaiKhoan.getListHDinTK(IDQA, monan.getIdMA());
+            if (ctdh != null) {
+                SL[0] = ctdh.getSLMA();
+            }
+        }
+
 
         holder.txtV_TenMA_ma1.setText(monan.getTenMA());
         holder.txtv_GiaMA_ma1.setText(key.Dou2Money(monan.getGiaMA()));
+        holder.txtV_SoL_ma1.setText(String.valueOf(SL[0]));
+
+        if (SL[0] <= 1) {
+            holder.txtV_SoL_ma1.setVisibility(View.INVISIBLE);
+            holder.imgB_Giam_ma1.setVisibility(View.INVISIBLE);
+        }
+
 
         holder.imgB_Giam_ma1.setOnClickListener(view -> {
-            Toast.makeText(mContext, "Giam", Toast.LENGTH_SHORT).show();
+            SL[0] = Integer.parseInt(holder.txtV_SoL_ma1.getText().toString());
+            if (SL[0] <= 1) {
+                holder.txtV_SoL_ma1.setVisibility(View.INVISIBLE);
+                holder.imgB_Giam_ma1.setVisibility(View.INVISIBLE);
+            }
+            SL[0] -= 1;
+            holder.txtV_SoL_ma1.setText(String.valueOf(SL[0]));
+
         });
+        EditText editText;
 
         holder.imgB_Tang_ma1.setOnClickListener(view -> {
-
+            SL[0] = Integer.parseInt(holder.txtV_SoL_ma1.getText().toString());
+            SL[0] += 1;
+            holder.txtV_SoL_ma1.setVisibility(View.VISIBLE);
+            holder.imgB_Giam_ma1.setVisibility(View.VISIBLE);
+            holder.txtV_SoL_ma1.setText(String.valueOf(SL[0]));
         });
 
         holder.relative1_ma1.setOnClickListener(view -> {

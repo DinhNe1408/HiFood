@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.example.bctn.DAO;
 import com.example.bctn.R;
 import com.example.bctn.adapter.TablayoutAdapter.TabQuanAnAdap;
+import com.example.bctn.domain.key;
 import com.example.bctn.domain.quanan;
 import com.example.bctn.fragment.QuanAn.QAThucDonFrag;
 import com.google.android.material.tabs.TabLayout;
@@ -34,7 +35,7 @@ public class QuanAnAct extends AppCompatActivity {
         mDao = new DAO(this);
 
         Intent intent = getIntent();
-        IDQA = intent.getIntExtra("IDQA",-1);
+        IDQA = intent.getIntExtra(key.key_IDQA,-1);
         if (IDQA == -1)
             return;
 

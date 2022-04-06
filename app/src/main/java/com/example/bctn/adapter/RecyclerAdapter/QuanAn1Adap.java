@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bctn.R;
 import com.example.bctn.activity.QuanAnAct;
+import com.example.bctn.domain.key;
 import com.example.bctn.domain.quanan;
 
 import java.util.List;
@@ -46,22 +47,22 @@ public class QuanAn1Adap extends RecyclerView.Adapter<QuanAn1Adap.QuanAn1AdapVie
 
         holder.relative_ma.setOnClickListener(view -> {
             Intent mIntent = new Intent(mContext, QuanAnAct.class);
-            mIntent.putExtra("IDQA",quanan.getIdQA());
+            mIntent.putExtra(key.key_IDQA, quanan.getIdQA());
             mContext.startActivity(mIntent);
         });
     }
 
     @Override
     public int getItemCount() {
-        if (mList.size() != 0){
+        if (mList.size() != 0) {
             return mList.size();
         }
         return 0;
     }
 
-    public class QuanAn1AdapViewHolder extends RecyclerView.ViewHolder{
+    public class QuanAn1AdapViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tenQA_1, saoQA_1,vitriQA_1;
+        TextView tenQA_1, saoQA_1, vitriQA_1;
         ImageView hinhQA_1;
         RelativeLayout relative_ma;
 

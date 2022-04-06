@@ -61,6 +61,8 @@ private TextView txtV_ChonNgay;
                 txtV_ChonNgay.setText(materialDatePicker.getHeaderText());
             }
         });
+
+
         return mView;
     }
 

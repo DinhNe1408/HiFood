@@ -1,6 +1,8 @@
 package com.example.bctn.domain;
 
-public class vitri {
+import java.io.Serializable;
+
+public class vitri implements Serializable {
     private String vitri;
     private double vido, kinhdo;
 

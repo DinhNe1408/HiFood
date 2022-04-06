@@ -145,7 +145,6 @@
             android:text="111.000đ" />
     </RelativeLayout>
 
-
     <Button
         android:id="@+id/btn_DatHang_tt"
         android:layout_width="match_parent"

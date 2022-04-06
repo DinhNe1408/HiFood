@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bctn.DAO;
+import com.example.bctn.MyAppication;
 import com.example.bctn.R;
 import com.example.bctn.domain.taikhoan;
 import com.google.android.material.textfield.TextInputEditText;
@@ -24,15 +25,11 @@ public class DangNhapAct extends AppCompatActivity {
     private TextView txtV_TaoTK_dn;
     private Button btn_DN_dn;
 
-    private DAO mDao;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dang_nhap);
         AnhXa();
-
-        mDao = new DAO(this);
-
 
         btn_DN_dn.setOnClickListener(view -> {
             if (editT_SDT_dn.getText() != null && editT_MK_dn.getText() != null
@@ -41,16 +38,20 @@ public class DangNhapAct extends AppCompatActivity {
                 String sdt = editT_SDT_dn.getText().toString();
                 String mk = editT_MK_dn.getText().toString();
 
-                taikhoan mTaikhoan = mDao.GetTK(sdt, mk);
+                taikhoan mTaikhoan = MyAppication.mDao.GetTK(sdt, mk);
 
                 if(mTaikhoan != null){
+                    if (!mTaikhoan.isKhoa()){
+                        MyAppication.mTaiKhoan = mTaikhoan;
+                        MyAppication.mTaiKhoan.setDonhangList(MyAppication.mDao.ListDHDonNhap(mTaikhoan.getIdTK()));
+                        Intent mIntent = new Intent(DangNhapAct.this, TrangChuAct.class);
+                        startActivity(mIntent);
 
-                    TrangChuAct.mTaiKhoan = mTaikhoan;
+                        Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(this, "Tài khoản của bạn đã bị khóa.", Toast.LENGTH_SHORT).show();
+                    }
 
-                    Intent mIntent = new Intent(DangNhapAct.this, TrangChuAct.class);
-                    startActivity(mIntent);
-
-                    Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(this, "Vui lòng kiểm tra lại Số điện thoại hoặc Mật khẩu", Toast.LENGTH_SHORT).show();
                 }

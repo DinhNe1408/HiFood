@@ -1,11 +1,12 @@
 package com.example.bctn;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 
+import com.example.bctn.domain.ctdh;
+import com.example.bctn.domain.donhang;
 import com.example.bctn.domain.monan;
 import com.example.bctn.domain.quanan;
 import com.example.bctn.domain.taikhoan;
@@ -43,10 +44,11 @@ public class DAO {
                     tro.getString(2),
                     tro.getString(3),
                     tro.getBlob(4),
-                    tro.getString(5),
-                    tro.getDouble(6),
-                    tro.getDouble(7),
-                    tro.getString(8));
+                    new vitri(tro.getString(5),
+                            tro.getDouble(6),
+                            tro.getDouble(7)),
+                    tro.getString(8),
+                    tro.getInt(9) == 1);
         }
         return null;
     }
@@ -83,13 +85,13 @@ public class DAO {
 
 
     // region Quán Ăn
-    public quanan QA(int IDQA){
+    public quanan QA(int IDQA) {
 
         List<monan> list = new ArrayList<>();
         Cursor tro1 = mDatabase.Get("SELECT * FROM MonAn WHERE IDQA = " + IDQA);
-        while (tro1.moveToNext()){
+        while (tro1.moveToNext()) {
             list.add(new monan(tro1.getInt(1),
-                        tro1.getString(3),
+                    tro1.getString(3),
                     tro1.getDouble(4)));
         }
 
@@ -99,14 +101,14 @@ public class DAO {
                     tro2.getInt(0),
                     tro2.getString(1),
                     null,
-                    new vitri(tro2.getString(3),0,0),
+                    new vitri(tro2.getString(3), 0, 0),
                     list
             );
         }
         return null;
     }
 
-    public List<quanan> ListQAGanBan(){
+    public List<quanan> ListQAGanBan() {
         List<quanan> list = new ArrayList<>();
         Cursor tro = mDatabase.Get("SELECT * FROM QuanAn LIMIT 8");
         while (tro.moveToNext()) {
@@ -114,7 +116,7 @@ public class DAO {
                     tro.getInt(0),
                     tro.getString(1),
                     null,
-                    new vitri(tro.getString(3),0,0)
+                    new vitri(tro.getString(3), 0, 0)
             ));
         }
         return list;
@@ -124,6 +126,38 @@ public class DAO {
 
     // region Món Ăn
 
+
+    // endregion
+
+    // region Đơn hàng
+
+    public List<donhang> ListDHDonNhap(int IDTK) {
+        List<donhang> donhangList = new ArrayList<>();
+        Cursor tro = mDatabase.Get("SELECT * FROM DonHang WHERE IDTK = " + IDTK);
+
+        while (tro.moveToNext()) {
+            int IDDH = tro.getInt(0);
+            Cursor tro2 = mDatabase.Get("SELECT * FROM DonHang A,CTDonHang B WHERE A.IDDH = B.IDDH AND A.IDDH = " + IDDH);
+            List<ctdh> ctdhList = new ArrayList<>();
+            while (tro2.moveToNext()) {
+                ctdhList.add(new ctdh(tro2.getInt(0),
+                        tro2.getInt(1),
+                        tro2.getString(2)));
+            }
+
+            donhangList.add(new donhang(IDDH,
+                        tro.getInt(2),
+                        tro.getDouble(3),
+                        new vitri(tro.getString(4),0,0),
+                            tro.getLong(5),
+                            tro.getLong(6),
+                            tro.getString(7),
+                            ctdhList)
+                    );
+        }
+
+        return donhangList;
+    }
 
     // endregion
 }
