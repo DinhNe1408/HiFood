@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bctn.DAO;
+import com.example.bctn.DataLocalManager;
 import com.example.bctn.MyAppication;
 import com.example.bctn.R;
 import com.example.bctn.domain.taikhoan;
@@ -44,6 +45,8 @@ public class DangNhapAct extends AppCompatActivity {
                     if (!mTaikhoan.isKhoa()){
                         MyAppication.mTaiKhoan = mTaikhoan;
                         MyAppication.mTaiKhoan.setDonhangList(MyAppication.mDao.ListDHDonNhap(mTaikhoan.getIdTK()));
+
+                        DataLocalManager.setTaiKhoan(mTaikhoan.getSdtTK(), mTaikhoan.getMkTK());
                         Intent mIntent = new Intent(DangNhapAct.this, TrangChuAct.class);
                         startActivity(mIntent);
 

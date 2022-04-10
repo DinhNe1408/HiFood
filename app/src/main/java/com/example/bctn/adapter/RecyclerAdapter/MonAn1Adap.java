@@ -1,10 +1,10 @@
 package com.example.bctn.adapter.RecyclerAdapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -24,14 +24,15 @@ import java.util.List;
 
 public class MonAn1Adap extends RecyclerView.Adapter<MonAn1Adap.MonAn1AdapViewHolder> {
 
-    private Context mContext;
+    private final Context mContext;
     private List<monan> mListMA;
-    private int IDQA;
+    private final int IDQA;
 
     public MonAn1Adap(Context mContext, List<monan> mListMA, int IDQA) {
         this.mContext = mContext;
         this.mListMA = mListMA;
         this.IDQA = IDQA;
+
     }
 
 
@@ -43,47 +44,48 @@ public class MonAn1Adap extends RecyclerView.Adapter<MonAn1Adap.MonAn1AdapViewHo
         return new MonAn1AdapViewHolder(mView);
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull MonAn1AdapViewHolder holder, int position) {
         monan monan = mListMA.get(position);
-        final int[] SL = {0};
+        int SL = 0;
 
         if (!MyAppication.mTaiKhoan.isdonhangList()) {
             ctdh ctdh = MyAppication.mTaiKhoan.getListHDinTK(IDQA, monan.getIdMA());
             if (ctdh != null) {
-                SL[0] = ctdh.getSLMA();
+                SL = ctdh.getSLMA();
+                Log.e("ThucDon", position + "" + SL );
             }
         }
 
 
         holder.txtV_TenMA_ma1.setText(monan.getTenMA());
         holder.txtv_GiaMA_ma1.setText(key.Dou2Money(monan.getGiaMA()));
-        holder.txtV_SoL_ma1.setText(String.valueOf(SL[0]));
+        holder.txtV_SoL_ma1.setText(String.valueOf(SL));
 
-        if (SL[0] <= 1) {
-            holder.txtV_SoL_ma1.setVisibility(View.INVISIBLE);
-            holder.imgB_Giam_ma1.setVisibility(View.INVISIBLE);
-        }
-
+//        if (SL < 1) {
+//            holder.txtV_SoL_ma1.setVisibility(View.INVISIBLE);
+//            holder.imgB_Giam_ma1.setVisibility(View.INVISIBLE);
+//        }
 
         holder.imgB_Giam_ma1.setOnClickListener(view -> {
-            SL[0] = Integer.parseInt(holder.txtV_SoL_ma1.getText().toString());
-            if (SL[0] <= 1) {
-                holder.txtV_SoL_ma1.setVisibility(View.INVISIBLE);
-                holder.imgB_Giam_ma1.setVisibility(View.INVISIBLE);
+            int Sl = Integer.parseInt(holder.txtV_SoL_ma1.getText().toString()) - 1;
+            if (Sl < 0) {
+//                holder.txtV_SoL_ma1.setVisibility(View.INVISIBLE);
+//                holder.imgB_Giam_ma1.setVisibility(View.INVISIBLE);
+            } else {
+                holder.txtV_SoL_ma1.setText(String.valueOf(Sl));
             }
-            SL[0] -= 1;
-            holder.txtV_SoL_ma1.setText(String.valueOf(SL[0]));
-
+            notifyDataSetChanged();
         });
-        EditText editText;
+
 
         holder.imgB_Tang_ma1.setOnClickListener(view -> {
-            SL[0] = Integer.parseInt(holder.txtV_SoL_ma1.getText().toString());
-            SL[0] += 1;
-            holder.txtV_SoL_ma1.setVisibility(View.VISIBLE);
-            holder.imgB_Giam_ma1.setVisibility(View.VISIBLE);
-            holder.txtV_SoL_ma1.setText(String.valueOf(SL[0]));
+            int Sl = Integer.parseInt(holder.txtV_SoL_ma1.getText().toString()) + 1;
+//            holder.txtV_SoL_ma1.setVisibility(View.VISIBLE);
+//            holder.imgB_Giam_ma1.setVisibility(View.VISIBLE);
+            holder.txtV_SoL_ma1.setText(String.valueOf(Sl));
+            notifyDataSetChanged();
         });
 
         holder.relative1_ma1.setOnClickListener(view -> {
@@ -91,12 +93,11 @@ public class MonAn1Adap extends RecyclerView.Adapter<MonAn1Adap.MonAn1AdapViewHo
         });
     }
 
+
+
+
     @Override
-    public int getItemCount() {
-        if (mListMA.size() != 0) {
-            return mListMA.size();
-        }
-        return 0;
+    public int getItemCount() { return mListMA == null ? 0 : mListMA.size();
     }
 
     public class MonAn1AdapViewHolder extends RecyclerView.ViewHolder {

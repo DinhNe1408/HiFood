@@ -10,11 +10,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.bctn.DAO;
 import com.example.bctn.R;
 import com.example.bctn.check_internet.NetworkChangeListener;
-import com.example.bctn.domain.key;
-import com.example.bctn.domain.taikhoan;
 import com.example.bctn.fragment.DonHangFrag;
 import com.example.bctn.fragment.HomeFrag;
 import com.example.bctn.fragment.TaiKhoanFrag;

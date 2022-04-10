@@ -2,6 +2,7 @@ package com.example.bctn.adapter.RecyclerAdapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +48,7 @@ public class QuanAn1Adap extends RecyclerView.Adapter<QuanAn1Adap.QuanAn1AdapVie
 
         holder.relative_ma.setOnClickListener(view -> {
             Intent mIntent = new Intent(mContext, QuanAnAct.class);
+            Log.e("IDQA",quanan.getIdQA() + "");
             mIntent.putExtra(key.key_IDQA, quanan.getIdQA());
             mContext.startActivity(mIntent);
         });
@@ -54,7 +56,7 @@ public class QuanAn1Adap extends RecyclerView.Adapter<QuanAn1Adap.QuanAn1AdapVie
 
     @Override
     public int getItemCount() {
-        if (mList.size() != 0) {
+        if (mList != null) {
             return mList.size();
         }
         return 0;

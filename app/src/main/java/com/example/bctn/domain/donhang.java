@@ -42,11 +42,7 @@ public class donhang implements Serializable {
     }
 
     public ctdh getCTDHinDH(int IDDH){
-        if(!isctdhList())
-        {
-            return cthdMap.get(IDDH);
-        }
-        return null;
+        return cthdMap.get(IDDH);
     }
 
 

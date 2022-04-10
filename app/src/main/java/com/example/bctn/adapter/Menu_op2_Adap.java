@@ -11,19 +11,22 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.bctn.DataLocalManager;
+import com.example.bctn.MyAppication;
 import com.example.bctn.R;
 import com.example.bctn.activity.DangNhapAct;
 import com.example.bctn.activity.TheoDoiDonHang;
 import com.example.bctn.domain.key;
+import com.example.bctn.domain.menu_option;
 
 import java.util.List;
 
 public class Menu_op2_Adap extends RecyclerView.Adapter<Menu_op2_Adap.Menu_op2_AdapViewHolder> {
 
     private Context mContext;
-    private List<Integer> mListKey;
+    private List<menu_option> mListKey;
 
-    public Menu_op2_Adap(Context mContext, List<Integer> mListKey) {
+    public Menu_op2_Adap(Context mContext, List<menu_option> mListKey) {
         this.mContext = mContext;
         this.mListKey = mListKey;
     }
@@ -37,29 +40,17 @@ public class Menu_op2_Adap extends RecyclerView.Adapter<Menu_op2_Adap.Menu_op2_A
 
     @Override
     public void onBindViewHolder(@NonNull Menu_op2_AdapViewHolder holder, int position) {
-        int mKey = mListKey.get(position);
+        menu_option mKey = mListKey.get(position);
 
-        switch (mKey){
-            case key.key_THONGTINCANHAN :
-                holder.txtV_MenuTaiKhoan.setText("Thông tin tài khoản");
-                break;
-            case key.key_GOPY:
-                holder.txtV_MenuTaiKhoan.setText("Góp ý");
-                break;
-            case key.key_CAIDAT:
-                holder.txtV_MenuTaiKhoan.setText("Cài đặt");
-                break;
-            case key.key_GIOITHIEU:
-                holder.txtV_MenuTaiKhoan.setText("Giới thiệu");
-                break;
-        }
+        holder.txtV_MenuTaiKhoan.setText(mKey.getNoidungMenu());
 
         holder.CardView_1.setOnClickListener(view -> {
-            switch (mKey){
-                case key.key_GIOITHIEU:
+            switch (mKey.getIdMenu()){
+                case key.key_DANGXUAT:
+                    DataLocalManager.setTaiKhoan("", "");
                     Intent intent = new Intent(mContext, DangNhapAct.class);
                     mContext.startActivity(intent);
-
+                    break;
             }
         });
     }

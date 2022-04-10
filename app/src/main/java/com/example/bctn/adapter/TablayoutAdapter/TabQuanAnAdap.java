@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.bctn.activity.QuanAnAct;
 import com.example.bctn.fragment.QuanAn.QAThongTinFrag;
 import com.example.bctn.fragment.QuanAn.QAThucDonFrag;
 

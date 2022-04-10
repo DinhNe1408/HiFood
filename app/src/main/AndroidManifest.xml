@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BCTN">
         <activity
+            android:name=".activity.ThongTinTaiKhoan"
+            android:exported="false" />
+        <activity
             android:name=".activity.TheoDoiDonHang"
             android:exported="false" />
         <activity

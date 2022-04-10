@@ -14,13 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.bctn.MyAppication;
 import com.example.bctn.R;
 import com.example.bctn.adapter.RecyclerAdapter.DonHang1Adap;
-import com.example.bctn.domain.ctdh;
-import com.example.bctn.domain.donhang;
-import com.example.bctn.domain.key;
-import com.example.bctn.domain.vitri;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class DHDonNhapFrag extends Fragment {
 

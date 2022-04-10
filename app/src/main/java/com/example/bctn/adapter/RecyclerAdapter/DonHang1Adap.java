@@ -65,7 +65,7 @@ public class DonHang1Adap extends RecyclerView.Adapter<DonHang1Adap.DonHang1Adap
 
     @Override
     public int getItemCount() {
-        if (mListDH.size() != 0) {
+        if (mListDH != null) {
             return mListDH.size();
         }
         return 0;

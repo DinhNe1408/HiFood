@@ -7,13 +7,17 @@ import android.database.sqlite.SQLiteStatement;
 
 import com.example.bctn.domain.ctdh;
 import com.example.bctn.domain.donhang;
+import com.example.bctn.domain.key;
 import com.example.bctn.domain.monan;
 import com.example.bctn.domain.quanan;
 import com.example.bctn.domain.taikhoan;
 import com.example.bctn.domain.vitri;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DAO {
     Context mContext;
@@ -146,18 +150,79 @@ public class DAO {
             }
 
             donhangList.add(new donhang(IDDH,
-                        tro.getInt(2),
-                        tro.getDouble(3),
-                        new vitri(tro.getString(4),0,0),
-                            tro.getLong(5),
-                            tro.getLong(6),
-                            tro.getString(7),
-                            ctdhList)
-                    );
+                    tro.getInt(2),
+                    tro.getDouble(3),
+                    new vitri(tro.getString(4), 0, 0),
+                    tro.getLong(5),
+                    tro.getLong(6),
+                    tro.getString(7),
+                    ctdhList)
+            );
         }
 
         return donhangList;
     }
 
+    public int isExistDonNhap(int IDTK, int IDQA) {
+        Cursor tro = mDatabase.Get("SELECT * FROM DonHang WHERE IDTK = "
+                + IDTK + " AND IDQA = " + IDQA + " AND TTGiao = '" + key.key_dh_Nhap + "'");
+        while (tro.moveToNext()) {
+            return tro.getInt(0);
+        }
+        return -1;
+    }
+
+    public int TaoMaDonHang(int IDTK, int IDQA) {
+        Cursor tro = mDatabase.Get("SELECT * FROM DonHang ORDER BY IDDH DESC LIMIT 1");
+        while (tro.moveToNext()) {
+            return tro.getInt(0);
+        }
+        return 0;
+    }
+
+    public void TaoDonHang(int IDDH, int IDTK, int IDQA, String TTGiao) {
+        if (isExistDonNhap(IDTK, IDQA) != -1) {
+            mDatabase.Query("INSERT INTO DonHang(IDDH, IDTK, IDQA, TGDat,TTGiao) VALUES ( "
+                    + IDDH + " , " + IDTK + " , " + IDQA + " , '" + Calendar.getInstance().getTime() + "','" + TTGiao + "')");
+        } else {
+            mDatabase.Query("");
+        }
+    }
+
+    // endregion
+
+    // region Yêu thích
+    public boolean isThich(int IDTK, int IDQA) {
+        Cursor tro = mDatabase.Get("SELECT * FROM YeuThich WHERE IDTK = "
+                + IDTK + " AND IDQA = " + IDQA);
+        while (tro.moveToNext()) {
+            return true;
+        }
+        return false;
+    }
+
+    public void ThemYT(int IDTK, int IDQA) {
+        mDatabase.Query("INSERT INTO YeuThich(IDTK,IDQA,ThoiGian) VALUES ("
+                + IDTK + " , " + IDQA + " , '" + Calendar.getInstance().getTime() + "')");
+    }
+
+    public void XoaYT(int IDTK, int IDQA) {
+        mDatabase.Query("DELETE FROM YeuThich WHERE IDTK = " + IDTK + " AND IDQA = " + IDQA);
+    }
+
+    public List<quanan> ListQAYT(int idTK) {
+        List<quanan> list = new ArrayList<>();
+        Cursor tro = mDatabase.Get("SELECT * FROM QuanAn B, YeuThich A WHERE  A.IDTK = "
+                + idTK + " AND A.IDQA = B.IDQA ORDER BY ThoiGian DESC");
+        while (tro.moveToNext()) {
+            list.add(new quanan(
+                    tro.getInt(0),
+                    tro.getString(1),
+                    null,
+                    new vitri(tro.getString(3), 0, 0)));
+        }
+        ;
+        return list;
+    }
     // endregion
 }

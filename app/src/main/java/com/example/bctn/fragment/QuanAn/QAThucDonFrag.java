@@ -4,32 +4,22 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.PluralsRes;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.bctn.MyAppication;
 import com.example.bctn.R;
 import com.example.bctn.activity.QuanAnAct;
 import com.example.bctn.adapter.RecyclerAdapter.MonAn1Adap;
-import com.example.bctn.domain.donhang;
-import com.example.bctn.domain.key;
-import com.example.bctn.domain.monan;
 import com.example.bctn.domain.quanan;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 public class QAThucDonFrag extends Fragment {
 
@@ -51,7 +41,6 @@ public class QAThucDonFrag extends Fragment {
         relative1_QA.setOnClickListener(view -> {
             OpenBotSheet();
         });
-
 
         //OpenBotSheet();
         return mView;
@@ -80,6 +69,7 @@ public class QAThucDonFrag extends Fragment {
         });
 
     }
+
 
 
     private void AnhXa() {

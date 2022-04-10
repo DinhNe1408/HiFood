@@ -3,9 +3,15 @@ package com.example.bctn;
 import android.app.Application;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.widget.Toast;
 
 import com.example.bctn.domain.key;
 import com.example.bctn.domain.taikhoan;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class MyAppication extends Application {
 
@@ -16,11 +22,23 @@ public class MyAppication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
-        mDao = new DAO(getApplicationContext());
-        mTaiKhoan = new taikhoan();
-
         DataLocalManager.init(getApplicationContext());
+        mDao = new DAO(getApplicationContext());
+        List<String> stringList =  DataLocalManager.getTaiKhoan();
+
+        Map<Integer, Integer> map = new HashMap<>();
+        map.put(1,2);
+        map.put(2,2);
+
+        map.get(3);
+
+        if (!stringList.get(0).equals("")){
+            mTaiKhoan = MyAppication.mDao.GetTK(stringList.get(0), stringList.get(1));
+            mTaiKhoan.setDonhangList(MyAppication.mDao.ListDHDonNhap(mTaiKhoan.getIdTK()));
+        } else {
+            mTaiKhoan = new taikhoan();
+        }
+
         TaoKenhTB();
     }
 

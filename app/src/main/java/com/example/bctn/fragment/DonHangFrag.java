@@ -1,6 +1,5 @@
 package com.example.bctn.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,21 +9,17 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.bctn.R;
-import com.example.bctn.activity.ThanhToanAct;
 import com.example.bctn.adapter.DsMA_dh_Adap;
 import com.example.bctn.adapter.TablayoutAdapter.TabDonHangAdap;
 import com.example.bctn.domain.monan;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class DonHangFrag extends Fragment {
 
