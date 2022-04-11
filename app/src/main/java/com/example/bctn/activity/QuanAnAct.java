@@ -3,6 +3,7 @@ package com.example.bctn.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -34,7 +35,6 @@ public class QuanAnAct extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quan_an);
         AnhXa();
-
 
         Intent intent = getIntent();
         IDQA = intent.getIntExtra(key.key_IDQA, -1);
@@ -77,6 +77,8 @@ public class QuanAnAct extends AppCompatActivity {
                 }
                 isThich = !isThich;
                 imgV_Thich_qa.setColorFilter(getResources().getColor(R.color.hifood1));
+            } else {
+                gotoDangNhap(this);
             }
         });
 
@@ -84,6 +86,11 @@ public class QuanAnAct extends AppCompatActivity {
         txtV_Ten_qa.setText(quanan.getTenQA());
         txtV_ViTri_qa.setText(quanan.getVitriQA().getVitri());
 
+    }
+
+    public void gotoDangNhap(Context mContext){
+        Intent intent = new Intent(mContext, DangNhapAct.class);
+        startActivity(intent);
     }
 
     private void AnhXa() {

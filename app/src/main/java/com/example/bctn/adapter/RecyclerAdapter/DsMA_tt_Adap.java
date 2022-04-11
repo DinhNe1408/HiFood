@@ -1,4 +1,4 @@
-package com.example.bctn.adapter;
+package com.example.bctn.adapter.RecyclerAdapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,17 +11,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bctn.R;
-import com.example.bctn.domain.monan;
+import com.example.bctn.domain.ctdh;
+import com.example.bctn.domain.key;
 
 import java.util.List;
 
 public class DsMA_tt_Adap extends RecyclerView.Adapter<DsMA_tt_Adap.DsMA_tt_AdapViewHolder> {
 
     private Context mContext;
-    private List<monan> mListMA;
+    private List<ctdh> mListMA;
 
-
-    public DsMA_tt_Adap(Context mContext, List<monan> mListMA) {
+    public DsMA_tt_Adap(Context mContext, List<ctdh> mListMA) {
         this.mContext = mContext;
         this.mListMA = mListMA;
     }
@@ -35,20 +35,20 @@ public class DsMA_tt_Adap extends RecyclerView.Adapter<DsMA_tt_Adap.DsMA_tt_Adap
 
     @Override
     public void onBindViewHolder(@NonNull DsMA_tt_AdapViewHolder holder, int position) {
-        monan monan = mListMA.get(position);
-        if (monan == null){
+        ctdh ctdh = mListMA.get(position);
+        if (ctdh == null){
             return;
         }
 
-        holder.imgV_HinhMA_tt.setImageResource(monan.getHMA());
-        holder.txtV_TenMA_tt.setText(monan.getTenMA());
-        //holder.GiaMA_tt.setText(monan.getGiaMA());
-
+        holder.imgV_HinhMA_tt.setImageResource(R.drawable.w42419);
+        holder.txtV_TenMA_tt.setText(ctdh.getTenMA());
+        holder.GiaMA_tt.setText(key.Dou2Money(ctdh.getGiaMA()));
+        holder.txtV_SLMA_tt.setText(String.format("x%d", ctdh.getSLMA()));
     }
 
     @Override
     public int getItemCount() {
-        if (mListMA.size() > 0){
+        if (mListMA != null){
             return mListMA.size();
         }
         return 0;
@@ -57,7 +57,7 @@ public class DsMA_tt_Adap extends RecyclerView.Adapter<DsMA_tt_Adap.DsMA_tt_Adap
     public class DsMA_tt_AdapViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView imgV_HinhMA_tt;
-        private TextView txtV_TenMA_tt, GiaMA_tt, SLMA_tt;
+        private TextView txtV_TenMA_tt, GiaMA_tt, txtV_SLMA_tt;
         public DsMA_tt_AdapViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -65,7 +65,7 @@ public class DsMA_tt_Adap extends RecyclerView.Adapter<DsMA_tt_Adap.DsMA_tt_Adap
 
             txtV_TenMA_tt = itemView.findViewById(R.id.txtV_TenMA_tt);
             GiaMA_tt = itemView.findViewById(R.id.GiaMA_tt);
-            SLMA_tt = itemView.findViewById(R.id.SLMA_tt);
+            txtV_SLMA_tt = itemView.findViewById(R.id.txtV_SLMA_tt);
         }
     }
 }

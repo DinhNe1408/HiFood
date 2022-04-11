@@ -134,6 +134,40 @@ public class DAO {
     // endregion
 
     // region Đơn hàng
+    public donhang DHDonNhap(int IDTK, int IDQA) {
+        donhang donhang = null;
+        Cursor tro = mDatabase.Get("SELECT * FROM DonHang WHERE IDTK = " + IDTK + "  AND IDQA = " + IDQA);
+
+        while (tro.moveToNext()) {
+            int IDDH = tro.getInt(0);
+            Cursor tro2 = mDatabase.Get("SELECT B.IDMA,HinhMA,TenMA, GiaMa, SoLuong, GhiChu" +
+                    "  FROM DonHang A,CTDonHang B, MonAn C WHERE A.IDDH = B.IDDH AND C.IDMA = B.IDMA AND C.IDQA = A.IDQA AND A.IDDH =" + IDDH);
+            List<ctdh> ctdhList = new ArrayList<>();
+            while (tro2.moveToNext()) {
+                ctdhList.add(new ctdh(tro2.getInt(0),
+                        tro2.getBlob(1),
+                        tro2.getString(2),
+                        tro2.getDouble(3),
+                        tro2.getInt(4),
+                        tro2.getString(5) == null ? "" : tro2.getString(5)));
+            }
+
+            donhang = new donhang(IDDH,
+                    tro.getInt(2),
+                    tro.getString(3),
+                    tro.getString(4),
+                    tro.getDouble(5),
+                    tro.getDouble(6),
+                    tro.getDouble(7),
+                    tro.getString(8),
+                    tro.getLong(9),
+                    tro.getLong(10),
+                    tro.getString(11),
+                    ctdhList);
+        }
+
+        return donhang;
+    }
 
     public List<donhang> ListDHDonNhap(int IDTK) {
         List<donhang> donhangList = new ArrayList<>();
@@ -141,21 +175,26 @@ public class DAO {
 
         while (tro.moveToNext()) {
             int IDDH = tro.getInt(0);
-            Cursor tro2 = mDatabase.Get("SELECT * FROM DonHang A,CTDonHang B WHERE A.IDDH = B.IDDH AND A.IDDH = " + IDDH);
+            Cursor tro2 = mDatabase.Get("SELECT B.IDMA, SoLuong, GiaMa, GhiChu  " +
+                    "FROM DonHang A,CTDonHang B, MonAn C WHERE A.IDDH = B.IDDH AND C.IDMA = B.IDMA AND A.IDDH = " + IDDH);
             List<ctdh> ctdhList = new ArrayList<>();
             while (tro2.moveToNext()) {
                 ctdhList.add(new ctdh(tro2.getInt(0),
                         tro2.getInt(1),
-                        tro2.getString(2)));
+                        tro2.getString(2) == null ? "" : tro2.getString(2)));
             }
 
             donhangList.add(new donhang(IDDH,
                     tro.getInt(2),
-                    tro.getDouble(3),
-                    new vitri(tro.getString(4), 0, 0),
-                    tro.getLong(5),
-                    tro.getLong(6),
-                    tro.getString(7),
+                    tro.getString(3),
+                    tro.getString(4),
+                    tro.getDouble(5),
+                    tro.getDouble(6),
+                    tro.getDouble(7),
+                    tro.getString(8),
+                    tro.getLong(9),
+                    tro.getLong(10),
+                    tro.getString(11),
                     ctdhList)
             );
         }
@@ -163,30 +202,70 @@ public class DAO {
         return donhangList;
     }
 
-    public int isExistDonNhap(int IDTK, int IDQA) {
+    public int isExistDonNhap(int IDTK, int IDQA, String TTGiao) {
         Cursor tro = mDatabase.Get("SELECT * FROM DonHang WHERE IDTK = "
-                + IDTK + " AND IDQA = " + IDQA + " AND TTGiao = '" + key.key_dh_Nhap + "'");
+                + IDTK + " AND IDQA = " + IDQA + " AND TTGiao = '" + TTGiao + "'");
         while (tro.moveToNext()) {
             return tro.getInt(0);
         }
         return -1;
     }
 
-    public int TaoMaDonHang(int IDTK, int IDQA) {
-        Cursor tro = mDatabase.Get("SELECT * FROM DonHang ORDER BY IDDH DESC LIMIT 1");
+    public boolean isExistMonAninDH(int IDDH, int IDMA) {
+        Cursor tro = mDatabase.Get("SELECT * FROM CTDonHang WHERE IDDH = "
+                + IDDH + " AND IDMA = " + IDMA);
         while (tro.moveToNext()) {
-            return tro.getInt(0);
+            return true;
         }
-        return 0;
+        return false;
+    }
+
+    public boolean isExistCTDH(int IDDH) {
+        Cursor tro = mDatabase.Get("SELECT * FROM CTDonHang WHERE IDDH = " + IDDH);
+        while (tro.moveToNext()) {
+            return true;
+        }
+        return false;
+    }
+
+    public void CapNhatDH(int IDDH, Long TGDat, String TTGiao) {
+
+        mDatabase.Query("UPDATE DonHang SET TGDat = '" + TGDat + "', TTGiao = '" + TTGiao + "' WHERE IDDH = " + IDDH);
+    }
+
+    public void CapNhatDH(int IDDH, String TenNN, String SDTNN,
+                          double PhiVC, double TienGiam, double TongTien,
+                          String ViTriGiao, Long TGDat, Long TGGiao, String TTGiao) {
+
+        mDatabase.Query("UPDATE DonHang SET TenNN ='" + TenNN + "', SDTNN ='" + SDTNN + "', PhiVanChuyen =" +
+                PhiVC + ", TienGiam = " + TienGiam + ", TongTien = " + TongTien + ", ViTriGiao = '" + ViTriGiao
+                + "', TGDat = '" + TGDat + "', TGGiao = '" + TGGiao + "', TTGiao ='" + TTGiao
+                + "' WHERE IDDH = " + IDDH);
+    }
+
+    public void ThemMonAninDH(int IDDH, int IDMA, int SoL, String GhiChu) {
+        mDatabase.Query("INSERT INTO CTDonHang( IDDH, IDMA, SoLuong, GhiChu) VALUES ( "
+                + IDDH + " , " + IDMA + " , " + SoL + " ,'" + GhiChu + "')");
+    }
+
+    public void CapNhatMonAninDH(int IDDH, int IDMA, int SoL, String GhiChu) {
+        mDatabase.Query("UPDATE CTDonHang SET SoLuong = "
+                + SoL + " , GhiChu = '" + GhiChu + "' WHERE IDDH = " + IDDH + " AND IDMA = " + IDMA);
+    }
+
+    public void XoaMonAninDH(int IDDH, int IDMA) {
+        mDatabase.Query("DELETE FROM CTDonHang WHERE IDDH = " + IDDH + " AND IDMA = " + IDMA);
+    }
+
+    public int TaoMaDonHang() {
+        Cursor tro = mDatabase.Get("SELECT * FROM DonHang ORDER BY IDDH DESC LIMIT 1");
+        tro.moveToNext();
+        return tro.getInt(0) + 1;
     }
 
     public void TaoDonHang(int IDDH, int IDTK, int IDQA, String TTGiao) {
-        if (isExistDonNhap(IDTK, IDQA) != -1) {
-            mDatabase.Query("INSERT INTO DonHang(IDDH, IDTK, IDQA, TGDat,TTGiao) VALUES ( "
-                    + IDDH + " , " + IDTK + " , " + IDQA + " , '" + Calendar.getInstance().getTime() + "','" + TTGiao + "')");
-        } else {
-            mDatabase.Query("");
-        }
+        mDatabase.Query("INSERT INTO DonHang(IDDH, IDTK, IDQA, TGDat,TTGiao) VALUES ( "
+                + IDDH + " , " + IDTK + " , " + IDQA + " , '" + Calendar.getInstance().getTime() + "','" + TTGiao + "')");
     }
 
     // endregion

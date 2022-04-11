@@ -1,6 +1,8 @@
 package com.example.bctn.fragment.QuanAn;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,19 +17,32 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.bctn.MyAppication;
 import com.example.bctn.R;
 import com.example.bctn.activity.QuanAnAct;
+import com.example.bctn.activity.ThanhToanAct;
 import com.example.bctn.adapter.RecyclerAdapter.MonAn1Adap;
+import com.example.bctn.domain.ctdh;
+import com.example.bctn.domain.donhang;
+import com.example.bctn.domain.key;
 import com.example.bctn.domain.quanan;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
+
 public class QAThucDonFrag extends Fragment {
 
+    private static TextView txtV_TSoL_gh, txtV_TongGia_QA;
     private View mView;
     private RecyclerView recV_ThucDon_QA;
     private quanan quanan;
     private RelativeLayout relative1_QA;
-    private TextView txtV_TSoL_gh;
+    public static donhang mDonhang;
+    public static Map<Integer, Integer> mapRemove = new HashMap<>();
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -35,25 +50,91 @@ public class QAThucDonFrag extends Fragment {
         AnhXa();
 
         quanan = QuanAnAct.quanan;
-
+        if (MyAppication.mDao.isExistDonNhap(MyAppication.mTaiKhoan.getIdTK(), quanan.getIdQA(), key.key_dh_Nhap) == -1) {
+            mDonhang = new donhang();
+            txtV_TSoL_gh.setText("0");
+            txtV_TongGia_QA.setText("0");
+        } else {
+            mDonhang = MyAppication.mDao.DHDonNhap(MyAppication.mTaiKhoan.getIdTK(), quanan.getIdQA());
+            SoLuong();
+        }
         getData_RecV();
 
         relative1_QA.setOnClickListener(view -> {
-            OpenBotSheet();
+
+            Intent intent = new Intent(getContext(), ThanhToanAct.class);
+            intent.putExtra(key.key_IDQA, quanan.getIdQA());
+            startActivity(intent);
         });
 
         //OpenBotSheet();
         return mView;
     }
 
+    public static void SoLuong() {
+        Log.e("opopopopop", mDonhang.getTongSoLuong() + " = " + mDonhang.getTongTienMA());
+        txtV_TSoL_gh.setText(String.valueOf(mDonhang.getTongSoLuong()));
+        txtV_TongGia_QA.setText(key.Dou2Money(mDonhang.getTongTienMA()));
+    }
+
     private void getData_RecV() {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         MonAn1Adap monAn1Adap = new MonAn1Adap(getContext(), quanan.getDsMA(), quanan.getIdQA());
-        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(mView.getContext(),DividerItemDecoration.VERTICAL);
+        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(mView.getContext(), DividerItemDecoration.VERTICAL);
 
         recV_ThucDon_QA.setLayoutManager(linearLayoutManager);
         recV_ThucDon_QA.setAdapter(monAn1Adap);
         recV_ThucDon_QA.addItemDecoration(itemDecoration);
+    }
+
+    public static void CapNhapGhiChuMonAn(int IDMA, String GhiChu) {
+        mDonhang.getCthdMap().get(IDMA).setGhiChu(GhiChu);
+    }
+
+
+    public static void TaoMonAn(int IDMA, byte[] HinhMA, String TenMA, double GiaMA, int SL) {
+        mDonhang.getCthdMap().put(IDMA, new ctdh(IDMA, HinhMA, TenMA, GiaMA, SL, ""));
+        mapRemove.remove(IDMA);
+        Log.e("FAFAFAFA", SL + " / " + IDMA + " = " + GiaMA + " / " + SL);
+        SoLuong();
+    }
+
+    public static void CapNhapMonAn(int IDMA, int SL) {
+        if (SL > 0) {
+            Log.e("DADADADA", SL + " / " + IDMA);
+            mDonhang.getCthdMap().get(IDMA).setSLMA(SL);
+        } else if (SL == 0) {
+            mDonhang.getCthdMap().get(IDMA).setSLMA(SL);
+            mapRemove.put(IDMA, IDMA);
+            mDonhang.getCthdMap().remove(IDMA);
+        }
+        SoLuong();
+    }
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        int IDDH = MyAppication.mDao.isExistDonNhap(MyAppication.mTaiKhoan.getIdTK(), quanan.getIdQA(), key.key_dh_Nhap);
+        if (IDDH != -1) {
+            MyAppication.mDao.CapNhatDH(IDDH, Calendar.getInstance().getTime().getTime(), key.key_dh_Nhap);
+        } else {
+            IDDH = MyAppication.mDao.TaoMaDonHang();
+            MyAppication.mDao.TaoDonHang(IDDH, MyAppication.mTaiKhoan.getIdTK(), quanan.getIdQA(), key.key_dh_Nhap);
+        }
+
+        for (ctdh cthd : mDonhang.getCthdMap().values()) {
+            if (!MyAppication.mDao.isExistMonAninDH(IDDH, cthd.getIDMA())) {
+                MyAppication.mDao.ThemMonAninDH(IDDH, cthd.getIDMA(), cthd.getSLMA(), cthd.getGhiChu());
+            } else {
+                MyAppication.mDao.CapNhatMonAninDH(IDDH, cthd.getIDMA(), cthd.getSLMA(), cthd.getGhiChu());
+            }
+        }
+
+        for (Integer IDMA : mapRemove.values()) {
+            MyAppication.mDao.XoaMonAninDH(IDDH, IDMA);
+        }
     }
 
     private void OpenBotSheet() {
@@ -70,12 +151,11 @@ public class QAThucDonFrag extends Fragment {
 
     }
 
-
-
     private void AnhXa() {
         recV_ThucDon_QA = mView.findViewById(R.id.recV_ThucDon_QA);
         relative1_QA = mView.findViewById(R.id.relative1_QA);
         txtV_TSoL_gh = mView.findViewById(R.id.txtV_TSoL_gh);
+        txtV_TongGia_QA = mView.findViewById(R.id.txtV_TongGia_QA);
     }
 
 }

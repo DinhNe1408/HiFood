@@ -18,7 +18,6 @@ public class MyAppication extends Application {
     public static DAO mDao;
     public static taikhoan mTaiKhoan;
 
-
     @Override
     public void onCreate() {
         super.onCreate();
@@ -34,7 +33,6 @@ public class MyAppication extends Application {
 
         if (!stringList.get(0).equals("")){
             mTaiKhoan = MyAppication.mDao.GetTK(stringList.get(0), stringList.get(1));
-            mTaiKhoan.setDonhangList(MyAppication.mDao.ListDHDonNhap(mTaiKhoan.getIdTK()));
         } else {
             mTaiKhoan = new taikhoan();
         }

@@ -32,7 +32,6 @@ public class DHDonNhapFrag extends Fragment {
 
     private void getData_Rec() {
 
-
         DonHang1Adap donHang1Adap = new DonHang1Adap(mView.getContext(), MyAppication.mDao.ListDHDonNhap(MyAppication.mTaiKhoan.getIdTK()));
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mView.getContext(), LinearLayoutManager.VERTICAL, false);
         recV_DHDonNhap.setLayoutManager(linearLayoutManager);

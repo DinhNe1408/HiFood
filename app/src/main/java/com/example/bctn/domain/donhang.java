@@ -1,5 +1,7 @@
 package com.example.bctn.domain;
 
+import com.example.bctn.activity.DangNhapAct;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,19 +10,39 @@ import java.util.Map;
 
 public class donhang implements Serializable {
     private int IDDH, IDQA;
-    private double GiaHD;
-    private vitri VitriDH;
-    private List<ctdh> ctdhList = new ArrayList<>();
+    private double PhiVC, TongDH, TienGiam;
     private Long TGDat, TGGiao;
-    private String TTDH;
-    private Map<Integer,ctdh> cthdMap;
+    private String TTDH, TenNN, SDTNN,VitriDH;
+    private List<ctdh> ctdhList = new ArrayList<>();
+    private Map<Integer, ctdh> cthdMap = new HashMap<>();
+
     public donhang() {
     }
 
-    public donhang(int IDDH, int IDQA, double giaHD, vitri vitriDH, Long TGDat, Long TGGiao, String TTDH, List<ctdh> ctdhList) {
+    public donhang(int IDDH, int IDQA, String TenNN, String SDTNN, double PhiVC, double TienGiam, double TongDH,String vitriDH, Long TGDat, Long TGGiao, String TTDH, List<ctdh> ctdhList) {
         this.IDDH = IDDH;
         this.IDQA = IDQA;
-        this.GiaHD = giaHD;
+        this.TenNN = TenNN;
+        this.SDTNN = SDTNN;
+        this.PhiVC = PhiVC;
+        this.TienGiam = TienGiam;
+        this.TongDH = TongDH;
+        this.VitriDH = vitriDH;
+        this.ctdhList = ctdhList;
+        this.TGDat = TGDat;
+        this.TGGiao = TGGiao;
+        this.TTDH = TTDH;
+
+        cthdMap = new HashMap<>();
+        for (ctdh val : ctdhList) {
+            cthdMap.put(val.getIDMA(), val);
+        }
+    }
+
+    public donhang(int IDDH, int IDQA, double TongDH, String vitriDH, Long TGDat, Long TGGiao, String TTDH, List<ctdh> ctdhList) {
+        this.IDDH = IDDH;
+        this.IDQA = IDQA;
+        this.TongDH = TongDH;
         this.VitriDH = vitriDH;
         this.ctdhList = ctdhList;
         this.TGDat = TGDat;
@@ -34,14 +56,21 @@ public class donhang implements Serializable {
     }
 
     public int getTongSoL() {
-        return ctdhList.stream().mapToInt(com.example.bctn.domain.ctdh::getSLMA).sum();
+        return ctdhList.stream().mapToInt(ctdh::getSLMA).sum();
+    }
+    public double getTongTienMA() {
+        return cthdMap.values().stream().mapToDouble(ctdh -> ctdh.getGiaMA() * ctdh.getSLMA()).sum();
     }
 
-    public boolean isctdhList(){
+    public int getTongSoLuong() {
+        return cthdMap.values().stream().mapToInt(ctdh::getSLMA).sum();
+    }
+
+    public boolean isctdhList() {
         return ctdhList.size() == 0;
     }
 
-    public ctdh getCTDHinDH(int IDDH){
+    public ctdh getCTDHinDH(int IDDH) {
         return cthdMap.get(IDDH);
     }
 
@@ -62,19 +91,51 @@ public class donhang implements Serializable {
         this.IDQA = IDQA;
     }
 
-    public double getGiaHD() {
-        return GiaHD;
+    public double getPhiVC() {
+        return PhiVC;
     }
 
-    public void setGiaHD(double giaHD) {
-        GiaHD = giaHD;
+    public void setPhiVC(double phiVC) {
+        PhiVC = phiVC;
     }
 
-    public vitri getVitriDH() {
+    public double getTongDH() {
+        return TongDH;
+    }
+
+    public void setTongDH(double tongDH) {
+        TongDH = tongDH;
+    }
+
+    public double getTienGiam() {
+        return TienGiam;
+    }
+
+    public void setTienGiam(double tienGiam) {
+        TienGiam = tienGiam;
+    }
+
+    public String getTenNN() {
+        return TenNN;
+    }
+
+    public void setTenNN(String tenNN) {
+        TenNN = tenNN;
+    }
+
+    public String getSDTNN() {
+        return SDTNN;
+    }
+
+    public void setSDTNN(String SDTNN) {
+        this.SDTNN = SDTNN;
+    }
+
+    public String getVitriDH() {
         return VitriDH;
     }
 
-    public void setVitriDH(vitri vitriDH) {
+    public void setVitriDH(String vitriDH) {
         VitriDH = vitriDH;
     }
 
@@ -104,6 +165,14 @@ public class donhang implements Serializable {
 
     public String getTTDH() {
         return TTDH;
+    }
+
+    public Map<Integer, ctdh> getCthdMap() {
+        return cthdMap;
+    }
+
+    public void setCthdMap(Map<Integer, ctdh> cthdMap) {
+        this.cthdMap = cthdMap;
     }
 
     public void setTTDH(String TTDH) {

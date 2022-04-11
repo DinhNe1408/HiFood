@@ -33,7 +33,7 @@
         android:text="30.000đ" />
 
     <TextView
-        android:id="@+id/SLMA_tt"
+        android:id="@+id/txtV_SLMA_tt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"

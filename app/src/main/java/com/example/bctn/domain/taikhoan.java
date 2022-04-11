@@ -11,9 +11,6 @@ public class taikhoan {
     private String tenTK, sdtTK,mkTK, role;
     private boolean khoa;
     private vitri Vitri, CurVitri;
-    private List<donhang> donhangList = new ArrayList<>();
-    private Map<Integer,donhang> donhangMap;
-
 
     public taikhoan() {
         this.idTK = -1;
@@ -28,30 +25,6 @@ public class taikhoan {
         this.Vitri = vitri;
         this.mkTK = mkTK;
         this.khoa = khoa;
-    }
-
-    public boolean isdonhangList(){
-        return donhangList.size() == 0;
-    }
-
-    public ctdh getListHDinTK(int IDQA,int IDMA){
-        if(!isdonhangList()){
-            if(donhangMap.get(IDQA) != null){
-                ctdh ctdh = donhangMap.get(IDQA).getCTDHinDH(IDMA);
-                if(ctdh != null){
-                    return ctdh;
-                }
-            }
-        }
-        return null;
-    }
-
-    public void setDonhangList(List<donhang> donhangList) {
-        this.donhangList = donhangList;
-        donhangMap = new HashMap<>();
-        for (donhang val : donhangList) {
-            donhangMap.put(val.getIDDH(), val);
-        }
     }
 
     public int getIdTK() {
@@ -124,9 +97,5 @@ public class taikhoan {
 
     public void setCurVitri(vitri curVitri) {
         CurVitri = curVitri;
-    }
-
-    public List<donhang> getDonhangList() {
-        return donhangList;
     }
 }

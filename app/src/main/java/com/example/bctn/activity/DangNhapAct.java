@@ -44,7 +44,6 @@ public class DangNhapAct extends AppCompatActivity {
                 if(mTaikhoan != null){
                     if (!mTaikhoan.isKhoa()){
                         MyAppication.mTaiKhoan = mTaikhoan;
-                        MyAppication.mTaiKhoan.setDonhangList(MyAppication.mDao.ListDHDonNhap(mTaikhoan.getIdTK()));
 
                         DataLocalManager.setTaiKhoan(mTaikhoan.getSdtTK(), mTaikhoan.getMkTK());
                         Intent mIntent = new Intent(DangNhapAct.this, TrangChuAct.class);

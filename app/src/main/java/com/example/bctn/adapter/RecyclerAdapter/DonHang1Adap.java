@@ -45,8 +45,8 @@ public class DonHang1Adap extends RecyclerView.Adapter<DonHang1Adap.DonHang1Adap
         if (donhang == null)
             return;
 
-        holder.txtV_SL_dh1.setText(key.TienvaSL(donhang.getGiaHD(), donhang.getTongSoL()));
-        holder.txtV_ViTri_dh1.setText(donhang.getVitriDH().getVitri());
+        holder.txtV_SL_dh1.setText(key.TienvaSL(donhang.getTongDH(), donhang.getTongSoL()));
+        holder.txtV_ViTri_dh1.setText(donhang.getVitriDH());
 
         holder.relative1_dh1.setOnClickListener(view -> {
             Intent mIntent;

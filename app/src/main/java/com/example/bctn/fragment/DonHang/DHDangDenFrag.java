@@ -56,9 +56,9 @@ public class DHDangDenFrag extends Fragment {
         ctdhList.add(new ctdh(1, 3, "Giao gấp"));
         ctdhList.add(new ctdh(1, 10, "Giao gấp"));
 
-        list.add(new donhang(1,1, 10000, new vitri("Bình Dương", 0, 0), 10L, 10L, key.key_dh_DangGiao, ctdhList));
-        list.add(new donhang(1,1, 30000, new vitri("Bình Dương", 0, 0),10L, 10L,"", ctdhList));
-        list.add(new donhang(1,1, 40000, new vitri("Dĩ An", 0, 0),10L, 10L,key.key_dh_HoanThanh, ctdhList));
+        list.add(new donhang(1,1, 10000,"Bình Dương", 10L, 10L, key.key_dh_DangGiao, ctdhList));
+        list.add(new donhang(1,1, 30000,"Bình Dương",10L, 10L,"", ctdhList));
+        list.add(new donhang(1,1, 40000,"Dĩ An",10L, 10L,key.key_dh_HoanThanh, ctdhList));
         return list;
     }
 

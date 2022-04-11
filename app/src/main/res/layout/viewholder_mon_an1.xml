@@ -7,31 +7,41 @@
 
     <ImageView
         android:id="@+id/imgV_HinhMA_ma1"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:src="@drawable/w42419"/>
+        android:src="@drawable/w42419" />
 
     <TextView
         android:id="@+id/txtV_TenMA_ma1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/relative2_ma1"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="10dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="0dp"
-        android:layout_marginBottom="10dp"
         android:layout_toEndOf="@+id/imgV_HinhMA_ma1"
         android:text="Banh" />
+
+    <TextView
+        android:id="@+id/txtV_GhiChu_ma1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtV_TenMA_ma1"
+        android:layout_marginVertical="4dp"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@+id/imgV_HinhMA_ma1"
+        android:text="Ghi chú cho quán"
+        android:textSize="12sp"
+        android:textStyle="italic" />
 
     <RelativeLayout
         android:id="@+id/relative2_ma1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imgV_HinhMA_ma1"
+        android:layout_below="@+id/txtV_GhiChu_ma1"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="10dp"
         android:layout_toEndOf="@+id/imgV_HinhMA_ma1">
@@ -56,7 +66,7 @@
                 android:layout_width="30dp"
                 android:layout_height="35dp"
                 android:layout_weight="1"
-                android:src="@drawable/ic_round_remove_24"/>
+                android:src="@drawable/ic_round_remove_24" />
 
             <TextView
                 android:id="@+id/txtV_SoL_ma1"

@@ -1,13 +1,10 @@
 package com.example.bctn.domain;
 
 public class monan {
-    private int idMA,gtgMA,hMA, saoMA, loaiMA;
-    private String maMA, tenMA, motaMA;
+    private int idMA,hMA, loaiMA;
+    private String maMA, tenMA;
     private double giaMA;
-    public monan(int hMA, String tenMA) {
-        this.hMA = hMA;
-        this.tenMA = tenMA;
-    }
+    private byte[] HinhMA;
 
     public monan(int idMA, String maMA, double giaMA, String tenMA) {
         this.idMA = idMA;
@@ -22,16 +19,13 @@ public class monan {
         this.tenMA = tenMA;
     }
 
-    public monan(int idMA, double giaMA, int gtgMA, int hMA, int saoMA, int loaiMA, String maMA, String tenMA, String motaMA) {
+    public monan(int idMA, double giaMA, int hMA, int loaiMA, String maMA, String tenMA) {
         this.idMA = idMA;
         this.giaMA = giaMA;
-        this.gtgMA = gtgMA;
         this.hMA = hMA;
-        this.saoMA = saoMA;
         this.loaiMA = loaiMA;
         this.maMA = maMA;
         this.tenMA = tenMA;
-        this.motaMA = motaMA;
     }
 
     public int getIdMA() {
@@ -50,28 +44,20 @@ public class monan {
         this.giaMA = giaMA;
     }
 
-    public int getGtgMA() {
-        return gtgMA;
-    }
-
-    public void setGtgMA(int gtgMA) {
-        this.gtgMA = gtgMA;
-    }
-
     public int getHMA() {
         return hMA;
     }
 
+    public byte[] getHinhMA() {
+        return HinhMA;
+    }
+
+    public void setHinhMA(byte[] hinhMA) {
+        HinhMA = hinhMA;
+    }
+
     public void setHMA(int hMA) {
         this.hMA = hMA;
-    }
-
-    public int getSaoMA() {
-        return saoMA;
-    }
-
-    public void setSaoMA(int saoMA) {
-        this.saoMA = saoMA;
     }
 
     public int getLoaiMA() {
@@ -96,13 +82,5 @@ public class monan {
 
     public void setTenMA(String tenMA) {
         this.tenMA = tenMA;
-    }
-
-    public String getMotaMA() {
-        return motaMA;
-    }
-
-    public void setMotaMA(String motaMA) {
-        this.motaMA = motaMA;
     }
 }
