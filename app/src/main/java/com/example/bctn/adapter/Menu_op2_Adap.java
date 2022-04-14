@@ -16,6 +16,9 @@ import com.example.bctn.MyAppication;
 import com.example.bctn.R;
 import com.example.bctn.activity.DangNhapAct;
 import com.example.bctn.activity.TheoDoiDonHang;
+import com.example.bctn.activity.admin.QLDonHang;
+import com.example.bctn.activity.admin.QLQuanAn;
+import com.example.bctn.activity.admin.QLTaiKhoan;
 import com.example.bctn.domain.key;
 import com.example.bctn.domain.menu_option;
 
@@ -50,6 +53,21 @@ public class Menu_op2_Adap extends RecyclerView.Adapter<Menu_op2_Adap.Menu_op2_A
                     DataLocalManager.setTaiKhoan("", "");
                     Intent intent = new Intent(mContext, DangNhapAct.class);
                     mContext.startActivity(intent);
+                    break;
+
+                case key.key_QLDonHang:
+                    Intent intent1 =new Intent(mContext, QLDonHang.class);
+                    mContext.startActivity(intent1);
+                    break;
+
+                case key.key_QLTaiKhoan:
+                    Intent intent2 =new Intent(mContext, QLTaiKhoan.class);
+                    mContext.startActivity(intent2);
+                    break;
+
+                case key.key_QLQuanAn:
+                    Intent intent3 =new Intent(mContext, QLQuanAn.class);
+                    mContext.startActivity(intent3);
                     break;
             }
         });

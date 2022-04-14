@@ -13,8 +13,8 @@
         android:id="@+id/progress3_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tool3_TheoDoiDonHang"
-        android:layout_marginTop="40dp"
+        android:layout_below="@+id/txtV_ThoiGianNhan_tddh"
+        android:layout_marginTop="20dp"
         app:spb_checkStateCompleted="true"
         app:spb_currentStateDescriptionColor="@color/hifood1"
         app:spb_descriptionTopSpaceIncrementer="5dp"
@@ -25,16 +25,157 @@
         app:spb_stateNumberBackgroundColor="#808080"
         app:spb_stateNumberForegroundColor="#eeeeee" />
 
-    <androidx.cardview.widget.CardView
+    <TextView
+        android:id="@+id/txt1_tddh"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp">
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/CircleImgV_hinhTaiXe"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:src="@drawable/w42419"
-            android:layout_margin="10dp"/>
+        android:layout_below="@+id/tool3_TheoDoiDonHang"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="15dp"
+        android:text="Thông tin giao hàng"
+        android:textSize="16sp" />
 
-    </androidx.cardview.widget.CardView>
+    <RelativeLayout
+        android:id="@+id/relative2_tddh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt1_tddh"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="8dp">
+
+        <TextView
+            android:id="@+id/txtV_TenTK_tddh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginVertical="3dp"
+            android:text="Nguyễn Quang Dinh" />
+
+        <TextView
+            android:id="@+id/txtV_DiaChiNhan_tddh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtV_TenTK_tddh"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginVertical="3dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/roboto_italic"
+            android:maxLines="1"
+            android:text="Số 6 Trần Văn Ơn, Phú Hòa, Thủ Dầu Một, Bình Dương" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/txtV_ThoiGianNhan_tddh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relative2_tddh"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginHorizontal="15dp"
+        android:text="Giao hàng: 17 tháng 9 năm 2022"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:id="@+id/line1_tddh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/progress3_bar"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:text="Đơn hàng"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recV_DsMA_tddh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="20dp"
+            android:background="@color/hifood4"
+            android:paddingTop="5dp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/relative3_tddh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/line1_tddh"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="30dp"
+        android:background="@color/hifood4"
+        android:padding="4dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="0dp"
+            android:text="@string/tongDH_tt" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/phiVC_tddh"
+            android:layout_alignParentStart="true"
+            android:text="@string/phiVC_tt" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/tienGiam_tddh"
+            android:layout_alignParentStart="true"
+            android:text="@string/tiengiam" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/tongTien_tddh"
+            android:layout_alignParentStart="true"
+            android:text="@string/tongTien_tt" />
+
+        <TextView
+            android:id="@+id/tongDH_tddh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="90.000đ" />
+
+        <TextView
+            android:id="@+id/phiVC_tddh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tongDH_tddh"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="5dp"
+            android:text="20.000đ" />
+
+        <TextView
+            android:id="@+id/tienGiam_tddh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/phiVC_tddh"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="5dp"
+            android:text="20.000đ" />
+
+        <TextView
+            android:id="@+id/tongTien_tddh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tienGiam_tddh"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="5dp"
+            android:text="111.000đ" />
+    </RelativeLayout>
+
 </RelativeLayout>

@@ -4,6 +4,11 @@ public class menu_option {
     private int idMenu, hinhMenu, bgMenu;
     private String noidungMenu;
 
+    public menu_option(int idMenu, String noidungMenu) {
+        this.idMenu = idMenu;
+        this.noidungMenu = noidungMenu;
+    }
+
     public menu_option(int idMenu, int hinhMenu, int bgMenu, String noidungMenu) {
         this.idMenu = idMenu;
         this.hinhMenu = hinhMenu;

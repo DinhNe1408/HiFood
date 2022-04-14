@@ -3,8 +3,10 @@ package com.example.bctn;
 import android.app.Application;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.Intent;
 import android.widget.Toast;
 
+import com.example.bctn.activity.admin.QuanTri;
 import com.example.bctn.domain.key;
 import com.example.bctn.domain.taikhoan;
 

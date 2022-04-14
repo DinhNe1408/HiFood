@@ -59,7 +59,7 @@ public class MonAn1Adap extends RecyclerView.Adapter<MonAn1Adap.MonAn1AdapViewHo
         int SL = 0;
 
 
-        if (QAThucDonFrag.mDonhang != null) {
+        if (QAThucDonFrag.mDonhang.getCthdMap().size() != 0) {
             ctdh ctdh = QAThucDonFrag.mDonhang.getCthdMap().get(monan.getIdMA());
             if (ctdh != null) {
                 SL = ctdh.getSLMA();
@@ -99,7 +99,6 @@ public class MonAn1Adap extends RecyclerView.Adapter<MonAn1Adap.MonAn1AdapViewHo
 
         });
         holder.txtV_GhiChu_ma1.setOnClickListener(view -> {
-            Log.e("OQIEQE","Open");
             openDialog(monan.getIdMA());
         });
     }
@@ -121,11 +120,6 @@ public class MonAn1Adap extends RecyclerView.Adapter<MonAn1Adap.MonAn1AdapViewHo
         ImageButton imgB_Dong_dialog = dialog.findViewById(R.id.imgB_Dong_dialog);
         Button btn_LuuGhiChu_dialog = dialog.findViewById(R.id.btn_LuuGhiChu_dialog);
 
-//        if (QAThucDonFrag.mapMA.get(IDMA) != null) {
-//            txtV_GhiChu_dialog.setText(QAThucDonFrag.mapMA.get(IDMA).getGhiChu());
-//        } else {
-//            txtV_GhiChu_dialog.setText("");
-//        }
         imgB_Dong_dialog.setOnClickListener(view -> {
             dialog.dismiss();
         });
@@ -144,7 +138,6 @@ public class MonAn1Adap extends RecyclerView.Adapter<MonAn1Adap.MonAn1AdapViewHo
         holder.imgB_Giam_ma1.setVisibility(HIDE);
         holder.txtV_GhiChu_ma1.setVisibility(HIDE);
     }
-
 
     @Override
     public int getItemCount() {

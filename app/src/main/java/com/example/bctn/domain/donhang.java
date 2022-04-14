@@ -10,70 +10,43 @@ import java.util.Map;
 
 public class donhang implements Serializable {
     private int IDDH, IDQA;
-    private double PhiVC, TongDH, TienGiam;
+    private double PhiVC, TongDH, TienGiam, TongTienMA;
     private Long TGDat, TGGiao;
-    private String TTDH, TenNN, SDTNN,VitriDH;
-    private List<ctdh> ctdhList = new ArrayList<>();
+    private String TTDH, TenNN, SDTNN, VitriDH;
     private Map<Integer, ctdh> cthdMap = new HashMap<>();
 
     public donhang() {
     }
 
-    public donhang(int IDDH, int IDQA, String TenNN, String SDTNN, double PhiVC, double TienGiam, double TongDH,String vitriDH, Long TGDat, Long TGGiao, String TTDH, List<ctdh> ctdhList) {
+    public donhang(int IDDH, int IDQA, String TenNN, String SDTNN,
+                   double TongTienMA, double PhiVC, double TienGiam, double TongDH,
+                   String vitriDH, Long TGDat, Long TGGiao, String TTDH, Map<Integer, ctdh> cthdMap) {
         this.IDDH = IDDH;
         this.IDQA = IDQA;
         this.TenNN = TenNN;
         this.SDTNN = SDTNN;
+        this.TongTienMA = TongTienMA;
         this.PhiVC = PhiVC;
         this.TienGiam = TienGiam;
         this.TongDH = TongDH;
         this.VitriDH = vitriDH;
-        this.ctdhList = ctdhList;
         this.TGDat = TGDat;
         this.TGGiao = TGGiao;
         this.TTDH = TTDH;
-
-        cthdMap = new HashMap<>();
-        for (ctdh val : ctdhList) {
-            cthdMap.put(val.getIDMA(), val);
-        }
-    }
-
-    public donhang(int IDDH, int IDQA, double TongDH, String vitriDH, Long TGDat, Long TGGiao, String TTDH, List<ctdh> ctdhList) {
-        this.IDDH = IDDH;
-        this.IDQA = IDQA;
-        this.TongDH = TongDH;
-        this.VitriDH = vitriDH;
-        this.ctdhList = ctdhList;
-        this.TGDat = TGDat;
-        this.TGGiao = TGGiao;
-        this.TTDH = TTDH;
-
-        cthdMap = new HashMap<>();
-        for (ctdh val : ctdhList) {
-            cthdMap.put(val.getIDMA(), val);
-        }
+        this.cthdMap = cthdMap;
     }
 
     public int getTongSoL() {
-        return ctdhList.stream().mapToInt(ctdh::getSLMA).sum();
+        return cthdMap.values().stream().mapToInt(ctdh::getSLMA).sum();
     }
-    public double getTongTienMA() {
+
+    public double getTongTienMAMap() {
         return cthdMap.values().stream().mapToDouble(ctdh -> ctdh.getGiaMA() * ctdh.getSLMA()).sum();
     }
 
     public int getTongSoLuong() {
         return cthdMap.values().stream().mapToInt(ctdh::getSLMA).sum();
     }
-
-    public boolean isctdhList() {
-        return ctdhList.size() == 0;
-    }
-
-    public ctdh getCTDHinDH(int IDDH) {
-        return cthdMap.get(IDDH);
-    }
-
 
     public int getIDDH() {
         return IDDH;
@@ -139,14 +112,6 @@ public class donhang implements Serializable {
         VitriDH = vitriDH;
     }
 
-    public List<ctdh> getCtdhList() {
-        return ctdhList;
-    }
-
-    public void setCtdhList(List<ctdh> ctdhList) {
-        this.ctdhList = ctdhList;
-    }
-
     public Long getTGDat() {
         return TGDat;
     }
@@ -175,7 +140,17 @@ public class donhang implements Serializable {
         this.cthdMap = cthdMap;
     }
 
+    public void newCtdhMap(){ this.cthdMap = new HashMap<>();}
+
     public void setTTDH(String TTDH) {
         this.TTDH = TTDH;
+    }
+
+    public void setTongTienMA(double tongTienMA) {
+        TongTienMA = tongTienMA;
+    }
+
+    public double getTongTienMA() {
+        return TongTienMA;
     }
 }

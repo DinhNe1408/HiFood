@@ -4,19 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".activity.admin.QuanTri">
 
-    <TextView
-        android:id="@+id/txtV_ChonNgay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <include android:id="@+id/tool3_QuanTri"
+        layout="@layout/toolbar_option_1"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recV_DHLichSu"
+        android:id="@+id/recV_QuanTriMenu"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_marginTop="30dp"/>
 
 </LinearLayout>

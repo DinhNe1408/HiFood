@@ -41,7 +41,7 @@ public class QuanAn1Adap extends RecyclerView.Adapter<QuanAn1Adap.QuanAn1AdapVie
     public void onBindViewHolder(@NonNull QuanAn1AdapViewHolder holder, int position) {
         quanan quanan = mList.get(position);
 
-        holder.hinhQA_1.setImageResource(R.drawable.w42419);
+        holder.hinhQA_1.setImageBitmap(key.Byte2Bitmap(quanan.getHinhQA()));
         holder.tenQA_1.setText(quanan.getTenQA());
         holder.vitriQA_1.setText(quanan.getVitriQA().getVitri());
         //holder.saoQA_1.setText();

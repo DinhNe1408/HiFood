@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name=".MyAppication"
@@ -14,7 +16,28 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BCTN">
         <activity
-            android:name=".activity.ThongTinTaiKhoan"
+            android:name=".activity.admin.ThongKe"
+            android:exported="false" />
+        <activity
+            android:name=".activity.admin.UpQuanAn"
+            android:exported="false" />
+        <activity
+            android:name=".activity.admin.UpTaiKhoan"
+            android:exported="false" />
+        <activity
+            android:name=".activity.admin.QLDonHang"
+            android:exported="false" />
+        <activity
+            android:name=".activity.admin.QLQuanAn"
+            android:exported="false" />
+        <activity
+            android:name=".activity.admin.QLTaiKhoan"
+            android:exported="false" />
+        <activity
+            android:name=".activity.admin.QuanTri"
+            android:exported="false" />
+        <activity
+            android:name=".activity.ThongTinNguoiDung"
             android:exported="false" />
         <activity
             android:name=".activity.TheoDoiDonHang"

@@ -16,6 +16,7 @@ import com.example.bctn.DAO;
 import com.example.bctn.DataLocalManager;
 import com.example.bctn.MyAppication;
 import com.example.bctn.R;
+import com.example.bctn.activity.admin.QuanTri;
 import com.example.bctn.domain.taikhoan;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -44,12 +45,18 @@ public class DangNhapAct extends AppCompatActivity {
                 if(mTaikhoan != null){
                     if (!mTaikhoan.isKhoa()){
                         MyAppication.mTaiKhoan = mTaikhoan;
-
                         DataLocalManager.setTaiKhoan(mTaikhoan.getSdtTK(), mTaikhoan.getMkTK());
-                        Intent mIntent = new Intent(DangNhapAct.this, TrangChuAct.class);
-                        startActivity(mIntent);
 
-                        Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                        if(!mTaikhoan.getRole().equals("admin")){
+                            Intent mIntent = new Intent(DangNhapAct.this, TrangChuAct.class);
+                            startActivity(mIntent);
+
+                            Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Intent mIntent = new Intent(DangNhapAct.this, QuanTri.class);
+                            startActivity(mIntent);
+                        }
+
                     } else {
                         Toast.makeText(this, "Tài khoản của bạn đã bị khóa.", Toast.LENGTH_SHORT).show();
                     }
@@ -62,8 +69,6 @@ public class DangNhapAct extends AppCompatActivity {
                 Toast.makeText(this, "Vui lòng điền đầy đủ các trường", Toast.LENGTH_SHORT).show();
             }
         });
-
-
 
         txtV_TaoTK_dn.setOnClickListener(view -> {
             Intent intent = new Intent(DangNhapAct.this, DangKy2Act.class);

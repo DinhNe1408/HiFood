@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteStatement;
 
 import com.example.bctn.domain.ctdh;
 import com.example.bctn.domain.donhang;
-import com.example.bctn.domain.key;
+import com.example.bctn.domain.donhang_dhfrag;
 import com.example.bctn.domain.monan;
 import com.example.bctn.domain.quanan;
 import com.example.bctn.domain.taikhoan;
@@ -31,12 +31,47 @@ public class DAO {
     }
 
     // region Tài khoản
+    public List<taikhoan> GetListTK(){
+        List<taikhoan> taikhoanList = new ArrayList<>();
+        Cursor tro = mDatabase.Get("SELECT * FROM TaiKhoan ORDER BY TGCS DESC");
+        while (tro.moveToNext()) {
+            taikhoanList.add(new taikhoan(tro.getInt(0),
+                    tro.getString(1),
+                    tro.getString(2),
+                    tro.getString(3),
+                    tro.getBlob(4),
+                    new vitri(tro.getString(5),
+                            tro.getDouble(6),
+                            tro.getDouble(7)),
+                    tro.getString(8),
+                    tro.getInt(9) == 1));
+        }
+        return taikhoanList;
+    }
+
     public boolean isExistTK(String SDT) {
         Cursor tro = mDatabase.Get("SELECT * FROM TaiKhoan WHERE SDT='" + SDT + "'");
         while (tro.moveToNext()) {
             return true;
         }
         return false;
+    }
+
+    public taikhoan GetTK(int IDTK) {
+        Cursor tro = mDatabase.Get("SELECT * FROM TaiKhoan WHERE IDTK = " + IDTK);
+        while (tro.moveToNext()) {
+            return new taikhoan(tro.getInt(0),
+                    tro.getString(1),
+                    tro.getString(2),
+                    tro.getString(3),
+                    tro.getBlob(4),
+                    new vitri(tro.getString(5),
+                            tro.getDouble(6),
+                            tro.getDouble(7)),
+                    tro.getString(8),
+                    tro.getInt(9) == 1);
+        }
+        return null;
     }
 
     public taikhoan GetTK(String SDT, String MatKhau) {
@@ -66,8 +101,16 @@ public class DAO {
         return null;
     }
 
-    public void CapNhatViTriTK(int IDTK, String ViTri, double LatPos, double LongPos) {
-        mDatabase.Query("UPDATE TaiKhoan SET ViTri = " + ViTri + ", ViDo = "
+    public int IDTK(String SDT, String MK) {
+        Cursor tro = mDatabase.Get("SELECT * FROM TaiKhoan WHERE SDT='" + SDT + "' AND MatKhau = '" + MK + "'");
+        while (tro.moveToNext()) {
+            return tro.getInt(0);
+        }
+        return -1;
+    }
+
+    public void CapNhatViTriTK(int IDTK, String DiaChi, double LatPos, double LongPos) {
+        mDatabase.Query("UPDATE TaiKhoan SET DiaChi = '" + DiaChi + "', ViDo = "
                 + LatPos + " , KinhDo = " + LongPos + " WHERE IDTK = " + IDTK);
     }
 
@@ -81,10 +124,16 @@ public class DAO {
         statement.executeInsert();
     }
 
-    public void TaoTK(String SDT, String MK, String TENTK, String QUYEN) {
-        mDatabase.Query("INSERT INTO TaiKhoan(SDT, MATKHAU, TENTK, QUYEN) VALUES ('"
-                + SDT + "','" + MK + "','" + TENTK + "','" + QUYEN + "')");
+    public void CapNhatTK(int IDTK, String SDT, String MK, String TENTK, String Quyen, boolean Khoa) {
+        mDatabase.Query("UPDATE TaiKhoan SET SDT = '" + SDT + "', MATKHAU = '"
+                + MK + "' , TENTK = '" + TENTK + "', QUYEN = '" + Quyen + "', Khoa = " + (Khoa ? 1 : 0)+ " WHERE IDTK = " + IDTK);
     }
+
+    public void TaoTK(String SDT, String MK, String TENTK, String QUYEN) {
+        mDatabase.Query("INSERT INTO TaiKhoan (SDT, MATKHAU, TENTK, QUYEN, Khoa) VALUES ('"
+                + SDT + "','" + MK + "','" + TENTK + "','" + QUYEN + "'," + 0 + ")");
+    }
+
     // endregion
 
 
@@ -104,7 +153,7 @@ public class DAO {
             return new quanan(
                     tro2.getInt(0),
                     tro2.getString(1),
-                    null,
+                    tro2.getBlob(2),
                     new vitri(tro2.getString(3), 0, 0),
                     list
             );
@@ -119,11 +168,25 @@ public class DAO {
             list.add(new quanan(
                     tro.getInt(0),
                     tro.getString(1),
-                    null,
+                    tro.getBlob(2),
                     new vitri(tro.getString(3), 0, 0)
             ));
         }
         return list;
+    }
+
+    public List<quanan> GetListQA(){
+        List<quanan> quananList = new ArrayList<>();
+        Cursor tro = mDatabase.Get("SELECT * FROM QuanAn");
+        while (tro.moveToNext()){
+            quananList.add(new quanan(
+                    tro.getInt(0),
+                    tro.getString(1),
+                    tro.getBlob(2),
+                    new vitri(tro.getString(3), 0, 0)
+            ));
+        }
+        return quananList;
     }
 
     // endregion
@@ -134,17 +197,16 @@ public class DAO {
     // endregion
 
     // region Đơn hàng
-    public donhang DHDonNhap(int IDTK, int IDQA) {
+    public donhang DH(int IDDH, String TTGiao) {
         donhang donhang = null;
-        Cursor tro = mDatabase.Get("SELECT * FROM DonHang WHERE IDTK = " + IDTK + "  AND IDQA = " + IDQA);
+        Cursor tro = mDatabase.Get("SELECT * FROM DonHang WHERE IDDH = " + IDDH + " AND TTGiao ='" + TTGiao + "'");
 
         while (tro.moveToNext()) {
-            int IDDH = tro.getInt(0);
             Cursor tro2 = mDatabase.Get("SELECT B.IDMA,HinhMA,TenMA, GiaMa, SoLuong, GhiChu" +
                     "  FROM DonHang A,CTDonHang B, MonAn C WHERE A.IDDH = B.IDDH AND C.IDMA = B.IDMA AND C.IDQA = A.IDQA AND A.IDDH =" + IDDH);
-            List<ctdh> ctdhList = new ArrayList<>();
+            Map<Integer, ctdh> ctdhMap = new HashMap<>();
             while (tro2.moveToNext()) {
-                ctdhList.add(new ctdh(tro2.getInt(0),
+                ctdhMap.put(tro2.getInt(0), new ctdh(tro2.getInt(0),
                         tro2.getBlob(1),
                         tro2.getString(2),
                         tro2.getDouble(3),
@@ -159,47 +221,34 @@ public class DAO {
                     tro.getDouble(5),
                     tro.getDouble(6),
                     tro.getDouble(7),
-                    tro.getString(8),
-                    tro.getLong(9),
+                    tro.getDouble(8),
+                    tro.getString(9),
                     tro.getLong(10),
-                    tro.getString(11),
-                    ctdhList);
+                    tro.getLong(11),
+                    tro.getString(12),
+                    ctdhMap);
         }
 
         return donhang;
     }
 
-    public List<donhang> ListDHDonNhap(int IDTK) {
-        List<donhang> donhangList = new ArrayList<>();
-        Cursor tro = mDatabase.Get("SELECT * FROM DonHang WHERE IDTK = " + IDTK);
+    public List<donhang_dhfrag> DHFrag(int IDTK, String TTGiao) {
+        List<donhang_dhfrag> donhang_dhfragList = new ArrayList<>();
+        Cursor tro = mDatabase.Get("SELECT A.IDDH,A.IDQA, B.HinhQA, B.TenQA, B.DiaChiQA, A.TongTienMA," +
+                " (SELECT SUM(SoLuong) FROM CTDonHang C WHERE C.IDDH = A.IDDH) AS 'SoLuong', A.TTGiao" +
+                " FROM DonHang A, QuanAn B WHERE A.IDQA = B.IDQA  AND IDTK = " + IDTK + " AND TTGiao = '" + TTGiao + "' ORDER BY TGGiao DESC");
 
         while (tro.moveToNext()) {
-            int IDDH = tro.getInt(0);
-            Cursor tro2 = mDatabase.Get("SELECT B.IDMA, SoLuong, GiaMa, GhiChu  " +
-                    "FROM DonHang A,CTDonHang B, MonAn C WHERE A.IDDH = B.IDDH AND C.IDMA = B.IDMA AND A.IDDH = " + IDDH);
-            List<ctdh> ctdhList = new ArrayList<>();
-            while (tro2.moveToNext()) {
-                ctdhList.add(new ctdh(tro2.getInt(0),
-                        tro2.getInt(1),
-                        tro2.getString(2) == null ? "" : tro2.getString(2)));
-            }
-
-            donhangList.add(new donhang(IDDH,
-                    tro.getInt(2),
+            donhang_dhfragList.add(new donhang_dhfrag(tro.getInt(0),
+                    tro.getInt(1),
+                    tro.getBlob(2),
                     tro.getString(3),
                     tro.getString(4),
                     tro.getDouble(5),
-                    tro.getDouble(6),
-                    tro.getDouble(7),
-                    tro.getString(8),
-                    tro.getLong(9),
-                    tro.getLong(10),
-                    tro.getString(11),
-                    ctdhList)
-            );
+                    tro.getInt(6),
+                    tro.getString(7)));
         }
-
-        return donhangList;
+        return donhang_dhfragList;
     }
 
     public int isExistDonNhap(int IDTK, int IDQA, String TTGiao) {
@@ -234,10 +283,10 @@ public class DAO {
     }
 
     public void CapNhatDH(int IDDH, String TenNN, String SDTNN,
-                          double PhiVC, double TienGiam, double TongTien,
+                          double TongTienMA, double PhiVC, double TienGiam, double TongTien,
                           String ViTriGiao, Long TGDat, Long TGGiao, String TTGiao) {
 
-        mDatabase.Query("UPDATE DonHang SET TenNN ='" + TenNN + "', SDTNN ='" + SDTNN + "', PhiVanChuyen =" +
+        mDatabase.Query("UPDATE DonHang SET TenNN ='" + TenNN + "', SDTNN ='" + SDTNN + "', TongTienMA = '" + TongTienMA + "', PhiVanChuyen =" +
                 PhiVC + ", TienGiam = " + TienGiam + ", TongTien = " + TongTien + ", ViTriGiao = '" + ViTriGiao
                 + "', TGDat = '" + TGDat + "', TGGiao = '" + TGGiao + "', TTGiao ='" + TTGiao
                 + "' WHERE IDDH = " + IDDH);
@@ -297,7 +346,7 @@ public class DAO {
             list.add(new quanan(
                     tro.getInt(0),
                     tro.getString(1),
-                    null,
+                    tro.getBlob(2),
                     new vitri(tro.getString(3), 0, 0)));
         }
         ;

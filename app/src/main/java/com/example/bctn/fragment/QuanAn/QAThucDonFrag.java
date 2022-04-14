@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -41,7 +42,7 @@ public class QAThucDonFrag extends Fragment {
     private RelativeLayout relative1_QA;
     public static donhang mDonhang;
     public static Map<Integer, Integer> mapRemove = new HashMap<>();
-
+    private int IDDH;
 
     @Nullable
     @Override
@@ -50,21 +51,29 @@ public class QAThucDonFrag extends Fragment {
         AnhXa();
 
         quanan = QuanAnAct.quanan;
-        if (MyAppication.mDao.isExistDonNhap(MyAppication.mTaiKhoan.getIdTK(), quanan.getIdQA(), key.key_dh_Nhap) == -1) {
+        IDDH = MyAppication.mDao.isExistDonNhap(MyAppication.mTaiKhoan.getIdTK(), quanan.getIdQA(), key.key_dh_Nhap);
+        if (IDDH == -1) {
+            IDDH = MyAppication.mDao.TaoMaDonHang();
             mDonhang = new donhang();
             txtV_TSoL_gh.setText("0");
             txtV_TongGia_QA.setText("0");
         } else {
-            mDonhang = MyAppication.mDao.DHDonNhap(MyAppication.mTaiKhoan.getIdTK(), quanan.getIdQA());
+            mDonhang = MyAppication.mDao.DH(IDDH, key.key_dh_Nhap);
             SoLuong();
         }
-        getData_RecV();
+
+        Toast.makeText(mView.getContext(), String.valueOf(IDDH), Toast.LENGTH_SHORT).show();
+        //getData_RecV();
 
         relative1_QA.setOnClickListener(view -> {
-
-            Intent intent = new Intent(getContext(), ThanhToanAct.class);
-            intent.putExtra(key.key_IDQA, quanan.getIdQA());
-            startActivity(intent);
+            if(mDonhang.getTongSoLuong() > 0){
+                Intent intent = new Intent(getContext(), ThanhToanAct.class);
+                intent.putExtra(key.key_IDDH, IDDH);
+                startActivity(intent);
+            } else {
+                Toast.makeText(mView.getContext(), "Giỏ hàng đang trống, hãy thêm món ăn để có thể đặt hàng", Toast.LENGTH_SHORT).show();
+            }
+           
         });
 
         //OpenBotSheet();
@@ -72,9 +81,8 @@ public class QAThucDonFrag extends Fragment {
     }
 
     public static void SoLuong() {
-        Log.e("opopopopop", mDonhang.getTongSoLuong() + " = " + mDonhang.getTongTienMA());
         txtV_TSoL_gh.setText(String.valueOf(mDonhang.getTongSoLuong()));
-        txtV_TongGia_QA.setText(key.Dou2Money(mDonhang.getTongTienMA()));
+        txtV_TongGia_QA.setText(key.Dou2Money(mDonhang.getTongTienMAMap()));
     }
 
     private void getData_RecV() {
@@ -91,17 +99,14 @@ public class QAThucDonFrag extends Fragment {
         mDonhang.getCthdMap().get(IDMA).setGhiChu(GhiChu);
     }
 
-
     public static void TaoMonAn(int IDMA, byte[] HinhMA, String TenMA, double GiaMA, int SL) {
         mDonhang.getCthdMap().put(IDMA, new ctdh(IDMA, HinhMA, TenMA, GiaMA, SL, ""));
         mapRemove.remove(IDMA);
-        Log.e("FAFAFAFA", SL + " / " + IDMA + " = " + GiaMA + " / " + SL);
         SoLuong();
     }
 
     public static void CapNhapMonAn(int IDMA, int SL) {
         if (SL > 0) {
-            Log.e("DADADADA", SL + " / " + IDMA);
             mDonhang.getCthdMap().get(IDMA).setSLMA(SL);
         } else if (SL == 0) {
             mDonhang.getCthdMap().get(IDMA).setSLMA(SL);
@@ -135,6 +140,13 @@ public class QAThucDonFrag extends Fragment {
         for (Integer IDMA : mapRemove.values()) {
             MyAppication.mDao.XoaMonAninDH(IDDH, IDMA);
         }
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        getData_RecV();
     }
 
     private void OpenBotSheet() {

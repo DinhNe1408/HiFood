@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="20dp"
-        android:layout_toStartOf="@+id/SLMA_tt"
+        android:layout_toStartOf="@+id/txtV_SLMA_tt"
         android:layout_toEndOf="@id/imgV_HinhMA_tt"
         android:text="Cơm trộn Hàn Quốc" />
 
