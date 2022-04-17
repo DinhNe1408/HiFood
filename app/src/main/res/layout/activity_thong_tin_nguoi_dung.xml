@@ -9,7 +9,38 @@
 
     <include
         android:id="@+id/tool3_ThongTinNguoiDung"
-        layout="@layout/toolbar_option_1" />
+        layout="@layout/include_toolbar_option_1" />
+
+    <ImageView
+        android:id="@+id/imgV_HinhTK_ttnd"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center_horizontal"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_Folder_ttnd"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:text="Lấy từ thư mục" />
+
+        <Button
+            android:id="@+id/btn_Camera_ttnd"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1"
+            android:text="Lấy từ Camera" />
+    </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/txtL_SDT_ttnd"
@@ -58,13 +89,29 @@
             android:id="@+id/editT_ViTri_ttnd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number" />
+            android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/btn_XacNhan_ttnd"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        />
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="30dp">
+        <Button
+            android:id="@+id/btn_DoiMatKhau_ttnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:text="Đổi mật khẩu" />
+
+        <Button
+            android:id="@+id/btn_XacNhan_ttnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1"
+            android:text="Xác nhận"/>
+    </LinearLayout>
+
 </LinearLayout>

@@ -31,7 +31,7 @@ public class DAO {
     }
 
     // region Tài khoản
-    public List<taikhoan> GetListTK(){
+    public List<taikhoan> GetListTK() {
         List<taikhoan> taikhoanList = new ArrayList<>();
         Cursor tro = mDatabase.Get("SELECT * FROM TaiKhoan ORDER BY TGCS DESC");
         while (tro.moveToNext()) {
@@ -109,9 +109,9 @@ public class DAO {
         return -1;
     }
 
-    public void CapNhatViTriTK(int IDTK, String DiaChi, double LatPos, double LongPos) {
+    public void CapNhatViTriTK(int IDTK, String DiaChi, double ViDo, double KinhDo) {
         mDatabase.Query("UPDATE TaiKhoan SET DiaChi = '" + DiaChi + "', ViDo = "
-                + LatPos + " , KinhDo = " + LongPos + " WHERE IDTK = " + IDTK);
+                + ViDo + " , KinhDo = " + KinhDo + " WHERE IDTK = " + IDTK);
     }
 
     public void CapNhatHinhTK(int IDTK, byte[] HinhTK) {
@@ -126,7 +126,11 @@ public class DAO {
 
     public void CapNhatTK(int IDTK, String SDT, String MK, String TENTK, String Quyen, boolean Khoa) {
         mDatabase.Query("UPDATE TaiKhoan SET SDT = '" + SDT + "', MATKHAU = '"
-                + MK + "' , TENTK = '" + TENTK + "', QUYEN = '" + Quyen + "', Khoa = " + (Khoa ? 1 : 0)+ " WHERE IDTK = " + IDTK);
+                + MK + "' , TENTK = '" + TENTK + "', QUYEN = '" + Quyen + "', Khoa = " + (Khoa ? 1 : 0) + " WHERE IDTK = " + IDTK);
+    }
+
+    public void CapNhatMK(int IDTK, String MK) {
+        mDatabase.Query("UPDATE TaiKhoan SET MATKHAU = '" + MK + "' WHERE IDTK = " + IDTK);
     }
 
     public void TaoTK(String SDT, String MK, String TENTK, String QUYEN) {
@@ -144,6 +148,7 @@ public class DAO {
         Cursor tro1 = mDatabase.Get("SELECT * FROM MonAn WHERE IDQA = " + IDQA);
         while (tro1.moveToNext()) {
             list.add(new monan(tro1.getInt(1),
+                    tro1.getBlob(2),
                     tro1.getString(3),
                     tro1.getDouble(4)));
         }
@@ -155,6 +160,7 @@ public class DAO {
                     tro2.getString(1),
                     tro2.getBlob(2),
                     new vitri(tro2.getString(3), 0, 0),
+                    tro2.getInt(6) == 1,
                     list
             );
         }
@@ -175,10 +181,10 @@ public class DAO {
         return list;
     }
 
-    public List<quanan> GetListQA(){
+    public List<quanan> GetListQA() {
         List<quanan> quananList = new ArrayList<>();
         Cursor tro = mDatabase.Get("SELECT * FROM QuanAn");
-        while (tro.moveToNext()){
+        while (tro.moveToNext()) {
             quananList.add(new quanan(
                     tro.getInt(0),
                     tro.getString(1),
@@ -189,10 +195,80 @@ public class DAO {
         return quananList;
     }
 
+    public int TaoIDQA (){
+        Cursor tro = mDatabase.Get("SELECT IDQA FROM QuanAn ORDER BY IDQA DESC LIMIT 1");
+        tro.moveToNext();
+        return tro.getInt(0) + 1;
+    }
+
+    public void TaoQA(int IDQA, String TenQA) {
+        mDatabase.Query("INSERT INTO QuanAn( IDQA, TenQA, Khoa) VALUES ("
+                + IDQA + " ,'" + TenQA + "', " + 0 + ")");
+    }
+
+    public void CapNhatQA(int IDQA, String TenQA, boolean Khoa) {
+        mDatabase.Query("UPDATE QuanAn SET TenQA = '"
+                + TenQA + "', Khoa = " + (Khoa ? 1 : 0) + " WHERE IDQA = " + IDQA);
+    }
+
+    public void CapNhatViTriQA(int IDQA, String DiaChiQA, double ViDoQA, double KinhDoQA) {
+        mDatabase.Query("UPDATE QuanAn SET DiaChiQA = '"
+                + DiaChiQA + "', ViDoQA = " + ViDoQA + " , KinhDoQA = " + KinhDoQA + " WHERE IDQA = " + IDQA);
+    }
+
+    public void CapNhatHinhQA(int IDQA, byte[] HinhQA) {
+        String sql = "UPDATE QuanAn SET HinhQA = ? WHERE IDQA = " + IDQA;
+        SQLiteDatabase database = mDatabase.WritableData();
+        SQLiteStatement statement = database.compileStatement(sql);
+        statement.clearBindings();
+
+        statement.bindBlob(1, HinhQA);
+        statement.executeInsert();
+    }
     // endregion
 
     // region Món Ăn
+    public monan MA(int IDMA) {
+        Cursor tro = mDatabase.Get("SELECT * FROM MonAn WHERE IDMA = " + IDMA);
+        tro.moveToNext();
+        return new monan(tro.getInt(1), tro.getBlob(2), tro.getString(3), tro.getDouble(4), tro.getInt(5) == 1);
+    }
 
+    public int TaoIDMA (){
+        Cursor tro = mDatabase.Get("SELECT IDMA FROM MonAn ORDER BY IDMA DESC LIMIT 1");
+        tro.moveToNext();
+        return tro.getInt(0) + 1;
+    }
+
+    public void TaoMA(int IDQA, int IDMA, String TenMA, double GiaMA) {
+        mDatabase.Query("INSERT INTO MonAn( IDQA, IDMA, TenMa, GiaMA, Khoa) VALUES ("
+                + IDQA + " , " + IDMA + " ,'" + TenMA + "', " + GiaMA + " ," + 0 + ")");
+    }
+
+    public void CapNhatMA(int IDMA, String TenMA, double GiaMA, boolean Khoa) {
+        mDatabase.Query("UPDATE MonAn SET TenMA = '"
+                + TenMA + "', GiaMA = " + GiaMA + ", Khoa = " + (Khoa ? 1 : 0) + " WHERE IDMA = " + IDMA);
+    }
+
+    public void CapNhatHinhMA(int IDMA, byte[] HinhMA) {
+        String sql = "UPDATE MonAn SET HinhMA = ? WHERE IDMA = " + IDMA;
+        SQLiteDatabase database = mDatabase.WritableData();
+        SQLiteStatement statement = database.compileStatement(sql);
+        statement.clearBindings();
+
+        statement.bindBlob(1, HinhMA);
+        statement.executeInsert();
+    }
+
+    public List<monan> ListMA(int IDQA){
+        List<monan> monanList = new ArrayList<>();
+        Cursor tro = mDatabase.Get("SELECT * FROM MonAn WHERE IDQA = " + IDQA);
+        while (tro.moveToNext()){
+            monanList.add(new monan(tro.getInt(1), tro.getBlob(2), tro.getString(3),
+                    tro.getDouble(4), tro.getInt(5) == 1));
+        }
+        return monanList;
+    }
 
     // endregion
 
@@ -306,7 +382,7 @@ public class DAO {
         mDatabase.Query("DELETE FROM CTDonHang WHERE IDDH = " + IDDH + " AND IDMA = " + IDMA);
     }
 
-    public int TaoMaDonHang() {
+    public int TaoIDDH() {
         Cursor tro = mDatabase.Get("SELECT * FROM DonHang ORDER BY IDDH DESC LIMIT 1");
         tro.moveToNext();
         return tro.getInt(0) + 1;

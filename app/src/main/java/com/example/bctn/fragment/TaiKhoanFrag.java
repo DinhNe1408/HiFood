@@ -39,7 +39,7 @@ public class TaiKhoanFrag extends Fragment {
         AnhXa();
 
         mListKey = new ArrayList<>();
-        mListKey.add(new menu_option(key.key_THONGTINCANHAN,0,0,"Thông tin cá nhân"));
+        mListKey.add(new menu_option(key.key_ThongTinNguoiDung,0,0,"Thông tin cá nhân"));
         mListKey.add(new menu_option(key.key_GOPY,0,0,"Góp ý"));
         mListKey.add(new menu_option(key.key_GIOITHIEU,0,0,"Giới thiệu"));
         mListKey.add(new menu_option(key.key_CAIDAT,0,0,"Cài đặt"));

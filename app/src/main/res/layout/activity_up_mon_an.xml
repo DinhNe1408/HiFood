@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.admin.UpQuanAn">
+    tools:context=".activity.admin.UpMonAn">
 
     <include
-        android:id="@+id/tool3_QLQuanAn_Up"
+        android:id="@+id/tool3_UpMonAn"
         layout="@layout/include_toolbar_option_1" />
 
     <ScrollView
@@ -20,63 +20,64 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-
             <include
-                android:id="@+id/iclu_get_img_upqa"
+                android:id="@+id/iclu_get_img_upma"
                 layout="@layout/include_get_img" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/txtL_TenQA_upqa"
+                android:id="@+id/txtL_TenMA_upma"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="40dp"
-                android:hint="Tên quán"
+                android:hint="Tên món ăn"
                 app:endIconMode="clear_text">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editT_TenQA_upqa"
+                    android:id="@+id/editT_TenMA_upma"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/txtL_ViTri_upqa"
+                android:id="@+id/txtL_GiaMa_upma"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="20dp"
-                android:hint="Địa chỉ"
+                android:hint="Giá món ăn"
                 app:endIconMode="clear_text">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editT_ViTri_upqa"
+                    android:id="@+id/editT_GiaMa_upma"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <CheckBox
-                android:id="@+id/checkB_KhoaQA_upqa"
+                android:id="@+id/checkB_Khoa_upma"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="20dp"
-                android:text="Khóa quán ăn"/>
+                android:text="Khóa món ăn"/>
 
 
             <Button
-                android:id="@+id/btn_XacNhan_upqa"
+                android:id="@+id/btn_XacNhan_upma"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="30dp"
-                android:layout_marginHorizontal="15dp"
                 android:text="Xác nhận" />
 
 
         </LinearLayout>
     </ScrollView>
+
 </LinearLayout>

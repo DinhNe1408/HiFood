@@ -8,7 +8,7 @@
 
     <include
         android:id="@+id/tool3_ThanhToan"
-        layout="@layout/toolbar_option_1" />
+        layout="@layout/include_toolbar_option_1" />
 
     <TextView
         android:id="@+id/txt1_tt"

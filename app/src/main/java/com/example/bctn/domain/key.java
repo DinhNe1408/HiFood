@@ -8,9 +8,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.text.Spanned;
+import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -18,12 +20,15 @@ import androidx.core.text.HtmlCompat;
 
 import com.example.bctn.R;
 
+import java.io.ByteArrayOutputStream;
 import java.text.DecimalFormat;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class key {
     public static final String key_ThongBao = "ThongBao";
@@ -34,7 +39,7 @@ public class key {
     private static final String PATTERN_DATE_TIME = "dd.MM.yyyy HH:mm:ss";
     private static final String PATTERN_TIME_DATE = "HH:mm:ss dd.MM.yyyy";
     // key Menu
-    public static final int key_THONGTINCANHAN = 861;
+    public static final int key_ThongTinNguoiDung = 861;
     public static final int key_CAIDAT = 280;
     public static final int key_GOPY = 778;
     public static final int key_GIOITHIEU = 120;
@@ -54,8 +59,10 @@ public class key {
     public static final String key_IDQA = "IDQA";
     public static final String key_IDTK = "IDTK";
     public static final String key_IDDH = "IDDH";
+    public static final String key_IDMA = "IDMA";
     public static final String key_TTGiao = "TTGiao";
 
+    public static final String key_LoaiCS = "LoaiCS";
     public static final String key_Them = "Them";
     public static final String key_Sua = "Sua";
     //
@@ -64,6 +71,15 @@ public class key {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm\n dd-MM-yyyy");
         return LocalDateTime.parse(time, formatter);
     }
+
+    public static byte[] BitmapDrawable2Byte(BitmapDrawable bitmapDrawable) {
+        Bitmap bitmap = bitmapDrawable.getBitmap();
+        ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArray);
+
+        return byteArray.toByteArray();
+    }
+
 
     public static String Date2String(LocalDateTime time) {
         return DateTimeFormatter.ofPattern("HH:mm\n dd-MM-yyyy", Locale.getDefault()).format(time);
@@ -89,7 +105,7 @@ public class key {
         return BitmapFactory.decodeByteArray(hinh, 0, hinh.length);
     }
 
-    public static Bitmap Drawable2Bitmap(Context context,int Drawable){
+    public static Bitmap Drawable2Bitmap(Context context, int Drawable) {
         return BitmapFactory.decodeResource(context.getResources(), Drawable);
     }
 
@@ -100,6 +116,17 @@ public class key {
 
     public static Spanned TienvaSL(double money, int SL) {
         return HtmlCompat.fromHtml("<b>" + Dou2Money(money) + "</b> (" + SL + " phần)", HtmlCompat.FROM_HTML_MODE_LEGACY);
+    }
+
+    public static boolean isSDT(String SDT) {
+        if (SDT.length() == 10) {
+            return SDT.matches("^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}");
+        }
+        return false;
+    }
+
+    public static boolean isMk(String MK) {
+        return MK.matches("^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,20}$");
     }
 
     public static void sendNotification(Context mContext, String title, String text) {

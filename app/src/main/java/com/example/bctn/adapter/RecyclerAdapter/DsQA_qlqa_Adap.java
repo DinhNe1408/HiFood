@@ -2,7 +2,8 @@ package com.example.bctn.adapter.RecyclerAdapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
+import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,37 +17,41 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bctn.R;
-import com.example.bctn.activity.admin.UpQuanAn;
-import com.example.bctn.activity.admin.UpTaiKhoan;
 import com.example.bctn.domain.key;
 import com.example.bctn.domain.quanan;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class DsTK_qlqa_Adap extends RecyclerView.Adapter<DsTK_qlqa_Adap.DsTK_qlqa_Viewholder> implements Filterable {
+public class DsQA_qlqa_Adap extends RecyclerView.Adapter<DsQA_qlqa_Adap.DsQA_qlqa_Viewholder> implements Filterable {
 
     private Context mContext;
-    private List<quanan> quananList;
-    private final List<quanan> OldquananList;
+    public ArrayList<quanan> quananList, OldquananList;
+    private static int position;
 
-
-    public DsTK_qlqa_Adap(Context mContext, List<quanan> quananList) {
+    public DsQA_qlqa_Adap(Context mContext, ArrayList<quanan> quananList) {
         this.mContext = mContext;
         this.quananList = quananList;
         this.OldquananList = quananList;
     }
 
+    public static int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
     @NonNull
     @Override
-    public DsTK_qlqa_Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public DsQA_qlqa_Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_dstk_qltk, parent, false);
 
-        return new DsTK_qlqa_Viewholder(view);
+        return new DsQA_qlqa_Viewholder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DsTK_qlqa_Viewholder holder, int position) {
+    public void onBindViewHolder(@NonNull DsQA_qlqa_Viewholder holder, int position) {
         quanan quanan = quananList.get(position);
 
         if (quanan == null)
@@ -62,11 +67,9 @@ public class DsTK_qlqa_Adap extends RecyclerView.Adapter<DsTK_qlqa_Adap.DsTK_qlq
             holder.imgV_HinhQA_qlqa.setImageBitmap(key.Drawable2Bitmap(mContext, R.mipmap.hifood));
         }
 
-        holder.cardView_qlqa.setOnClickListener(view -> {
-            Intent intent = new Intent(mContext, UpQuanAn.class);
-            intent.putExtra("LoaiCS", key.key_Sua);
-            intent.putExtra(key.key_IDQA, quanan.getIdQA());
-            mContext.startActivity(intent);
+        holder.itemView.setOnClickListener(v -> {
+            setPosition(holder.getPosition());
+            holder.itemView.performLongClick();
         });
     }
 
@@ -110,13 +113,13 @@ public class DsTK_qlqa_Adap extends RecyclerView.Adapter<DsTK_qlqa_Adap.DsTK_qlq
         return 0;
     }
 
-    public class DsTK_qlqa_Viewholder extends RecyclerView.ViewHolder {
+    public static class DsQA_qlqa_Viewholder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
 
         private CardView cardView_qlqa;
         private ImageView imgV_HinhQA_qlqa;
         private TextView txtV_IDQA_qlqa, txtV_TenQA_qlqa, txtV_Vitri_qlqa;
 
-        public DsTK_qlqa_Viewholder(@NonNull View itemView) {
+        public DsQA_qlqa_Viewholder(@NonNull View itemView) {
             super(itemView);
 
             cardView_qlqa = itemView.findViewById(R.id.cardView_qltk);
@@ -124,6 +127,15 @@ public class DsTK_qlqa_Adap extends RecyclerView.Adapter<DsTK_qlqa_Adap.DsTK_qlq
             txtV_IDQA_qlqa = itemView.findViewById(R.id.txtV_IDTK_qltk);
             txtV_TenQA_qlqa = itemView.findViewById(R.id.txtV_TenTK_qltk);
             txtV_Vitri_qlqa = itemView.findViewById(R.id.txtV_SDT_qltk);
+
+            itemView.setOnCreateContextMenuListener(this);
+            cardView_qlqa.setOnClickListener(view -> cardView_qlqa.showContextMenu());
+        }
+
+        @Override
+        public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo) {
+            contextMenu.add(contextMenu.NONE, R.id.iSua, contextMenu.NONE, "Sửa quán ăn");
+            contextMenu.add(contextMenu.NONE, R.id.iQuanLy, contextMenu.NONE, "Quản lý món ăn");
         }
     }
 }

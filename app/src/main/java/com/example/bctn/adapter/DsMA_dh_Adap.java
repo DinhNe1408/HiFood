@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bctn.R;
+import com.example.bctn.domain.key;
 import com.example.bctn.domain.monan;
 
 import java.util.List;
@@ -40,7 +41,7 @@ public class DsMA_dh_Adap extends RecyclerView.Adapter<DsMA_dh_Adap.DsMA_dh_Adap
             return;
         }
 
-        holder.imgV_HinhMA_dh.setImageResource(monan.getHMA());
+        holder.imgV_HinhMA_dh.setImageBitmap(key.Byte2Bitmap(monan.getHinhMA()));
     }
 
     @Override

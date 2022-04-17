@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cardView_qltk"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    android:id="@+id/cardView_qltk">
+    android:layout_margin="5dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp">
-
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imgV_HinhTK_qltk"
@@ -36,9 +35,9 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="3dp"
             android:layout_toEndOf="@+id/imgV_HinhTK_qltk"
-            android:text="@string/hovaten"
+            android:ellipsize="end"
             android:maxLines="2"
-            android:ellipsize="end"/>
+            android:text="@string/hovaten" />
 
         <TextView
             android:id="@+id/txtV_SDT_qltk"
@@ -49,8 +48,8 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="3dp"
             android:layout_toEndOf="@+id/imgV_HinhTK_qltk"
-            android:text="@string/nhapsdt"
+            android:ellipsize="end"
             android:maxLines="2"
-            android:ellipsize="end"/>
+            android:text="@string/nhapsdt" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

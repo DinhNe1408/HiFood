@@ -1,31 +1,28 @@
 package com.example.bctn.domain;
 
 public class monan {
-    private int idMA,hMA, loaiMA;
-    private String maMA, tenMA;
+    private int idMA, loaiMA;
+    private String tenMA;
     private double giaMA;
     private byte[] HinhMA;
+    private boolean Khoa;
 
-    public monan(int idMA, String maMA, double giaMA, String tenMA) {
+    public monan() {
+    }
+
+    public monan(int idMA, byte[] HinhMA, String tenMA, double giaMA) {
         this.idMA = idMA;
+        this.HinhMA = HinhMA;
         this.giaMA = giaMA;
-        this.maMA = maMA;
         this.tenMA = tenMA;
     }
 
-    public monan(int idMA,String tenMA, double giaMA) {
+    public monan(int idMA,byte[] HinhMA, String tenMA, double giaMA,boolean Khoa) {
         this.idMA = idMA;
+        this.HinhMA = HinhMA;
         this.giaMA = giaMA;
         this.tenMA = tenMA;
-    }
-
-    public monan(int idMA, double giaMA, int hMA, int loaiMA, String maMA, String tenMA) {
-        this.idMA = idMA;
-        this.giaMA = giaMA;
-        this.hMA = hMA;
-        this.loaiMA = loaiMA;
-        this.maMA = maMA;
-        this.tenMA = tenMA;
+        this.Khoa = Khoa;
     }
 
     public int getIdMA() {
@@ -44,20 +41,12 @@ public class monan {
         this.giaMA = giaMA;
     }
 
-    public int getHMA() {
-        return hMA;
-    }
-
     public byte[] getHinhMA() {
         return HinhMA;
     }
 
     public void setHinhMA(byte[] hinhMA) {
         HinhMA = hinhMA;
-    }
-
-    public void setHMA(int hMA) {
-        this.hMA = hMA;
     }
 
     public int getLoaiMA() {
@@ -68,19 +57,19 @@ public class monan {
         this.loaiMA = loaiMA;
     }
 
-    public String getMaMA() {
-        return maMA;
-    }
-
-    public void setMaMA(String maMA) {
-        this.maMA = maMA;
-    }
-
     public String getTenMA() {
         return tenMA;
     }
 
     public void setTenMA(String tenMA) {
         this.tenMA = tenMA;
+    }
+
+    public boolean isKhoa() {
+        return Khoa;
+    }
+
+    public void setKhoa(boolean khoa) {
+        Khoa = khoa;
     }
 }

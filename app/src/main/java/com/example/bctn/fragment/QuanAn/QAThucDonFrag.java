@@ -2,7 +2,6 @@ package com.example.bctn.fragment.QuanAn;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,7 +52,7 @@ public class QAThucDonFrag extends Fragment {
         quanan = QuanAnAct.quanan;
         IDDH = MyAppication.mDao.isExistDonNhap(MyAppication.mTaiKhoan.getIdTK(), quanan.getIdQA(), key.key_dh_Nhap);
         if (IDDH == -1) {
-            IDDH = MyAppication.mDao.TaoMaDonHang();
+            IDDH = MyAppication.mDao.TaoIDDH();
             mDonhang = new donhang();
             txtV_TSoL_gh.setText("0");
             txtV_TongGia_QA.setText("0");
@@ -125,7 +124,7 @@ public class QAThucDonFrag extends Fragment {
         if (IDDH != -1) {
             MyAppication.mDao.CapNhatDH(IDDH, Calendar.getInstance().getTime().getTime(), key.key_dh_Nhap);
         } else {
-            IDDH = MyAppication.mDao.TaoMaDonHang();
+            IDDH = MyAppication.mDao.TaoIDDH();
             MyAppication.mDao.TaoDonHang(IDDH, MyAppication.mTaiKhoan.getIdTK(), quanan.getIdQA(), key.key_dh_Nhap);
         }
 

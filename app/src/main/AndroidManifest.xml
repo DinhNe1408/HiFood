@@ -16,6 +16,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BCTN">
         <activity
+            android:name=".activity.admin.QLMonAn"
+            android:exported="false" />
+        <activity
+            android:name=".activity.admin.UpMonAn"
+            android:exported="false" />
+        <activity
+            android:name=".activity.DoiMatKhau"
+            android:exported="false" />
+        <activity
             android:name=".activity.admin.ThongKe"
             android:exported="false" />
         <activity

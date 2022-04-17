@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.example.bctn.DAO;
 import com.example.bctn.R;
+import com.example.bctn.domain.key;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class DangKy2Act extends AppCompatActivity {
@@ -32,7 +33,7 @@ public class DangKy2Act extends AppCompatActivity {
 
             if (editT_SDT_dk2.length() > 0 && editT_SDT_dk2.getText() != null){
                 String sdt = editT_SDT_dk2.getText().toString();
-                if (sdt.length() == 10){
+                if (key.isSDT(sdt)){
                     if ( !mDao.isExistTK(sdt)){
 
                         Intent mIntent = new Intent(DangKy2Act.this, DangKy1Act.class);

@@ -10,6 +10,7 @@ public class quanan implements Serializable {
     private vitri vitriQA;
     private double khcachQA, saoQA;
     private List<monan> dsMA;
+    private boolean Khoa;
 
     public quanan() {
     }
@@ -26,6 +27,15 @@ public class quanan implements Serializable {
         this.tenQA = tenQA;
         this.hinhQA = hinhQA;
         this.vitriQA = vitriQA;
+        this.dsMA = dsMA;
+    }
+
+    public quanan(int idQA, String tenQA, byte[] hinhQA, vitri vitriQA,boolean Khoa, List<monan> dsMA) {
+        this.idQA = idQA;
+        this.tenQA = tenQA;
+        this.hinhQA = hinhQA;
+        this.vitriQA = vitriQA;
+        this.Khoa = Khoa;
         this.dsMA = dsMA;
     }
 
@@ -91,5 +101,13 @@ public class quanan implements Serializable {
 
     public void setDsMA(List<monan> dsMA) {
         this.dsMA = dsMA;
+    }
+
+    public boolean isKhoa() {
+        return Khoa;
+    }
+
+    public void setKhoa(boolean khoa) {
+        Khoa = khoa;
     }
 }

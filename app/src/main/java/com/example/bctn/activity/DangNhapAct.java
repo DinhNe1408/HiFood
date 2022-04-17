@@ -35,19 +35,19 @@ public class DangNhapAct extends AppCompatActivity {
 
         btn_DN_dn.setOnClickListener(view -> {
             if (editT_SDT_dn.getText() != null && editT_MK_dn.getText() != null
-            &&  editT_SDT_dn.length() > 0 && editT_MK_dn.length() > 0){
+                    && editT_SDT_dn.length() > 0 && editT_MK_dn.length() > 0) {
 
-                String sdt = editT_SDT_dn.getText().toString();
-                String mk = editT_MK_dn.getText().toString();
+                String sdt = editT_SDT_dn.getText().toString().trim();
+                String mk = editT_MK_dn.getText().toString().trim();
 
                 taikhoan mTaikhoan = MyAppication.mDao.GetTK(sdt, mk);
 
-                if(mTaikhoan != null){
-                    if (!mTaikhoan.isKhoa()){
+                if (mTaikhoan != null) {
+                    if (!mTaikhoan.isKhoa()) {
                         MyAppication.mTaiKhoan = mTaikhoan;
                         DataLocalManager.setTaiKhoan(mTaikhoan.getSdtTK(), mTaikhoan.getMkTK());
 
-                        if(!mTaikhoan.getRole().equals("admin")){
+                        if (!mTaikhoan.getRole().equals("admin")) {
                             Intent mIntent = new Intent(DangNhapAct.this, TrangChuAct.class);
                             startActivity(mIntent);
 
@@ -78,7 +78,7 @@ public class DangNhapAct extends AppCompatActivity {
     }
 
     private void AnhXa() {
-        btn_DN_dn =  findViewById(R.id.btn_DN_dn);
+        btn_DN_dn = findViewById(R.id.btn_DN_dn);
         txtV_TaoTK_dn = findViewById(R.id.txtV_TaoTK_dn);
 
         editT_SDT_dn = findViewById(R.id.editT_SDT_dn);

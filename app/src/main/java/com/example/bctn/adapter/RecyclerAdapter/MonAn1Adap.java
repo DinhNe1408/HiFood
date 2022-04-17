@@ -66,6 +66,10 @@ public class MonAn1Adap extends RecyclerView.Adapter<MonAn1Adap.MonAn1AdapViewHo
             }
         }
 
+        if (monan.getHinhMA() != null){
+            holder.imgV_HinhMA_ma1.setImageBitmap(key.Byte2Bitmap(monan.getHinhMA()));
+
+        }
         holder.txtV_TenMA_ma1.setText(monan.getTenMA());
         holder.txtv_GiaMA_ma1.setText(key.Dou2Money(monan.getGiaMA()));
         holder.txtV_SoL_ma1.setText(String.valueOf(SL));
