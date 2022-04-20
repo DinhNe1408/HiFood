@@ -6,6 +6,7 @@ public class donhang_dhfrag {
     private String TenQA, ViTriQA,TTGiao;
     private double TongTienMA;
     private int SoPhan;
+    private boolean DanhGia;
 
     public donhang_dhfrag(int IDDH,int IDQA, byte[] hinhQA, String tenQA, String viTriQA, double tongTienMA, int soPhan, String tTGiao) {
         this.IDDH = IDDH;
@@ -16,6 +17,18 @@ public class donhang_dhfrag {
         this.TongTienMA = tongTienMA;
         this.SoPhan = soPhan;
         this.TTGiao = tTGiao;
+    }
+
+    public donhang_dhfrag(int IDDH,int IDQA, byte[] hinhQA, String tenQA, String viTriQA, double tongTienMA, int soPhan, String tTGiao, boolean DanhGia) {
+        this.IDDH = IDDH;
+        this.IDQA = IDQA;
+        this.HinhQA = hinhQA;
+        this.TenQA = tenQA;
+        this.ViTriQA = viTriQA;
+        this.TongTienMA = tongTienMA;
+        this.SoPhan = soPhan;
+        this.TTGiao = tTGiao;
+        this.DanhGia = DanhGia;
     }
 
     public int getIDDH() {
@@ -80,5 +93,13 @@ public class donhang_dhfrag {
 
     public void setIDQA(int IDQA) {
         this.IDQA = IDQA;
+    }
+
+    public boolean isDanhGia() {
+        return DanhGia;
+    }
+
+    public void setDanhGia(boolean danhGia) {
+        DanhGia = danhGia;
     }
 }

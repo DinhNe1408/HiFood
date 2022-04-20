@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,12 +42,12 @@ public class Menu_op1_Adap extends RecyclerView.Adapter<Menu_op1_Adap.Menu_op1_A
         holder.imgV_HinhMenu_op1.setImageResource(mKey.getHinhMenu());
         //holder.relativeMenu_op1.setBackgroundColor(mContext.getColor(mKey.getBgMenu()));
 
-        holder.relativeMenu_op1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                switch (mKey.getIdMenu()) {
-                    case key.key_KHUYENMAI:
-                }
+        holder.relativeMenu_op1.setOnClickListener(view -> {
+            switch (mKey.getIdMenu()) {
+                case key.key_KHUYENMAI:
+                    Toast.makeText(mContext, "Khuyến mãi", Toast.LENGTH_SHORT).show();
+                case key.key_PHUONGTHUCTHANHTOAN:
+                    Toast.makeText(mContext, "Thanh toán", Toast.LENGTH_SHORT).show();
             }
         });
 

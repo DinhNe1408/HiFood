@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:layout_margin="10dp"
-    android:background="@drawable/bg_layout_dialog">
+    android:background="@drawable/bg_layout_dialog"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -42,8 +42,8 @@
         android:layout_margin="10dp"
         android:background="@drawable/bg_white_border_edittext"
         android:hint="Tên người nhận"
-        android:padding="10dp"
-        android:maxLines="1"/>
+        android:maxLines="1"
+        android:padding="10dp" />
 
     <EditText
         android:id="@+id/txtV_SDT_dialog_tt"
@@ -52,8 +52,8 @@
         android:layout_margin="10dp"
         android:background="@drawable/bg_white_border_edittext"
         android:hint="Số điện thoại"
-        android:padding="10dp"
-        android:maxLines="1"/>
+        android:maxLines="1"
+        android:padding="10dp" />
 
     <EditText
         android:id="@+id/txtV_ViTri_dialog_tt"
@@ -69,5 +69,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="Lưu"/>
+        android:text="Lưu" />
 </LinearLayout>

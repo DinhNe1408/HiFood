@@ -27,6 +27,12 @@ public class YTGanBanFrag extends Fragment {
         mView = inflater.inflate(R.layout.frag_yt_gan_ban, container, false);
         AnhXa();
 
+        return mView;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         QuanAn1Adap quanAn1Adap = new QuanAn1Adap(getContext(), MyAppication.mDao.ListQAYT(MyAppication.mTaiKhoan.getIdTK()));
         RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(mView.getContext(),DividerItemDecoration.VERTICAL);
@@ -35,7 +41,6 @@ public class YTGanBanFrag extends Fragment {
         rec_YT_GanBan.setLayoutManager(linearLayoutManager);
         rec_YT_GanBan.setAdapter(quanAn1Adap);
 
-        return mView;
     }
 
     private void AnhXa() {

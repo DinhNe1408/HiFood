@@ -36,17 +36,9 @@
         android:id="@+id/txtV_SLMA_tt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="10dp"
-        android:layout_toStartOf="@+id/btn_Xoa_tt"
-        android:text="x2" />
-
-    <ImageButton
-        android:id="@+id/btn_Xoa_tt"
-        android:layout_width="25dp"
-        android:layout_height="30dp"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-        android:background="#FFFFFF"
-        android:src="@drawable/ic_baseline_cancel_24" />
+        android:layout_marginEnd="10dp"
+        android:text="x2" />
+
 </RelativeLayout>

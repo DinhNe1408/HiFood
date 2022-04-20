@@ -70,18 +70,20 @@ public class DHLichSuFrag extends Fragment {
             }
         });
 
-        if (MyAppication.mTaiKhoan.getIdTK() == -1)
-            return mView;
-
-        setData();
         return mView;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        setData();
+    }
+
     private void setData() {
-        List<donhang_dhfrag> donhang_dhfrags = MyAppication.mDao.DHFrag(MyAppication.mTaiKhoan.getIdTK(), key.key_dh_HoanThanh);
+        List<donhang_dhfrag> donhang_dhfrags = MyAppication.mDao.DHHoanThanhFrag(MyAppication.mTaiKhoan.getIdTK(), key.key_dh_HoanThanh);
         DonHang1Adap donHang1Adap = new DonHang1Adap(mView.getContext(), donhang_dhfrags);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mView.getContext(), LinearLayoutManager.VERTICAL, false);
-        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(mView.getContext(),DividerItemDecoration.VERTICAL);
+        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(mView.getContext(), DividerItemDecoration.VERTICAL);
 
         recV_DHLichSu.addItemDecoration(itemDecoration);
         recV_DHLichSu.setLayoutManager(linearLayoutManager);

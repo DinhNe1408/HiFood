@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="5dp"
+    android:layout_marginTop="5dp">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="5dp">
+
+        <TextView
+            android:id="@+id/txtV_IDDH"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:text="Mã đơn hàng" />
+
+        <TextView
+            android:id="@+id/txtV_TenVaSDT"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtV_IDDH"
+            android:layout_alignParentStart="true"
+            android:text="Tên Người Nhận + SDT" />
+
+        <TextView
+            android:id="@+id/txtV_ViTri"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtV_TenVaSDT"
+            android:layout_alignParentStart="true"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="Vị Trí Giao Hàng" />
+
+        <TextView
+            android:id="@+id/txtV_TGGiao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtV_ViTri"
+            android:layout_alignParentStart="true"
+            android:layout_marginEnd="10dp"
+            android:layout_toStartOf="@+id/txtV_TongTien"
+            android:text="Thời gian giao" />
+
+        <TextView
+            android:id="@+id/txtV_TongTien"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtV_ViTri"
+            android:layout_alignParentEnd="true"
+            android:text="Tổng tiền" />
+
+        <TextView
+            android:id="@+id/txtV_HoanThanh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtV_TongTien"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="5dp"
+            android:background="@color/hifood1"
+            android:padding="5dp"
+            android:text="Hoàn thành đơn"
+            android:textColor="@color/white" />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

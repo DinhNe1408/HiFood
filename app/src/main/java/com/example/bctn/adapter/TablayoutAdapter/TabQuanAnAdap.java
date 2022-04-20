@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.example.bctn.fragment.QuanAn.QADanhGiaFrag;
 import com.example.bctn.fragment.QuanAn.QAThongTinFrag;
 import com.example.bctn.fragment.QuanAn.QAThucDonFrag;
 
@@ -17,14 +18,19 @@ public class TabQuanAnAdap extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        if (position == 1) {
-            return new QAThongTinFrag();
+        switch (position){
+            case 1:
+                return new QADanhGiaFrag();
+            case 2:
+                return new QAThongTinFrag();
+            default:
+                return new QAThucDonFrag();
         }
-        return new QAThucDonFrag();
+
     }
 
     @Override
     public int getItemCount() {
-        return 2;
+        return 3;
     }
 }

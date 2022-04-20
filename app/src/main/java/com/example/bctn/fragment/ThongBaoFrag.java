@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.bctn.MyAppication;
 import com.example.bctn.R;
 import com.example.bctn.adapter.ThongBaoAdap;
 import com.example.bctn.domain.thongbao;
@@ -30,6 +31,12 @@ public class ThongBaoFrag extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        if (MyAppication.mTaiKhoan.getIdTK() == -1){
+            mView = inflater.inflate(R.layout.layout_ban_chua_dang_nhap,container,false);
+
+            return mView;
+        }
+
         mView = inflater.inflate(R.layout.frag_thong_bao,container,false);
 
         AnhXa();

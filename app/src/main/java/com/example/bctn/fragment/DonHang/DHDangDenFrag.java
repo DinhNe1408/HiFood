@@ -35,25 +35,24 @@ public class DHDangDenFrag extends Fragment {
         mView = inflater.inflate(R.layout.frag_dh_dang_den, container, false);
         AnhXa();
 
-        if (MyAppication.mTaiKhoan.getIdTK() == -1)
-            return mView;
-
-
-        setData();
         return mView;
     }
 
-    private void setData() {
-        List<donhang_dhfrag> donhang_dhfrags = MyAppication.mDao.DHFrag(MyAppication.mTaiKhoan.getIdTK(),key.key_dh_DangGiao);
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        List<donhang_dhfrag> donhang_dhfrags = MyAppication.mDao.DHFrag(MyAppication.mTaiKhoan.getIdTK(), key.key_dh_DangGiao);
         DonHang1Adap donHang1Adap = new DonHang1Adap(mView.getContext(), donhang_dhfrags);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mView.getContext(), LinearLayoutManager.VERTICAL, false);
-        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(mView.getContext(),DividerItemDecoration.VERTICAL);
+        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(mView.getContext(), DividerItemDecoration.VERTICAL);
 
         recV_DHDangDen.addItemDecoration(itemDecoration);
         recV_DHDangDen.setLayoutManager(linearLayoutManager);
         recV_DHDangDen.setAdapter(donHang1Adap);
 
     }
+
 
     private void AnhXa() {
         recV_DHDangDen = mView.findViewById(R.id.recV_DHDangDen);

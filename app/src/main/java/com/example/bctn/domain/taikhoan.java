@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public class taikhoan {
-    private int idTK;
+    private int idTK, IDQA;
     private byte[] hinhTK;
     private String tenTK, sdtTK,mkTK, role;
     private boolean khoa;
@@ -97,5 +97,13 @@ public class taikhoan {
 
     public void setCurVitri(vitri curVitri) {
         CurVitri = curVitri;
+    }
+
+    public int getIDQA() {
+        return IDQA;
+    }
+
+    public void setIDQA(int IDQA) {
+        this.IDQA = IDQA;
     }
 }

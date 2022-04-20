@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bctn.R;
+import com.example.bctn.activity.DanhGia;
 import com.example.bctn.activity.QuanAnAct;
 import com.example.bctn.activity.TheoDoiDonHang;
 import com.example.bctn.domain.donhang;
@@ -70,6 +71,23 @@ public class DonHang1Adap extends RecyclerView.Adapter<DonHang1Adap.DonHang1Adap
             }
             mContext.startActivity(mIntent);
         });
+        if (donhang_dhfrag.getTTGiao().equals(key.key_dh_HoanThanh)) {
+            if (donhang_dhfrag.isDanhGia()) {
+                holder.txtV_DenDanhGia.setText("Xem lại đánh giá");
+            } else {
+                holder.txtV_DenDanhGia.setText("Đánh giá ngay");
+            }
+            holder.txtV_DenDanhGia.setOnClickListener(view -> {
+                Intent intent = new Intent(mContext, DanhGia.class);
+                int danhgia = donhang_dhfrag.isDanhGia() ? 1 : 0;
+                intent.putExtra("DanhGia", danhgia);
+                intent.putExtra(key.key_IDDH, donhang_dhfrag.getIDDH());
+                mContext.startActivity(intent);
+            });
+        } else {
+            holder.txtV_DenDanhGia.setHeight(0);
+            holder.txtV_DenDanhGia.setWidth(0);
+        }
     }
 
     @Override
@@ -84,7 +102,7 @@ public class DonHang1Adap extends RecyclerView.Adapter<DonHang1Adap.DonHang1Adap
 
         private RelativeLayout relative1_dh1;
         private ImageView imgV_HinhQA_dh1;
-        private TextView txtV_TenQA_dh1, txtV_ViTri_dh1, txtV_SL_dh1;
+        private TextView txtV_TenQA_dh1, txtV_ViTri_dh1, txtV_SL_dh1, txtV_DenDanhGia;
 
         public DonHang1AdapViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -94,6 +112,7 @@ public class DonHang1Adap extends RecyclerView.Adapter<DonHang1Adap.DonHang1Adap
             txtV_TenQA_dh1 = itemView.findViewById(R.id.txtV_TenQA_dh1);
             txtV_ViTri_dh1 = itemView.findViewById(R.id.txtV_ViTri_dh1);
             txtV_SL_dh1 = itemView.findViewById(R.id.txtV_SL_dh1);
+            txtV_DenDanhGia = itemView.findViewById(R.id.txtV_DenDanhGia);
 
             relative1_dh1 = itemView.findViewById(R.id.relative1_dh1);
         }

@@ -65,14 +65,19 @@ public class QAThucDonFrag extends Fragment {
         //getData_RecV();
 
         relative1_QA.setOnClickListener(view -> {
-            if(mDonhang.getTongSoLuong() > 0){
-                Intent intent = new Intent(getContext(), ThanhToanAct.class);
-                intent.putExtra(key.key_IDDH, IDDH);
-                startActivity(intent);
+            if (MyAppication.mTaiKhoan.getIdTK() != -1){
+                if (mDonhang.getTongSoLuong() > 0) {
+                    Intent intent = new Intent(getContext(), ThanhToanAct.class);
+                    intent.putExtra(key.key_IDDH, IDDH);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(mView.getContext(), "Giỏ hàng đang trống, hãy thêm món ăn để có thể đặt hàng", Toast.LENGTH_SHORT).show();
+                }
             } else {
-                Toast.makeText(mView.getContext(), "Giỏ hàng đang trống, hãy thêm món ăn để có thể đặt hàng", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mView.getContext(), "Bạn chưa đăng nhập", Toast.LENGTH_SHORT).show();
             }
-           
+
+
         });
 
         //OpenBotSheet();
@@ -120,24 +125,33 @@ public class QAThucDonFrag extends Fragment {
     public void onPause() {
         super.onPause();
 
-        int IDDH = MyAppication.mDao.isExistDonNhap(MyAppication.mTaiKhoan.getIdTK(), quanan.getIdQA(), key.key_dh_Nhap);
-        if (IDDH != -1) {
-            MyAppication.mDao.CapNhatDH(IDDH, Calendar.getInstance().getTime().getTime(), key.key_dh_Nhap);
-        } else {
-            IDDH = MyAppication.mDao.TaoIDDH();
-            MyAppication.mDao.TaoDonHang(IDDH, MyAppication.mTaiKhoan.getIdTK(), quanan.getIdQA(), key.key_dh_Nhap);
-        }
+        if (MyAppication.mTaiKhoan.getIdTK() != -1) {
+            int IDDH = MyAppication.mDao.isExistDonNhap(MyAppication.mTaiKhoan.getIdTK(), quanan.getIdQA(), key.key_dh_Nhap);
+            if (IDDH != -1) {
+                if (mDonhang.getCthdMap().size() > 0){
+                    MyAppication.mDao.CapNhatDH(IDDH, Calendar.getInstance().getTime().getTime(), key.key_dh_Nhap);
+                } else {
+                    MyAppication.mDao.XoaDH(IDDH);
+                }
 
-        for (ctdh cthd : mDonhang.getCthdMap().values()) {
-            if (!MyAppication.mDao.isExistMonAninDH(IDDH, cthd.getIDMA())) {
-                MyAppication.mDao.ThemMonAninDH(IDDH, cthd.getIDMA(), cthd.getSLMA(), cthd.getGhiChu());
             } else {
-                MyAppication.mDao.CapNhatMonAninDH(IDDH, cthd.getIDMA(), cthd.getSLMA(), cthd.getGhiChu());
+                if (mDonhang.getCthdMap().size() > 0){
+                    IDDH = MyAppication.mDao.TaoIDDH();
+                    MyAppication.mDao.TaoDonHang(IDDH, MyAppication.mTaiKhoan.getIdTK(), quanan.getIdQA(), key.key_dh_Nhap);
+                }
             }
-        }
 
-        for (Integer IDMA : mapRemove.values()) {
-            MyAppication.mDao.XoaMonAninDH(IDDH, IDMA);
+            for (ctdh cthd : mDonhang.getCthdMap().values()) {
+                if (!MyAppication.mDao.isExistMonAninDH(IDDH, cthd.getIDMA())) {
+                    MyAppication.mDao.ThemMonAninDH(IDDH, cthd.getIDMA(), cthd.getSLMA(), cthd.getGhiChu());
+                } else {
+                    MyAppication.mDao.CapNhatMonAninDH(IDDH, cthd.getIDMA(), cthd.getSLMA(), cthd.getGhiChu());
+                }
+            }
+
+            for (Integer IDMA : mapRemove.values()) {
+                MyAppication.mDao.XoaMonAninDH(IDDH, IDMA);
+            }
         }
     }
 
@@ -145,6 +159,7 @@ public class QAThucDonFrag extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        SoLuong();
         getData_RecV();
     }
 

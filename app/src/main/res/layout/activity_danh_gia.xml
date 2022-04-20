@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.DanhGia">
+
+    <include
+        android:id="@+id/tool3_DanhGia"
+        layout="@layout/include_toolbar_option_1" />
+
+
+    <RatingBar
+        android:id="@+id/rate3_SaoDG"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tool3_DanhGia"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:numStars="5"
+        android:theme="@style/RatingBar2"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rate3_SaoDG"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="10dp"
+        android:text="Nội dung đánh giá" />
+
+    <EditText
+        android:id="@+id/editT_NoiDungDG"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rate3_SaoDG"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/bg_white_border_edittext"
+        android:gravity="start"
+        android:hint="Nhập vào đánh giá"
+        android:minHeight="200dp"
+        android:padding="10dp" />
+
+    <Button
+        android:id="@+id/btn_GuiDG"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="15dp"
+        android:text="Gửi đánh giá" />
+</RelativeLayout>

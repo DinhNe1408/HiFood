@@ -46,10 +46,15 @@ public class QuanAnAct extends AppCompatActivity {
         viewPage2_qa.setAdapter(tabQuanAnAdap);
         viewPage2_qa.setUserInputEnabled(false);
         new TabLayoutMediator(tab_qa, viewPage2_qa, (tab, position) -> {
-            if (position == 1) {
-                tab.setText("Thông tin");
-            } else {
-                tab.setText("Thực đơn");
+            switch (position){
+                case 1:
+                    tab.setText("Đánh giá");
+                    break;
+                case 2:
+                    tab.setText("Thông tin");
+                    break;
+                default:
+                    tab.setText("Thực đơn");
             }
         }).attach();
 

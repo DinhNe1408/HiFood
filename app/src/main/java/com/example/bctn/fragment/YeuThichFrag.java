@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.bctn.MyAppication;
 import com.example.bctn.R;
 import com.example.bctn.adapter.TablayoutAdapter.TabYeuThichAdap;
 import com.google.android.material.tabs.TabLayout;
@@ -24,6 +25,12 @@ public class YeuThichFrag extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        if (MyAppication.mTaiKhoan.getIdTK() == -1){
+            mView = inflater.inflate(R.layout.layout_ban_chua_dang_nhap,container,false);
+
+            return mView;
+        }
+
         mView = inflater.inflate(R.layout.frag_yeu_thich,container,false);
         AnhXa();
 

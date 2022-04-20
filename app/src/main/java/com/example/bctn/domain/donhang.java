@@ -20,6 +20,23 @@ public class donhang implements Serializable {
 
     public donhang(int IDDH, int IDQA, String TenNN, String SDTNN,
                    double TongTienMA, double PhiVC, double TienGiam, double TongDH,
+                   String vitriDH, Long TGDat, Long TGGiao, String TTDH) {
+        this.IDDH = IDDH;
+        this.IDQA = IDQA;
+        this.TenNN = TenNN;
+        this.SDTNN = SDTNN;
+        this.TongTienMA = TongTienMA;
+        this.PhiVC = PhiVC;
+        this.TienGiam = TienGiam;
+        this.TongDH = TongDH;
+        this.VitriDH = vitriDH;
+        this.TGDat = TGDat;
+        this.TGGiao = TGGiao;
+        this.TTDH = TTDH;
+    }
+
+    public donhang(int IDDH, int IDQA, String TenNN, String SDTNN,
+                   double TongTienMA, double PhiVC, double TienGiam, double TongDH,
                    String vitriDH, Long TGDat, Long TGGiao, String TTDH, Map<Integer, ctdh> cthdMap) {
         this.IDDH = IDDH;
         this.IDQA = IDQA;

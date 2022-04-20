@@ -55,7 +55,6 @@ public class UpQuanAn extends AppCompatActivity {
 
         tool3_QLQuanAn_Up.setNavigationOnClickListener(view -> onBackPressed());
         TextView txtV_toolbar_title = tool3_QLQuanAn_Up.findViewById(R.id.txtV_toolbar_title);
-        txtV_toolbar_title.setText("");
 
         Intent intent = getIntent();
         loai = intent.getStringExtra(key.key_LoaiCS);
@@ -113,7 +112,6 @@ public class UpQuanAn extends AppCompatActivity {
                     MyAppication.mDao.CapNhatQA(mQuanan.getIdQA(), mQuanan.getTenQA(), mQuanan.isKhoa());
                     Toast.makeText(this, "Cập nhật quán ăn thành công", Toast.LENGTH_SHORT).show();
                 }
-                Log.e("HinhLoi", new String(mQuanan.getHinhQA(), StandardCharsets.UTF_8));
 
                 mQuanan.setVitriQA(new vitri(editT_ViTri_upqa.getText().toString().trim(), 0.0, 0.0));
                 MyAppication.mDao.CapNhatViTriQA(mQuanan.getIdQA(), mQuanan.getVitriQA().getVitri(), mQuanan.getVitriQA().getVido(), mQuanan.getVitriQA().getKinhdo());

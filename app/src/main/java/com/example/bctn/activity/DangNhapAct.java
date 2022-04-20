@@ -17,6 +17,7 @@ import com.example.bctn.DataLocalManager;
 import com.example.bctn.MyAppication;
 import com.example.bctn.R;
 import com.example.bctn.activity.admin.QuanTri;
+import com.example.bctn.activity.quanan.QuanAn;
 import com.example.bctn.domain.taikhoan;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -45,16 +46,26 @@ public class DangNhapAct extends AppCompatActivity {
                 if (mTaikhoan != null) {
                     if (!mTaikhoan.isKhoa()) {
                         MyAppication.mTaiKhoan = mTaikhoan;
-                        DataLocalManager.setTaiKhoan(mTaikhoan.getSdtTK(), mTaikhoan.getMkTK());
 
-                        if (!mTaikhoan.getRole().equals("admin")) {
+                        if (mTaikhoan.getRole().equals("user")) {
                             Intent mIntent = new Intent(DangNhapAct.this, TrangChuAct.class);
                             startActivity(mIntent);
-
+                            DataLocalManager.setTaiKhoan(mTaikhoan.getSdtTK(), mTaikhoan.getMkTK());
                             Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                        } else {
+
+                        } else if (mTaikhoan.getRole().equals("admin")) {
                             Intent mIntent = new Intent(DangNhapAct.this, QuanTri.class);
                             startActivity(mIntent);
+
+                        } else if (mTaikhoan.getRole().equals("diner")){
+                            if(MyAppication.mDao.isQAKhoa(mTaikhoan.getIdTK()) == 0){
+                                MyAppication.mTaiKhoan.setIDQA(MyAppication.mDao.TKQA(mTaikhoan.getIdTK()));
+                                Intent mIntent = new Intent(DangNhapAct.this, QuanAn.class);
+                                startActivity(mIntent);
+                            } else {
+                                Toast.makeText(this, "Quán ăn đã bị khóa", Toast.LENGTH_SHORT).show();
+                            }
+
                         }
 
                     } else {

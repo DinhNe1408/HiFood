@@ -1,10 +1,12 @@
 package com.example.bctn.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.bctn.MyAppication;
 import com.example.bctn.R;
 import com.example.bctn.adapter.DsMA_dh_Adap;
 import com.example.bctn.adapter.TablayoutAdapter.TabDonHangAdap;
@@ -35,6 +38,11 @@ public class DonHangFrag extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        if (MyAppication.mTaiKhoan.getIdTK() == -1){
+            mView = inflater.inflate(R.layout.layout_ban_chua_dang_nhap,container,false);
+
+            return mView;
+        }
         mView = inflater.inflate(R.layout.frag_don_hang,container,false);
         AnhXa();
 

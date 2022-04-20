@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.bctn.MyAppication;
@@ -32,6 +33,7 @@ public class TheoDoiDonHang extends AppCompatActivity {
     private TextView txtV_toolbar_title, tongDH_tddh, phiVC_tddh, tongTien_tddh, txtV_TenTK_tddh, txtV_DiaChiNhan_tddh, txtV_ThoiGianNhan_tddh, tienGiam_tddh;
     private CountDownTimer count;
     private donhang donhang;
+    private Button btn_VeTrangChu;
     RecyclerView recV_DsMA_tddh;
 
     @Override
@@ -99,6 +101,10 @@ public class TheoDoiDonHang extends AppCompatActivity {
     private void SuKien() {
         tool3_TheoDoiDonHang.setNavigationOnClickListener(view -> onBackPressed());
 
+        btn_VeTrangChu.setOnClickListener(view -> {
+            Intent intent = new Intent(TheoDoiDonHang.this,TrangChuAct.class);
+            startActivity(intent);
+        });
     }
 
     private void AnhXa() {
@@ -113,5 +119,7 @@ public class TheoDoiDonHang extends AppCompatActivity {
         txtV_DiaChiNhan_tddh = findViewById(R.id.txtV_DiaChiNhan_tddh);
         txtV_ThoiGianNhan_tddh = findViewById(R.id.txtV_ThoiGianNhan_tddh);
         tienGiam_tddh = findViewById(R.id.tienGiam_tddh);
+
+        btn_VeTrangChu = findViewById(R.id.btn_VeTrangChu);
     }
 }

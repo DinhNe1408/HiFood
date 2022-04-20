@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.icu.text.SimpleDateFormat;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.text.Spanned;
@@ -50,6 +51,10 @@ public class key {
     public static final int key_QLQuanAn = 432;
     public static final int key_QLDonHang = 980;
     public static final int key_ThongKe = 983;
+    public static final int key_ThongTinQA = 678;
+    public static final int key_QLMonAn = 7091;
+    public static final int key_DonHangQA = 3021;
+
     // Đơn hàng
     public static final String key_dh_HoanThanh = "HoanThanh";
     public static final String key_dh_DangGiao = "DangGiao";
@@ -72,12 +77,24 @@ public class key {
         return LocalDateTime.parse(time, formatter);
     }
 
+
     public static byte[] BitmapDrawable2Byte(BitmapDrawable bitmapDrawable) {
         Bitmap bitmap = bitmapDrawable.getBitmap();
         ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArray);
 
         return byteArray.toByteArray();
+    }
+
+
+    public static String DateFormat(Date date){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        return  simpleDateFormat.format(date);
+    }
+
+    public static String DateTimeFormat(Date date){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm dd/MM/yyyy");
+        return  simpleDateFormat.format(date);
     }
 
 

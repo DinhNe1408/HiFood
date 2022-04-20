@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="4dp"
+    android:layout_marginBottom="4dp"
+    android:padding="5dp">
+
+    <TextView
+        android:id="@+id/txtV_TenMA_dsctdh_qadh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:ellipsize="end"
+        android:maxLines="2" />
+
+    <TextView
+        android:id="@+id/txtV_GiaMA_dsctdh_qadh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtV_TenMA_dsctdh_qadh"
+        android:layout_gravity="start"
+        android:maxLines="1"
+        android:text="100.000đ" />
+
+    <TextView
+        android:id="@+id/txtV_SoL_dsctdh_qadh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtV_TenMA_dsctdh_qadh"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="start"
+        android:text="x1" />
+
+    <TextView
+        android:id="@+id/txtV_TongTienMA_dsctdh_qadh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtV_TenMA_dsctdh_qadh"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="start"
+        android:maxLines="1"
+        android:text="100.000đ" />
+
+
+    <TextView
+        android:id="@+id/txtV_GhiChu_dsctdh_qadh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtV_SoL_dsctdh_qadh"
+        android:text="Ghi chú" />
+
+</RelativeLayout>

@@ -17,6 +17,14 @@ public class ctdh implements Serializable {
         this.GiaMA = GiaMA;
     }
 
+    public ctdh(int IDMA, String TenMA,double GiaMA, int SLMA,String GhiChu) {
+        this.GhiChu = GhiChu;
+        this.IDMA = IDMA;
+        this.SLMA = SLMA;
+        this.TenMA = TenMA;
+        this.GiaMA = GiaMA;
+    }
+
     public ctdh(int IDMA, int SLMA, String ghiChu) {
         this.IDMA = IDMA;
         this.SLMA = SLMA;

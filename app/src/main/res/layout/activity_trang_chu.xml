@@ -5,10 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.TrangChuAct">
-<!--    <androidx.viewpager2.widget.ViewPager2-->
-<!--        android:id="@+id/viewpager_TC"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"/>-->
+
     <FrameLayout
         android:id="@+id/frame_contrainer"
         android:layout_width="match_parent"
@@ -21,7 +18,5 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/white"
-        app:itemTextColor="@drawable/navi_menu_selector"
-        app:itemIconTint="@drawable/navi_menu_selector"
         app:menu="@menu/navigation_menu" />
 </RelativeLayout>

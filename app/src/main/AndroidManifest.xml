@@ -16,6 +16,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BCTN">
         <activity
+            android:name=".activity.quanan.ThongTinQA"
+            android:exported="false" />
+        <activity
+            android:name=".activity.quanan.QADonHang"
+            android:exported="false" />
+        <activity
+            android:name=".activity.quanan.QuanAn"
+            android:exported="false" />
+        <activity
+            android:name=".activity.DanhGia"
+            android:exported="false" />
+        <activity
             android:name=".activity.admin.QLMonAn"
             android:exported="false" />
         <activity

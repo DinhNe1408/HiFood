@@ -68,9 +68,8 @@ public class ThanhToanAct extends AppCompatActivity {
         btn_DatHang_tt.setOnClickListener(view -> {
 
             MyAppication.mDao.CapNhatDH(IDDH, mDonhang.getTenNN(), mDonhang.getSDTNN(),
-                    mDonhang.getTongTienMA(), mDonhang.getPhiVC(), mDonhang.getTienGiam(), mDonhang.getTongDH(),
+                    mDonhang.getTongTienMAMap(), mDonhang.getPhiVC(), mDonhang.getTienGiam(), mDonhang.getTongDH(),
                     mDonhang.getVitriDH(), Calendar.getInstance().getTime().getTime(), 10L, key.key_dh_DangGiao);
-
 
             QAThucDonFrag.mDonhang.newCtdhMap();
             Toast.makeText(this, "Đặt hàng thành công!!!", Toast.LENGTH_SHORT).show();
@@ -112,8 +111,8 @@ public class ThanhToanAct extends AppCompatActivity {
         recV_DsMA_tt.setAdapter(dsMA_tt_adap);
 
         List<menu_option> mListMenuOp = new ArrayList<>();
-        mListMenuOp.add(new menu_option(key.key_KHUYENMAI, R.drawable.ic_baseline_cancel_24, R.color.hifood5, "Chọn khuyến mãi, voucher"));
-        mListMenuOp.add(new menu_option(key.key_PHUONGTHUCTHANHTOAN, R.drawable.ic_baseline_cancel_24, R.color.hifood5, "Chọn phương thức thanh toán"));
+        mListMenuOp.add(new menu_option(key.key_KHUYENMAI, R.drawable.ic_round_paid_24, R.color.hifood5, "Chọn khuyến mãi, voucher"));
+        mListMenuOp.add(new menu_option(key.key_PHUONGTHUCTHANHTOAN, R.drawable.ic_round_credit_card_24, R.color.hifood5, "Chọn phương thức thanh toán"));
 
         Menu_op1_Adap menu_op1_adap = new Menu_op1_Adap(this, mListMenuOp);
         LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -152,11 +151,17 @@ public class ThanhToanAct extends AppCompatActivity {
         btn_LuuThongTin_dialog_tt.setOnClickListener(view -> {
             if (txtV_TenNN_dialog_tt.getText().length() != 0 && txtV_SDT_dialog_tt.getText().length() != 0 && txtV_ViTri_dialog_tt.getText().length() != 0) {
 
-                mDonhang.setTenNN(txtV_TenNN_dialog_tt.getText().toString());
-                mDonhang.setSDTNN(txtV_SDT_dialog_tt.getText().toString());
-                mDonhang.setVitriDH(txtV_ViTri_dialog_tt.getText().toString());
-                setThongTinNN();
-                Toast.makeText(this, "Thông tin người nhận đã được cập nhật", Toast.LENGTH_SHORT).show();
+                if (key.isSDT(txtV_SDT_dialog_tt.getText().toString())) {
+                    mDonhang.setTenNN(txtV_TenNN_dialog_tt.getText().toString());
+                    mDonhang.setSDTNN(txtV_SDT_dialog_tt.getText().toString());
+                    mDonhang.setVitriDH(txtV_ViTri_dialog_tt.getText().toString());
+                    setThongTinNN();
+                    Toast.makeText(this, "Thông tin người nhận đã được cập nhật", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "Vui lòng nhập đúng định dạng Số điện thoại ", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(this, "Hãy điền đủ các trường", Toast.LENGTH_SHORT).show();
             }
         });
         dialog.show();
