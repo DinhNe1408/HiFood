@@ -128,14 +128,15 @@
                 android:layout_marginTop="20dp"
                 android:text="Khóa tài khoản"/>
 
-
             <Button
                 android:id="@+id/btn_XacNhan_uptk"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="10dp"
-                android:text="Xác nhận" />
+                android:layout_marginBottom="20dp"
+                android:text="Xác nhận"
+                android:background="@drawable/bg_button"/>
 
         </LinearLayout>
     </ScrollView>

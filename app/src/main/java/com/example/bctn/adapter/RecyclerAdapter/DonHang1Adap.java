@@ -2,8 +2,6 @@ package com.example.bctn.adapter.RecyclerAdapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,11 +16,11 @@ import com.example.bctn.R;
 import com.example.bctn.activity.DanhGia;
 import com.example.bctn.activity.QuanAnAct;
 import com.example.bctn.activity.TheoDoiDonHang;
-import com.example.bctn.domain.donhang;
+
 import com.example.bctn.domain.donhang_dhfrag;
 import com.example.bctn.domain.key;
 
-import java.text.DecimalFormat;
+
 import java.util.List;
 
 public class DonHang1Adap extends RecyclerView.Adapter<DonHang1Adap.DonHang1AdapViewHolder> {

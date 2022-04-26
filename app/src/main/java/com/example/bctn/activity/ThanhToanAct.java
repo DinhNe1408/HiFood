@@ -6,11 +6,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
 import android.app.Dialog;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Window;
 import android.view.WindowManager;
@@ -20,6 +23,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.bctn.AlarmReceiver;
 import com.example.bctn.MyAppication;
 import com.example.bctn.R;
 import com.example.bctn.adapter.RecyclerAdapter.DsMA_tt_Adap;
@@ -40,15 +44,19 @@ public class ThanhToanAct extends AppCompatActivity {
     private RecyclerView recV_DsMA_tt, recV_Menu_tt;
     private Toolbar tool3_ThanhToan;
     private Button btn_DatHang_tt;
-    private TextView txtV_TenTK_tt, txtV_DiaChiNhan_tt, txtV_DoiDiaChiNhan_tt, tongDH_tt, phiVC_tt, tongTien_tt;
+    private TextView txtV_TenTK_tt, txtV_DiaChiNhan_tt, txtV_DoiDiaChiNhan_tt, tongDH_tt, phiVC_tt, tongTien_tt, txtV_ThoiGianNhan_tt;
     private donhang mDonhang;
     TextView txtV_toolbar_title;
-
+    AlarmManager alarmManager;
+    PendingIntent pendingIntent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thanh_toan);
         AnhXa();
+
+        alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        Intent intent1 = new Intent(this, AlarmReceiver.class);
 
         Intent intent = getIntent();
         int IDDH = intent.getIntExtra(key.key_IDDH, -1);
@@ -61,15 +69,26 @@ public class ThanhToanAct extends AppCompatActivity {
         mDonhang.setTongDH(mDonhang.getTongTienMAMap() + mDonhang.getPhiVC());
         mDonhang.setTenNN(MyAppication.mTaiKhoan.getTenTK());
         mDonhang.setSDTNN(MyAppication.mTaiKhoan.getSdtTK());
-        mDonhang.setVitriDH("Số 6 Trần Văn Ơn, Phú Hòa, Thủ Dầu Một,Bình Dương");
+        mDonhang.setVitriDH("Số 6 Trần Văn Ơn, Thủ Dầu Một, Bình Dương");
+        //mDonhang.setVitriDH(MyAppication.mTaiKhoan.getCurVitri().getVitri());
 
         setData();
+        Calendar betime = Calendar.getInstance();
+        Calendar aftime = betime;
+        int x = aftime.getTime().getMinutes() % 5;
+        aftime.add(Calendar.SECOND, 30);
+        //aftime.add(Calendar.MINUTE, 25 - x);
 
+        txtV_ThoiGianNhan_tt.setText("Thời gian giao: " + key.DateTimeFormat(aftime.getTime()));
         btn_DatHang_tt.setOnClickListener(view -> {
 
             MyAppication.mDao.CapNhatDH(IDDH, mDonhang.getTenNN(), mDonhang.getSDTNN(),
                     mDonhang.getTongTienMAMap(), mDonhang.getPhiVC(), mDonhang.getTienGiam(), mDonhang.getTongDH(),
-                    mDonhang.getVitriDH(), Calendar.getInstance().getTime().getTime(), 10L, key.key_dh_DangGiao);
+                    mDonhang.getVitriDH(), key.DateFormatSQL(betime.getTime()), key.DateFormatSQL(aftime.getTime()), key.key_dh_DangGiao);
+
+            Log.e("ThoiGian", key.DateFormatSQL(aftime.getTime()));
+            pendingIntent = PendingIntent.getBroadcast(this,0 ,intent1 ,PendingIntent.FLAG_UPDATE_CURRENT);
+            alarmManager.set(AlarmManager.RTC_WAKEUP, aftime.getTimeInMillis(),pendingIntent);
 
             QAThucDonFrag.mDonhang.newCtdhMap();
             Toast.makeText(this, "Đặt hàng thành công!!!", Toast.LENGTH_SHORT).show();
@@ -80,7 +99,6 @@ public class ThanhToanAct extends AppCompatActivity {
         });
 
         txtV_DoiDiaChiNhan_tt.setOnClickListener(view -> {
-            Toast.makeText(this, "DD", Toast.LENGTH_SHORT).show();
             openDialog();
         });
     }
@@ -174,6 +192,7 @@ public class ThanhToanAct extends AppCompatActivity {
         phiVC_tt = findViewById(R.id.phiVC_tt);
         tongTien_tt = findViewById(R.id.tongTien_tt);
         txtV_DoiDiaChiNhan_tt = findViewById(R.id.txtV_DoiDiaChiNhan_tt);
+        txtV_ThoiGianNhan_tt = findViewById(R.id.txtV_ThoiGianNhan_tt);
 
         btn_DatHang_tt = findViewById(R.id.btn_DatHang_tt);
         recV_DsMA_tt = findViewById(R.id.recV_DsMA_tt);

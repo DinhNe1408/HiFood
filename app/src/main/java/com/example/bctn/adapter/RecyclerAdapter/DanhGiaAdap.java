@@ -46,7 +46,7 @@ public class DanhGiaAdap extends RecyclerView.Adapter<DanhGiaAdap.DanhGiaViewHol
         holder.txtV_TenNDG.setText(danhgia.getTenNDG());
         holder.txtV_NoiDungDG.setText(danhgia.getNoiDungDG());
         holder.rate3_SaoDG.setRating((float) danhgia.getSaoDG());
-        holder.txtV_ThoiGianDG.setText(danhgia.getThoiGianDG());
+        holder.txtV_ThoiGianDG.setText(key.DateTimeFormat(key.DateFromSQL(danhgia.getThoiGianDG())));
 
     }
 

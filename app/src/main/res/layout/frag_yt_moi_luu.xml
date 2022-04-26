@@ -4,13 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"/>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rec_YT_MoiLuu"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 </LinearLayout>

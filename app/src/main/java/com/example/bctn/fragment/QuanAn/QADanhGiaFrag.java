@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -52,11 +53,12 @@ public class QADanhGiaFrag extends Fragment {
         if (danhgiaList.size() != 0) {
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
             DanhGiaAdap danhGiaAdap = new DanhGiaAdap(getContext(), danhgiaList);
+            RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(mView.getContext(), DividerItemDecoration.VERTICAL);
 
+            recV_DSDanhGia.addItemDecoration(itemDecoration);
             recV_DSDanhGia.setLayoutManager(linearLayoutManager);
             recV_DSDanhGia.setAdapter(danhGiaAdap);
         }
-
 
     }
 

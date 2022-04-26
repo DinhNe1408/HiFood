@@ -23,6 +23,7 @@ import com.example.bctn.R;
 
 import java.io.ByteArrayOutputStream;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -95,6 +96,21 @@ public class key {
     public static String DateTimeFormat(Date date){
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm dd/MM/yyyy");
         return  simpleDateFormat.format(date);
+    }
+
+    public static String DateFormatSQL(Date date){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return  simpleDateFormat.format(date);
+    }
+
+    public static Date DateFromSQL(String date){
+        Date temp = null;
+        try {
+            return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return temp;
     }
 
 

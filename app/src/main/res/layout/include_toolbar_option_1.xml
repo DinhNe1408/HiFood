@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/hifood1"
-    app:navigationIcon="@drawable/ic_round_arrow_back_ios_new_24">
+    app:navigationIcon="@drawable/ic_round_arrow_back_36">
 
     <TextView
         android:id="@+id/txtV_toolbar_title"

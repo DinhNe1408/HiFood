@@ -129,7 +129,7 @@ public class QAThucDonFrag extends Fragment {
             int IDDH = MyAppication.mDao.isExistDonNhap(MyAppication.mTaiKhoan.getIdTK(), quanan.getIdQA(), key.key_dh_Nhap);
             if (IDDH != -1) {
                 if (mDonhang.getCthdMap().size() > 0){
-                    MyAppication.mDao.CapNhatDH(IDDH, Calendar.getInstance().getTime().getTime(), key.key_dh_Nhap);
+                    MyAppication.mDao.CapNhatDH(IDDH,mDonhang.getTongTienMAMap(),mDonhang.getTongTienMAMap(), key.DateFormatSQL(Calendar.getInstance().getTime()), key.key_dh_Nhap);
                 } else {
                     MyAppication.mDao.XoaDH(IDDH);
                 }
@@ -137,7 +137,7 @@ public class QAThucDonFrag extends Fragment {
             } else {
                 if (mDonhang.getCthdMap().size() > 0){
                     IDDH = MyAppication.mDao.TaoIDDH();
-                    MyAppication.mDao.TaoDonHang(IDDH, MyAppication.mTaiKhoan.getIdTK(), quanan.getIdQA(), key.key_dh_Nhap);
+                    MyAppication.mDao.TaoDonHang(IDDH, MyAppication.mTaiKhoan.getIdTK(), quanan.getIdQA(),mDonhang.getTongTienMAMap(),mDonhang.getTongTienMAMap(), key.key_dh_Nhap);
                 }
             }
 

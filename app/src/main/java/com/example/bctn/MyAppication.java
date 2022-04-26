@@ -39,6 +39,7 @@ public class MyAppication extends Application {
             mTaiKhoan = new taikhoan();
         }
 
+
         TaoKenhTB();
     }
 

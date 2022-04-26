@@ -75,8 +75,8 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginHorizontal="15dp"
-        android:text="Giao hàng: 17 tháng 9 năm 2022"
         android:drawableEnd="@drawable/ic_round_chevron_right_24"
+        android:text="Giao hàng: 17 tháng 9 năm 2022"
         android:textSize="16sp" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -94,7 +94,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/relative3_tt"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="20dp" />
 
     <RelativeLayout
         android:id="@+id/relative3_tt"

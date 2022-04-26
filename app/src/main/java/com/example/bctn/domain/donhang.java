@@ -4,6 +4,7 @@ import com.example.bctn.activity.DangNhapAct;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,7 +12,7 @@ import java.util.Map;
 public class donhang implements Serializable {
     private int IDDH, IDQA;
     private double PhiVC, TongDH, TienGiam, TongTienMA;
-    private Long TGDat, TGGiao;
+    private Date TGDat, TGGiao;
     private String TTDH, TenNN, SDTNN, VitriDH;
     private Map<Integer, ctdh> cthdMap = new HashMap<>();
 
@@ -20,7 +21,7 @@ public class donhang implements Serializable {
 
     public donhang(int IDDH, int IDQA, String TenNN, String SDTNN,
                    double TongTienMA, double PhiVC, double TienGiam, double TongDH,
-                   String vitriDH, Long TGDat, Long TGGiao, String TTDH) {
+                   String vitriDH, Date TGDat, Date TGGiao, String TTDH) {
         this.IDDH = IDDH;
         this.IDQA = IDQA;
         this.TenNN = TenNN;
@@ -37,7 +38,7 @@ public class donhang implements Serializable {
 
     public donhang(int IDDH, int IDQA, String TenNN, String SDTNN,
                    double TongTienMA, double PhiVC, double TienGiam, double TongDH,
-                   String vitriDH, Long TGDat, Long TGGiao, String TTDH, Map<Integer, ctdh> cthdMap) {
+                   String vitriDH, Date TGDat, Date TGGiao, String TTDH, Map<Integer, ctdh> cthdMap) {
         this.IDDH = IDDH;
         this.IDQA = IDQA;
         this.TenNN = TenNN;
@@ -129,19 +130,19 @@ public class donhang implements Serializable {
         VitriDH = vitriDH;
     }
 
-    public Long getTGDat() {
+    public Date getTGDat() {
         return TGDat;
     }
 
-    public void setTGDat(Long TGDat) {
+    public void setTGDat(Date TGDat) {
         this.TGDat = TGDat;
     }
 
-    public Long getTGGiao() {
+    public Date getTGGiao() {
         return TGGiao;
     }
 
-    public void setTGGiao(Long TGGiao) {
+    public void setTGGiao(Date TGGiao) {
         this.TGGiao = TGGiao;
     }
 

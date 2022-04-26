@@ -53,7 +53,8 @@
         android:background="@drawable/bg_white_border_edittext"
         android:hint="Số điện thoại"
         android:maxLines="1"
-        android:padding="10dp" />
+        android:padding="10dp"
+        android:inputType="number"/>
 
     <EditText
         android:id="@+id/txtV_ViTri_dialog_tt"

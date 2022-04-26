@@ -14,8 +14,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imgV_HinhNDG"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:src="@drawable/khongchu" />
 
         <LinearLayout
@@ -33,14 +33,14 @@
                 android:layout_height="wrap_content"
                 android:maxLines="1"
                 android:text="Tên người đăng"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/txtV_ThoiGianDG"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Thời gian đăng"
-                android:textSize="10sp" />
+                android:textSize="12sp" />
 
             <RatingBar
                 android:id="@+id/rate3_SaoDG"
@@ -57,7 +57,7 @@
         android:id="@+id/txtV_NoiDungDG"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="70dp"
+        android:layout_marginStart="60dp"
         android:layout_marginTop="10dp"
         android:text="Nội dung đánh giá " />
 

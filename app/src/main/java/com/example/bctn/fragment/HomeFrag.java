@@ -1,10 +1,12 @@
 package com.example.bctn.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.bctn.R;
+import com.example.bctn.activity.TimKiemAct;
 import com.example.bctn.adapter.TablayoutAdapter.TabHomeAdap;
 import com.example.bctn.adapter.Slide_TC;
 import com.example.bctn.adapter.TheLoaiAdap;
@@ -38,6 +41,7 @@ public class HomeFrag extends Fragment{
     private Slide_TC slide_TC;
     private List<slide_tc> mListSlide;
     private List<theloai> mListTL;
+    private EditText editT_TimKiem;
 
     TextView txtV_ViTri_home;
     private RecyclerView recV_TheLoai_home;
@@ -103,6 +107,16 @@ public class HomeFrag extends Fragment{
             }
         }).attach();
 
+        editT_TimKiem.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (b){
+                    Intent intent = new Intent(mView.getContext(), TimKiemAct.class);
+                    getContext().startActivity(intent);
+                }
+            }
+        });
+
         return mView;
     }
 
@@ -127,7 +141,7 @@ public class HomeFrag extends Fragment{
         tab_home_1 = mView.findViewById(R.id.tab_home_1);
 
         txtV_ViTri_home = mView.findViewById(R.id.txtV_ViTri_home);
-
+        editT_TimKiem = mView.findViewById(R.id.editT_TimKiem);
     }
 
     private List<slide_tc> getListSlide() {

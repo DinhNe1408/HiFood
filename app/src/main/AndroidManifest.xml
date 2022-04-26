@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BCTN">
         <activity
+            android:name=".activity.TimKiemAct"
+            android:exported="false" />
+        <activity
             android:name=".activity.quanan.ThongTinQA"
             android:exported="false" />
         <activity
@@ -92,6 +95,7 @@
             </intent-filter>
         </activity>
 
+        <receiver android:name=".AlarmReceiver" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

@@ -101,6 +101,7 @@ public class Menu_op2_Adap extends RecyclerView.Adapter<Menu_op2_Adap.Menu_op2_A
                     break;
                 case key.key_ThongTinQA:
                     Intent intent6 = new Intent(mContext, ThongTinQA.class);
+                    intent6.putExtra(key.key_IDQA, MyAppication.mTaiKhoan.getIDQA());
                     mContext.startActivity(intent6);
                     break;
             }

@@ -41,6 +41,7 @@ public class ThongTinNguoiDung extends AppCompatActivity {
     private Button btn_Folder_ttnd, btn_Camera_ttnd, btn_DoiMatKhau_ttnd, btn_XacNhan_ttnd;
     private TextInputEditText editT_SDT_ttnd, editT_Ten_ttnd, editT_ViTri_ttnd;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

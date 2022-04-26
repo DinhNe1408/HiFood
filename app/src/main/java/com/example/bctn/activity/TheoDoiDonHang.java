@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TheoDoiDonHang extends AppCompatActivity {
-    String[] descriptionData = {"Chuẩn bị", "Tài xế\nnhận hàng", "Đang giao", "Hoàn thành"};
+    String[] descriptionData = {"Chuẩn bị", "Đang giao", "Hoàn thành"};
 
     private Toolbar tool3_TheoDoiDonHang;
     private StateProgressBar stateProgressBar;
@@ -45,10 +45,10 @@ public class TheoDoiDonHang extends AppCompatActivity {
         Intent intent = getIntent();
         int IDDH = intent.getIntExtra(key.key_IDDH, -1);
         String TTGiao = intent.getStringExtra(key.key_TTGiao);
-        if(IDDH == -1 || TTGiao == null)
+        if (IDDH == -1 || TTGiao == null)
             return;
 
-        donhang = MyAppication.mDao.DH(IDDH,TTGiao);
+        donhang = MyAppication.mDao.DH(IDDH, TTGiao);
         SuKien();
         setData();
     }
@@ -68,10 +68,10 @@ public class TheoDoiDonHang extends AppCompatActivity {
 
         switch (donhang.getTTDH()) {
             case key.key_dh_DangGiao:
-                stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.THREE);
+                stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.TWO);
                 break;
             case key.key_dh_HoanThanh:
-                stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FOUR);
+                stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.THREE);
                 break;
             default:
                 count.start();
@@ -86,9 +86,9 @@ public class TheoDoiDonHang extends AppCompatActivity {
         tongTien_tddh.setText(key.Dou2Money(donhang.getTongDH()));
         tienGiam_tddh.setText(key.Dou2Money(donhang.getTienGiam()));
 
-        txtV_TenTK_tddh.setText(donhang.getTenNN() + " - " + donhang.getSDTNN() );
+        txtV_TenTK_tddh.setText(donhang.getTenNN() + " - " + donhang.getSDTNN());
         txtV_DiaChiNhan_tddh.setText(donhang.getVitriDH());
-        txtV_ThoiGianNhan_tddh.setText(String.valueOf(donhang.getTGGiao()));
+        txtV_ThoiGianNhan_tddh.setText("Thời gian giao: " + key.DateTimeFormat(donhang.getTGGiao()));
 
         List<ctdh> ctdhList = new ArrayList<ctdh>(donhang.getCthdMap().values());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
@@ -102,7 +102,7 @@ public class TheoDoiDonHang extends AppCompatActivity {
         tool3_TheoDoiDonHang.setNavigationOnClickListener(view -> onBackPressed());
 
         btn_VeTrangChu.setOnClickListener(view -> {
-            Intent intent = new Intent(TheoDoiDonHang.this,TrangChuAct.class);
+            Intent intent = new Intent(TheoDoiDonHang.this, TrangChuAct.class);
             startActivity(intent);
         });
     }

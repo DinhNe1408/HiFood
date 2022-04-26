@@ -58,7 +58,7 @@ public class DsDH_qadh_Adap extends RecyclerView.Adapter<DsDH_qadh_Adap.DsDH_qad
         holder.txtV_TenVaSDT.setText(donhang.getTenNN() + " - " + donhang.getSDTNN());
         holder.txtV_ViTri.setText(donhang.getVitriDH());
         holder.txtV_TongTien.setText(key.Dou2Money(donhang.getTongDH()));
-        holder.txtV_TGGiao.setText(donhang.getTGGiao().toString());
+        holder.txtV_TGGiao.setText("Thời gian giao : " + key.DateTimeFormat(donhang.getTGGiao()));
 
         holder.itemView.setOnClickListener(view -> {
             openDialog(position);

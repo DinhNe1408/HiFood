@@ -18,7 +18,7 @@
         app:spb_checkStateCompleted="true"
         app:spb_currentStateDescriptionColor="@color/hifood1"
         app:spb_descriptionTopSpaceIncrementer="5dp"
-        app:spb_maxStateNumber="four"
+        app:spb_maxStateNumber="three"
         app:spb_stateBackgroundColor="#BDBDBD"
         app:spb_stateDescriptionColor="#808080"
         app:spb_stateForegroundColor="@color/hifood1"

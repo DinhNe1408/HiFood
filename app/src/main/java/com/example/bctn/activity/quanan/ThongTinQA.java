@@ -147,7 +147,7 @@ public class ThongTinQA extends AppCompatActivity {
     }
 
     private void AnhXa() {
-        tool3_ThongTinQA = findViewById(R.id.tool3_QLQuanAn_Up);
+        tool3_ThongTinQA = findViewById(R.id.tool3_ThongTinQA);
 
         iclu_get_img_ttqa = findViewById(R.id.iclu_get_img_ttqa);
         imgV_HinhQA_ttqa = iclu_get_img_ttqa.findViewById(R.id.imgV_Hinh);

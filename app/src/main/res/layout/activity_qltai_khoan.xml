@@ -12,7 +12,7 @@
         android:background="@color/hifood1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:navigationIcon="@drawable/ic_round_arrow_back_ios_new_24"
+        app:navigationIcon="@drawable/ic_round_arrow_back_36"
         tools:ignore="MissingConstraints" />
 
     <androidx.recyclerview.widget.RecyclerView
