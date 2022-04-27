@@ -1,7 +1,7 @@
 package com.example.bctn.domain;
 
 public class menu_option {
-    private int idMenu, hinhMenu, bgMenu;
+    private int idMenu, hinhMenu = -1, bgMenu;
     private String noidungMenu;
 
     public menu_option(int idMenu, String noidungMenu) {

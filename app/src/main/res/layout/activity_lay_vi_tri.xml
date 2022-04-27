@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.LayViTri">
+    <fragment
+        android:id="@+id/googlemap_lvt"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchV_lvt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/bg_map"
+        android:elevation="5dp"
+        app:iconifiedByDefault="false"
+        app:queryHint="Địa chỉ" />
+
+    <ImageButton
+        android:id="@+id/imgB_Mylocation_lvt"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_above="@+id/btn_lvt"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/bg_map"
+        android:src="@drawable/ic_round_my_location_24" />
+
+    <Button
+        android:id="@+id/btn_lvt"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="Lấy vị trí" />
+</RelativeLayout>

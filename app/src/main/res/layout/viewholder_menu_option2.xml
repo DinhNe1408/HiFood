@@ -9,23 +9,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:paddingEnd="0dp">
+        android:paddingEnd="0dp"
+        android:background="@drawable/bg_cardview">
+
+        <ImageView
+            android:id="@+id/imgV_Hinh1_op2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true" />
 
         <TextView
-            android:id="@+id/txtV_MenuTaiKhoan"
+            android:id="@+id/txtV_NoiDung_op2"
             android:layout_width="match_parent"
             android:layout_height="25dp"
             android:layout_centerVertical="true"
+            android:layout_marginStart="5dp"
             android:layout_marginEnd="10dp"
-            android:layout_toStartOf="@+id/imgV_1"
+            android:layout_toStartOf="@+id/imgV_Hinh2_op2"
+            android:layout_toEndOf="@+id/imgV_Hinh1_op2"
             android:gravity="center_vertical"
             android:text="Dang test"
+            android:textColor="@color/black"
             android:textSize="16sp" />
 
         <ImageView
-            android:id="@+id/imgV_1"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:id="@+id/imgV_Hinh2_op2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:src="@drawable/ic_round_chevron_right_24" />

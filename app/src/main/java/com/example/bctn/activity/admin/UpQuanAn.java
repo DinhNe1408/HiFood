@@ -18,6 +18,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,6 +26,8 @@ import android.widget.Toast;
 
 import com.example.bctn.MyAppication;
 import com.example.bctn.R;
+import com.example.bctn.activity.LayViTri;
+import com.example.bctn.activity.quanan.ThongTinQA;
 import com.example.bctn.domain.key;
 import com.example.bctn.domain.quanan;
 import com.example.bctn.domain.vitri;
@@ -41,8 +44,9 @@ public class UpQuanAn extends AppCompatActivity {
     private LinearLayout iclu_get_img_upqa;
     private ImageView imgV_HinhQA_upqa;
     private Button btn_Folder_upqa, btn_Camera_upqa, btn_XacNhan_upqa;
-    private TextInputLayout txtL_TenQA_upqa, txtL_ViTri_upqa;
+    private TextInputLayout txtL_TenQA_upqa;
     private TextInputEditText editT_TenQA_upqa, editT_ViTri_upqa;
+    private ImageButton imgB_LayViTri_upqa;
     private CheckBox checkB_KhoaQA_upqa;
     private String loai;
     private quanan mQuanan;
@@ -63,6 +67,7 @@ public class UpQuanAn extends AppCompatActivity {
 
         if (loai.equals(key.key_Them)) {
             mQuanan = new quanan();
+            MyAppication.mViTri = null;
             txtV_toolbar_title.setText("Thêm quán ăn");
         } else {
             int IDQA = intent.getIntExtra(key.key_IDQA, -1);
@@ -70,6 +75,7 @@ public class UpQuanAn extends AppCompatActivity {
 
             editT_TenQA_upqa.setText(mQuanan.getTenQA());
             editT_ViTri_upqa.setText(mQuanan.getVitriQA().getVitri());
+            MyAppication.mViTri = mQuanan.getVitriQA();
             imgV_HinhQA_upqa.setImageBitmap(key.Byte2Bitmap(mQuanan.getHinhQA()));
             checkB_KhoaQA_upqa.setChecked(mQuanan.isKhoa());
             txtV_toolbar_title.setText("Chỉnh sửa quán ăn");
@@ -81,6 +87,9 @@ public class UpQuanAn extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        if (MyAppication.mViTri != null) {
+            editT_ViTri_upqa.setText(MyAppication.mViTri.getVitri());
+        }
     }
 
     private void SuKien() {
@@ -97,28 +106,37 @@ public class UpQuanAn extends AppCompatActivity {
         ));
 
         btn_XacNhan_upqa.setOnClickListener(view -> {
-            if (editT_TenQA_upqa.getText() != null && editT_ViTri_upqa.getText() != null &&
-                    editT_TenQA_upqa.getText().length() != 0 && editT_ViTri_upqa.getText().length() != 0) {
+            if (editT_TenQA_upqa.getText() != null && editT_TenQA_upqa.getText().length() != 0) {
+                if (editT_ViTri_upqa.getText() != null && editT_ViTri_upqa.getText().length() != 0) {
 
-                mQuanan.setTenQA(editT_TenQA_upqa.getText().toString().trim());
-                mQuanan.setKhoa(checkB_KhoaQA_upqa.isChecked());
-                mQuanan.setHinhQA(key.BitmapDrawable2Byte((BitmapDrawable) imgV_HinhQA_upqa.getDrawable()));
+                    mQuanan.setTenQA(editT_TenQA_upqa.getText().toString().trim());
+                    mQuanan.setKhoa(checkB_KhoaQA_upqa.isChecked());
+                    mQuanan.setHinhQA(key.BitmapDrawable2Byte((BitmapDrawable) imgV_HinhQA_upqa.getDrawable()));
 
-                if (loai.equals(key.key_Them)) {
-                    mQuanan.setIdQA(MyAppication.mDao.TaoIDQA());
-                    MyAppication.mDao.TaoQA(mQuanan.getIdQA(), mQuanan.getTenQA());
-                    Toast.makeText(this, "Tạo quán ăn thành công", Toast.LENGTH_SHORT).show();
+                    if (loai.equals(key.key_Them)) {
+                        mQuanan.setIdQA(MyAppication.mDao.TaoIDQA());
+                        MyAppication.mDao.TaoQA(mQuanan.getIdQA(), mQuanan.getTenQA());
+                        Toast.makeText(this, "Tạo quán ăn thành công", Toast.LENGTH_SHORT).show();
+                    } else {
+                        MyAppication.mDao.CapNhatQA(mQuanan.getIdQA(), mQuanan.getTenQA(), mQuanan.isKhoa());
+                        Toast.makeText(this, "Cập nhật quán ăn thành công", Toast.LENGTH_SHORT).show();
+                    }
+                    MyAppication.mDao.CapNhatViTriQA(mQuanan.getIdQA(), MyAppication.mViTri.getVitri(), MyAppication.mViTri.getVido(), MyAppication.mViTri.getKinhdo());
+                    MyAppication.mDao.CapNhatHinhQA(mQuanan.getIdQA(), mQuanan.getHinhQA());
+
+                    MyAppication.mViTri = null;
                 } else {
-                    MyAppication.mDao.CapNhatQA(mQuanan.getIdQA(), mQuanan.getTenQA(), mQuanan.isKhoa());
-                    Toast.makeText(this, "Cập nhật quán ăn thành công", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Vui lòng chọn vị trí", Toast.LENGTH_SHORT).show();
                 }
 
-                mQuanan.setVitriQA(new vitri(editT_ViTri_upqa.getText().toString().trim(), 0.0, 0.0));
-                MyAppication.mDao.CapNhatViTriQA(mQuanan.getIdQA(), mQuanan.getVitriQA().getVitri(), mQuanan.getVitriQA().getVido(), mQuanan.getVitriQA().getKinhdo());
-                MyAppication.mDao.CapNhatHinhQA(mQuanan.getIdQA(), mQuanan.getHinhQA());
             } else {
                 Toast.makeText(this, "Hãy điền đủ các trường", Toast.LENGTH_SHORT).show();
             }
+        });
+
+        imgB_LayViTri_upqa.setOnClickListener(view -> {
+            Intent intent = new Intent(UpQuanAn.this, LayViTri.class);
+            startActivity(intent);
         });
     }
 
@@ -177,7 +195,7 @@ public class UpQuanAn extends AppCompatActivity {
         btn_XacNhan_upqa = findViewById(R.id.btn_XacNhan_upqa);
 
         txtL_TenQA_upqa = findViewById(R.id.txtL_TenQA_upqa);
-        txtL_ViTri_upqa = findViewById(R.id.txtL_ViTri_upqa);
+        imgB_LayViTri_upqa = findViewById(R.id.imgB_LayViTri_upqa);
 
         editT_TenQA_upqa = findViewById(R.id.editT_TenQA_upqa);
         editT_ViTri_upqa = findViewById(R.id.editT_ViTri_upqa);

@@ -62,7 +62,7 @@
             app:drawableLeftCompat="@drawable/favourite" />
 
         <TextView
-            android:id="@+id/khcachQA_1"
+            android:id="@+id/khcachQA_qa1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
@@ -71,7 +71,7 @@
             app:drawableLeftCompat="@drawable/ic_round_location_on_24" />
 
         <TextView
-            android:id="@+id/tgianQA"
+            android:id="@+id/tgianQA_qa1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawablePadding="2dp"

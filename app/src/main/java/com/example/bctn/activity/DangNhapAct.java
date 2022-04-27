@@ -46,6 +46,7 @@ public class DangNhapAct extends AppCompatActivity {
                 if (mTaikhoan != null) {
                     if (!mTaikhoan.isKhoa()) {
                         MyAppication.mTaiKhoan = mTaikhoan;
+                        MyAppication.mTaiKhoan.setCurVitri(MyAppication.curViTri);
 
                         if (mTaikhoan.getRole().equals("user")) {
                             Intent mIntent = new Intent(DangNhapAct.this, TrangChuAct.class);

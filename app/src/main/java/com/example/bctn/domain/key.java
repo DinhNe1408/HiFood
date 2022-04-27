@@ -33,6 +33,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class key {
+    public static final String token_mapbox = "pk.eyJ1IjoibnFkaW5oMTQwOCIsImEiOiJjbDEyd2Nwc3cwYWozM3FwZGtlaDBwMWtlIn0.z7djkMGzMlMpX5M_aRpd2g";
+    public static final String url1 = "https://api.mapbox.com/directions/v5/mapbox/driving/";
+    public static final String url2 = "?alternatives=true&annotations=speed%2Cdistance&geometries=geojson&language=en&overview=full&steps=true&access_token=";
+
     public static final String key_ThongBao = "ThongBao";
 
     public static final int REQUEST_CODE_CAMERA = 111;
@@ -111,6 +115,18 @@ public class key {
             e.printStackTrace();
         }
         return temp;
+    }
+
+    public static String Km2Met(double QuangDuong){
+        double Km = QuangDuong / 1000;
+
+        return String.format("%.01f km", Km);
+    }
+
+    public static String Second2Min(double ThoiGian){
+        double Min = ThoiGian / 60;
+
+        return String.format("%.0f p", Min);
     }
 
 

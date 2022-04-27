@@ -3,56 +3,59 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:textSize="24dp"
-        android:text="Thông tin cá nhân" />
-
     <RelativeLayout
-        android:id="@+id/avatar"
+        android:id="@+id/relative1_tk"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginBottom="20dp">
-
-        <ImageView
-            android:id="@+id/imgV_HinhTA_tk"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/w42419" />
-
-        <ImageButton
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_alignEnd="@+id/imgV_HinhTA_tk"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:src="@drawable/ic_round_photo_camera_24" />
+        android:layout_height="wrap_content"
+        android:background="@color/hifood1">
 
         <TextView
-            android:id="@+id/txtV_TenTK_tk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_toEndOf="@+id/imgV_HinhTA_tk"
-            android:text="Nguyễn Quang Dinh"
-            android:textSize="16sp" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="HiFood"
+
+            android:textColor="@color/white"
+            android:textSize="24dp" />
+
+        <RelativeLayout
+            android:id="@+id/avatar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginBottom="20dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgV_HinhTA_tk"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/bg_avatar"
+                android:src="@drawable/w42419" />
+
+            <TextView
+                android:id="@+id/txtV_TenTK_tk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@+id/imgV_HinhTA_tk"
+                android:padding="5dp"
+                android:text="Nguyễn Quang Dinh"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recV_MenuTaiKhoan_tk"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/avatar"
+        android:layout_below="@+id/relative1_tk"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="30dp"
         android:layout_marginBottom="30dp" />
 </RelativeLayout>

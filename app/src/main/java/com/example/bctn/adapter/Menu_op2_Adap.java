@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ import com.example.bctn.activity.quanan.ThongTinQA;
 import com.example.bctn.domain.key;
 import com.example.bctn.domain.menu_option;
 import com.example.bctn.domain.taikhoan;
+import com.example.bctn.domain.vitri;
 
 import java.util.List;
 
@@ -51,7 +53,10 @@ public class Menu_op2_Adap extends RecyclerView.Adapter<Menu_op2_Adap.Menu_op2_A
     public void onBindViewHolder(@NonNull Menu_op2_AdapViewHolder holder, int position) {
         menu_option mKey = mListKey.get(position);
 
-        holder.txtV_MenuTaiKhoan.setText(mKey.getNoidungMenu());
+        holder.txtV_NoiDung_op2.setText(mKey.getNoidungMenu());
+        if (mKey.getHinhMenu() != -1) {
+            holder.imgV_Hinh1_op2.setImageResource(mKey.getHinhMenu());
+        }
 
         holder.CardView_1.setOnClickListener(view -> {
             switch (mKey.getIdMenu()) {
@@ -67,7 +72,9 @@ public class Menu_op2_Adap extends RecyclerView.Adapter<Menu_op2_Adap.Menu_op2_A
 
                 case key.key_DANGXUAT:
                     DataLocalManager.setTaiKhoan("", "");
+
                     MyAppication.mTaiKhoan = new taikhoan();
+                    MyAppication.mTaiKhoan.setCurVitri(MyAppication.curViTri);
                     Intent intent = new Intent(mContext, DangNhapAct.class);
                     mContext.startActivity(intent);
                     break;
@@ -119,13 +126,15 @@ public class Menu_op2_Adap extends RecyclerView.Adapter<Menu_op2_Adap.Menu_op2_A
 
     public class Menu_op2_AdapViewHolder extends RecyclerView.ViewHolder {
 
-        TextView txtV_MenuTaiKhoan;
+        ImageView imgV_Hinh1_op2;
+        TextView txtV_NoiDung_op2;
         CardView CardView_1;
 
         public Menu_op2_AdapViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            txtV_MenuTaiKhoan = itemView.findViewById(R.id.txtV_MenuTaiKhoan);
+            imgV_Hinh1_op2 = itemView.findViewById(R.id.imgV_Hinh1_op2);
+            txtV_NoiDung_op2 = itemView.findViewById(R.id.txtV_NoiDung_op2);
             CardView_1 = itemView.findViewById(R.id.CardView_1);
         }
     }

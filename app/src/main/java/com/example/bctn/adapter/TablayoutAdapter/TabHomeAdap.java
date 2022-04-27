@@ -21,10 +21,10 @@ public class TabHomeAdap extends FragmentStateAdapter {
         switch (position){
             case 1:
                 return new HBanChayFrag();
-            case 2:
-                return new HPhoBienFrag();
-            case 3:
-                return new HKhuyenMaiFrag();
+//            case 2:
+//                return new HPhoBienFrag();
+//            case 3:
+//                return new HKhuyenMaiFrag();
             default:
                 return new HGanBanFrag();
         }
@@ -32,6 +32,6 @@ public class TabHomeAdap extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 4;
+        return 2;
     }
 }

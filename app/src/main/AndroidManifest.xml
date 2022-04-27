@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.bctn">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -15,6 +17,14 @@
         android:roundIcon="@mipmap/hifood_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BCTN">
+        <activity
+            android:name=".activity.LayViTri"
+            android:exported="false" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/key_googlemap" />
+
         <activity
             android:name=".activity.TimKiemAct"
             android:exported="false" />
@@ -82,10 +92,10 @@
             android:name=".activity.DangNhapAct"
             android:exported="false" />
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".activity.TrangChuAct"
             android:exported="true" /> <!-- Giúp menu không nhảy khi bấm editext adjustNothing -->
         <activity
-            android:name=".activity.TrangChuAct"
+            android:name=".activity.FlashScreenAct"
             android:exported="true"
             android:windowSoftInputMode="adjustNothing">
             <intent-filter>
@@ -96,6 +106,7 @@
         </activity>
 
         <receiver android:name=".AlarmReceiver" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

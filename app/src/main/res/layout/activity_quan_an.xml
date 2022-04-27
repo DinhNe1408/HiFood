@@ -9,7 +9,9 @@
     <ImageView
         android:id="@+id/imgV_Hinh_qa"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="220dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="-40dp"
         android:scaleType="centerCrop"
         android:src="@drawable/q5736563" />
 
@@ -75,7 +77,7 @@
                 android:text="4.1" />
 
             <TextView
-                android:id="@+id/KhCach_qa"
+                android:id="@+id/tvtV_KhCach_qa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"

@@ -14,6 +14,7 @@ public class taikhoan {
 
     public taikhoan() {
         this.idTK = -1;
+        this.CurVitri = new vitri();
     }
 
     public taikhoan(int idTK,String sdtTK,String mkTK, String tenTK , byte[] hinhTK,vitri vitri, String role,boolean khoa) {

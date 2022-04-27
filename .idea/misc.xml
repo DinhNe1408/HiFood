@@ -3,14 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/MSI-LAPTOP/AndroidStudioProjects/HiFood/app/src/main/res/drawable/bg_avatar.xml" value="0.1685" />
         <entry key="..\:/Users/MSI-LAPTOP/AndroidStudioProjects/HiFood/app/src/main/res/drawable/bg_boder_img.xml" value="0.1415" />
         <entry key="..\:/Users/MSI-LAPTOP/AndroidStudioProjects/HiFood/app/src/main/res/drawable/bg_botron.xml" value="0.2495" />
         <entry key="..\:/Users/MSI-LAPTOP/AndroidStudioProjects/HiFood/app/src/main/res/drawable/bg_botron1.xml" value="0.2595" />
         <entry key="..\:/Users/MSI-LAPTOP/AndroidStudioProjects/HiFood/app/src/main/res/drawable/bg_button.xml" value="0.2285" />
+        <entry key="..\:/Users/MSI-LAPTOP/AndroidStudioProjects/HiFood/app/src/main/res/drawable/bg_cardview.xml" value="0.1685" />
         <entry key="..\:/Users/MSI-LAPTOP/AndroidStudioProjects/HiFood/app/src/main/res/drawable/bg_gh.xml" value="0.156" />
         <entry key="..\:/Users/MSI-LAPTOP/AndroidStudioProjects/HiFood/app/src/main/res/drawable/bg_indicator3.xml" value="0.2495" />
         <entry key="..\:/Users/MSI-LAPTOP/AndroidStudioProjects/HiFood/app/src/main/res/drawable/bg_layout_dialog.xml" value="0.243" />
-        <entry key="..\:/Users/MSI-LAPTOP/AndroidStudioProjects/HiFood/app/src/main/res/drawable/bg_line_qa.xml" value="0.1995" />
+        <entry key="..\:/Users/MSI-LAPTOP/AndroidStudioProjects/HiFood/app/src/main/res/drawable/bg_line_qa.xml" value="0.8800000000000001" />
+        <entry key="..\:/Users/MSI-LAPTOP/AndroidStudioProjects/HiFood/app/src/main/res/drawable/bg_map.xml" value="0.1685" />
         <entry key="..\:/Users/MSI-LAPTOP/AndroidStudioProjects/HiFood/app/src/main/res/drawable/bg_option1.xml" value="0.2285" />
         <entry key="..\:/Users/MSI-LAPTOP/AndroidStudioProjects/HiFood/app/src/main/res/drawable/bg_title_dialog.xml" value="0.2595" />
         <entry key="..\:/Users/MSI-LAPTOP/AndroidStudioProjects/HiFood/app/src/main/res/drawable/bg_white_border_edittext.xml" value="0.2595" />
@@ -36,6 +39,8 @@
         <entry key="..\:/Users/MSI-LAPTOP/AndroidStudioProjects/HiFood/app/src/main/res/layout/activity_danh_gia.xml" value="0.264" />
         <entry key="..\:/Users/MSI-LAPTOP/AndroidStudioProjects/HiFood/app/src/main/res/layout/activity_danh_ky2.xml" value="0.175" />
         <entry key="..\:/Users/MSI-LAPTOP/AndroidStudioProjects/HiFood/app/src/main/res/layout/activity_doi_mat_khau.xml" value="0.2" />
+        <entry key="..\:/Users/MSI-LAPTOP/AndroidStudioProjects/HiFood/app/src/main/res/layout/activity_flash_screen.xml" value="0.20512820512820512" />
+        <entry key="..\:/Users/MSI-LAPTOP/AndroidStudioProjects/HiFood/app/src/main/res/layout/activity_lay_vi_tri.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/MSI-LAPTOP/AndroidStudioProjects/HiFood/app/src/main/res/layout/activity_main.xml" value="0.15364583333333334" />
         <entry key="..\:/Users/MSI-LAPTOP/AndroidStudioProjects/HiFood/app/src/main/res/layout/activity_qadon_hang.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/MSI-LAPTOP/AndroidStudioProjects/HiFood/app/src/main/res/layout/activity_qldon_hang.xml" value="0.20512820512820512" />
@@ -81,10 +86,11 @@
         <entry key="..\:/Users/MSI-LAPTOP/AndroidStudioProjects/HiFood/app/src/main/res/layout/frag_moi_luu_yt.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/MSI-LAPTOP/AndroidStudioProjects/HiFood/app/src/main/res/layout/frag_pho_bien.xml" value="0.23854166666666668" />
         <entry key="..\:/Users/MSI-LAPTOP/AndroidStudioProjects/HiFood/app/src/main/res/layout/frag_qa_danh_gia.xml" value="0.20512820512820512" />
+        <entry key="..\:/Users/MSI-LAPTOP/AndroidStudioProjects/HiFood/app/src/main/res/layout/frag_qa_thong_tin.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/MSI-LAPTOP/AndroidStudioProjects/HiFood/app/src/main/res/layout/frag_qa_thuc_don.xml" value="0.34234234234234234" />
         <entry key="..\:/Users/MSI-LAPTOP/AndroidStudioProjects/HiFood/app/src/main/res/layout/frag_qadh.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/MSI-LAPTOP/AndroidStudioProjects/HiFood/app/src/main/res/layout/frag_qadh_da_hoan_thanh.xml" value="0.17564102564102563" />
-        <entry key="..\:/Users/MSI-LAPTOP/AndroidStudioProjects/HiFood/app/src/main/res/layout/frag_tai_khoan.xml" value="0.2140625" />
+        <entry key="..\:/Users/MSI-LAPTOP/AndroidStudioProjects/HiFood/app/src/main/res/layout/frag_tai_khoan.xml" value="0.264" />
         <entry key="..\:/Users/MSI-LAPTOP/AndroidStudioProjects/HiFood/app/src/main/res/layout/frag_thong_tin_qa.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/MSI-LAPTOP/AndroidStudioProjects/HiFood/app/src/main/res/layout/frag_thuc_don_qa.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/MSI-LAPTOP/AndroidStudioProjects/HiFood/app/src/main/res/layout/frag_yeu_thich.xml" value="0.25416666666666665" />
@@ -114,7 +120,7 @@
         <entry key="..\:/Users/MSI-LAPTOP/AndroidStudioProjects/HiFood/app/src/main/res/layout/viewholder_dstk_qltk.xml" value="0.264" />
         <entry key="..\:/Users/MSI-LAPTOP/AndroidStudioProjects/HiFood/app/src/main/res/layout/viewholder_loading.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/MSI-LAPTOP/AndroidStudioProjects/HiFood/app/src/main/res/layout/viewholder_menu_option1.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/MSI-LAPTOP/AndroidStudioProjects/HiFood/app/src/main/res/layout/viewholder_menu_option2.xml" value="0.20512820512820512" />
+        <entry key="..\:/Users/MSI-LAPTOP/AndroidStudioProjects/HiFood/app/src/main/res/layout/viewholder_menu_option2.xml" value="0.3948439620081411" />
         <entry key="..\:/Users/MSI-LAPTOP/AndroidStudioProjects/HiFood/app/src/main/res/layout/viewholder_menutaikhoan.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/MSI-LAPTOP/AndroidStudioProjects/HiFood/app/src/main/res/layout/viewholder_mon_an1.xml" value="0.264" />
         <entry key="..\:/Users/MSI-LAPTOP/AndroidStudioProjects/HiFood/app/src/main/res/layout/viewholder_mon_an2.xml" value="0.264" />

@@ -196,7 +196,7 @@ public class DAO {
                     tro2.getInt(0),
                     tro2.getString(1),
                     tro2.getBlob(2),
-                    new vitri(tro2.getString(3), 0, 0),
+                    new vitri(tro2.getString(3), tro2.getDouble(4), tro2.getDouble(5)),
                     tro2.getInt(6) == 1,
                     list
             );
@@ -206,13 +206,13 @@ public class DAO {
 
     public List<quanan> ListQAGanBan() {
         List<quanan> list = new ArrayList<>();
-        Cursor tro = mDatabase.Get("SELECT * FROM QuanAn LIMIT 8");
+        Cursor tro = mDatabase.Get("SELECT * FROM QuanAn WHERE Khoa = 0 LIMIT 8 ");
         while (tro.moveToNext()) {
             list.add(new quanan(
                     tro.getInt(0),
                     tro.getString(1),
                     tro.getBlob(2),
-                    new vitri(tro.getString(3), 0, 0)
+                    new vitri(tro.getString(3), tro.getDouble(4), tro.getDouble(5))
             ));
         }
         return list;
@@ -251,6 +251,16 @@ public class DAO {
     public void CapNhatViTriQA(int IDQA, String DiaChiQA, double ViDoQA, double KinhDoQA) {
         mDatabase.Query("UPDATE QuanAn SET DiaChiQA = '"
                 + DiaChiQA + "', ViDoQA = " + ViDoQA + " , KinhDoQA = " + KinhDoQA + " WHERE IDQA = " + IDQA);
+    }
+
+    public vitri LayViTriQA(int IDQA) {
+        Cursor tro = mDatabase.Get("SELECT DiaChiQA, ViDoQA, KinhDoQA FROM QuanAn WHERE IDQA = " + IDQA);
+        while (tro.moveToNext()) {
+            return new vitri(tro.getString(0),
+                    tro.getDouble(1),
+                    tro.getDouble(2));
+        }
+        return null;
     }
 
     public void CapNhatHinhQA(int IDQA, byte[] HinhQA) {

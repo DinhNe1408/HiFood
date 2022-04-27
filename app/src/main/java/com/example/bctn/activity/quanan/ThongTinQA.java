@@ -18,6 +18,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,6 +26,7 @@ import android.widget.Toast;
 
 import com.example.bctn.MyAppication;
 import com.example.bctn.R;
+import com.example.bctn.activity.LayViTri;
 import com.example.bctn.activity.admin.UpQuanAn;
 import com.example.bctn.domain.key;
 import com.example.bctn.domain.quanan;
@@ -41,6 +43,7 @@ public class ThongTinQA extends AppCompatActivity {
     private Toolbar tool3_ThongTinQA;
     private LinearLayout iclu_get_img_ttqa;
     private ImageView imgV_HinhQA_ttqa;
+    private ImageButton imgB_LayViTri_ttqa;
     private Button btn_Folder_ttqa, btn_Camera_ttqa, btn_XacNhan_ttqa;
     private TextInputLayout txtL_TenQA_ttqa, txtL_ViTri_ttqa;
     private TextInputEditText editT_TenQA_ttqa, editT_ViTri_ttqa;
@@ -63,9 +66,18 @@ public class ThongTinQA extends AppCompatActivity {
 
         editT_TenQA_ttqa.setText(mQuanan.getTenQA());
         editT_ViTri_ttqa.setText(mQuanan.getVitriQA().getVitri());
+        MyAppication.mViTri = mQuanan.getVitriQA();
         imgV_HinhQA_ttqa.setImageBitmap(key.Byte2Bitmap(mQuanan.getHinhQA()));
-        txtV_toolbar_title.setText("Chỉnh sửa thông tin quán ăn");
+        txtV_toolbar_title.setText("Thông tin quán ăn");
         SuKien();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (MyAppication.mViTri != null) {
+            editT_ViTri_ttqa.setText(MyAppication.mViTri.getVitri());
+        }
     }
 
     private void SuKien() {
@@ -82,24 +94,30 @@ public class ThongTinQA extends AppCompatActivity {
         ));
 
         btn_XacNhan_ttqa.setOnClickListener(view -> {
-            if (editT_TenQA_ttqa.getText() != null && editT_ViTri_ttqa.getText() != null &&
-                    editT_TenQA_ttqa.getText().length() != 0 && editT_ViTri_ttqa.getText().length() != 0) {
+            if (editT_TenQA_ttqa.getText() != null && editT_TenQA_ttqa.getText().length() != 0) {
+                if (editT_ViTri_ttqa.getText() != null && editT_ViTri_ttqa.getText().length() != 0) {
+                    mQuanan.setTenQA(editT_TenQA_ttqa.getText().toString().trim());
+                    mQuanan.setHinhQA(key.BitmapDrawable2Byte((BitmapDrawable) imgV_HinhQA_ttqa.getDrawable()));
 
-                mQuanan.setTenQA(editT_TenQA_ttqa.getText().toString().trim());
-                mQuanan.setHinhQA(key.BitmapDrawable2Byte((BitmapDrawable) imgV_HinhQA_ttqa.getDrawable()));
+                    MyAppication.mDao.CapNhatQA(mQuanan.getIdQA(), mQuanan.getTenQA(), mQuanan.isKhoa());
 
-                MyAppication.mDao.CapNhatQA(mQuanan.getIdQA(), mQuanan.getTenQA(), mQuanan.isKhoa());
+                    MyAppication.mDao.CapNhatViTriQA(mQuanan.getIdQA(), MyAppication.mViTri.getVitri(), MyAppication.mViTri.getVido(), MyAppication.mViTri.getKinhdo());
+                    MyAppication.mDao.CapNhatHinhQA(mQuanan.getIdQA(), mQuanan.getHinhQA());
 
-                mQuanan.setVitriQA(new vitri(editT_ViTri_ttqa.getText().toString().trim(), 0.0, 0.0));
-                MyAppication.mDao.CapNhatViTriQA(mQuanan.getIdQA(), mQuanan.getVitriQA().getVitri(), mQuanan.getVitriQA().getVido(), mQuanan.getVitriQA().getKinhdo());
-                MyAppication.mDao.CapNhatHinhQA(mQuanan.getIdQA(), mQuanan.getHinhQA());
-
-                Toast.makeText(this, "Cập nhật quán ăn thành công", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Cập nhật quán ăn thành công", Toast.LENGTH_SHORT).show();
+                    MyAppication.mViTri = null;
+                } else {
+                    Toast.makeText(this, "Vui lòng chọn vị trí", Toast.LENGTH_SHORT).show();
+                }
             } else {
                 Toast.makeText(this, "Hãy điền đủ các trường", Toast.LENGTH_SHORT).show();
             }
         });
 
+        imgB_LayViTri_ttqa.setOnClickListener(view -> {
+            Intent intent = new Intent(ThongTinQA.this, LayViTri.class);
+            startActivity(intent);
+        });
     }
 
     @Override
@@ -161,5 +179,7 @@ public class ThongTinQA extends AppCompatActivity {
 
         editT_TenQA_ttqa = findViewById(R.id.editT_TenQA_ttqa);
         editT_ViTri_ttqa = findViewById(R.id.editT_ViTri_ttqa);
+
+        imgB_LayViTri_ttqa = findViewById(R.id.imgB_LayViTri_ttqa);
     }
 }

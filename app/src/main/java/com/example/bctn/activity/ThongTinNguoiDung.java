@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 import com.example.bctn.MyAppication;
 import com.example.bctn.R;
 import com.example.bctn.activity.admin.UpTaiKhoan;
+import com.example.bctn.activity.quanan.ThongTinQA;
 import com.example.bctn.domain.key;
 import com.example.bctn.domain.vitri;
 import com.google.android.material.textfield.TextInputEditText;
@@ -38,9 +40,9 @@ public class ThongTinNguoiDung extends AppCompatActivity {
     private Toolbar tool3_ThongTinNguoiDung;
     private ImageView imgV_HinhTK_ttnd;
     private TextInputLayout txtL_SDT_ttnd;
+    private ImageButton imgB_LayViTri_ttnd;
     private Button btn_Folder_ttnd, btn_Camera_ttnd, btn_DoiMatKhau_ttnd, btn_XacNhan_ttnd;
     private TextInputEditText editT_SDT_ttnd, editT_Ten_ttnd, editT_ViTri_ttnd;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,10 @@ public class ThongTinNguoiDung extends AppCompatActivity {
         TextView txtV_toolbar_title = tool3_ThongTinNguoiDung.findViewById(R.id.txtV_toolbar_title);
         txtV_toolbar_title.setText("Thông tin người dùng");
 
+
+        if (MyAppication.mTaiKhoan.getVitri().getVitri() != null) {
+            MyAppication.mViTri = MyAppication.mTaiKhoan.getVitri();
+        }
         SuKien();
     }
 
@@ -73,30 +79,34 @@ public class ThongTinNguoiDung extends AppCompatActivity {
         });
 
         btn_XacNhan_ttnd.setOnClickListener(view -> {
-            if (editT_SDT_ttnd.getText() != null && editT_Ten_ttnd.getText() != null
-                    && editT_ViTri_ttnd.getText() != null &&
-                    editT_SDT_ttnd.getText().length() != 0 && editT_Ten_ttnd.getText().length() != 0
-                    && editT_ViTri_ttnd.getText().length() != 0) {
+            if (editT_SDT_ttnd.getText() != null && editT_Ten_ttnd.getText() != null &&
+                    editT_SDT_ttnd.getText().length() != 0 && editT_Ten_ttnd.getText().length() != 0) {
+                if (editT_ViTri_ttnd.getText() != null && editT_ViTri_ttnd.getText().length() != 0) {
+                    MyAppication.mTaiKhoan.setSdtTK(editT_SDT_ttnd.getText().toString().trim());
+                    MyAppication.mTaiKhoan.setTenTK(editT_Ten_ttnd.getText().toString().trim());
 
-                MyAppication.mTaiKhoan.setSdtTK(editT_SDT_ttnd.getText().toString().trim());
-                MyAppication.mTaiKhoan.setTenTK(editT_Ten_ttnd.getText().toString().trim());
-                MyAppication.mTaiKhoan.setVitri(new vitri(editT_ViTri_ttnd.getText().toString().trim(), 0.0, 0.0));
+                    MyAppication.mDao.CapNhatTK(MyAppication.mTaiKhoan.getIdTK(), MyAppication.mTaiKhoan.getSdtTK(), MyAppication.mTaiKhoan.getMkTK(),
+                            MyAppication.mTaiKhoan.getTenTK(), MyAppication.mTaiKhoan.getRole(), MyAppication.mTaiKhoan.isKhoa());
 
-                MyAppication.mDao.CapNhatTK(MyAppication.mTaiKhoan.getIdTK(), MyAppication.mTaiKhoan.getSdtTK(), MyAppication.mTaiKhoan.getMkTK(),
-                        MyAppication.mTaiKhoan.getTenTK(), MyAppication.mTaiKhoan.getRole(), MyAppication.mTaiKhoan.isKhoa());
+                    MyAppication.mTaiKhoan.setHinhTK(key.BitmapDrawable2Byte((BitmapDrawable) imgV_HinhTK_ttnd.getDrawable()));
 
-                MyAppication.mTaiKhoan.setHinhTK(key.BitmapDrawable2Byte((BitmapDrawable) imgV_HinhTK_ttnd.getDrawable()));
+                    MyAppication.mDao.CapNhatHinhTK(MyAppication.mTaiKhoan.getIdTK(), MyAppication.mTaiKhoan.getHinhTK());
 
-                MyAppication.mDao.CapNhatHinhTK(MyAppication.mTaiKhoan.getIdTK(), MyAppication.mTaiKhoan.getHinhTK());
+                    MyAppication.mDao.CapNhatViTriTK(MyAppication.mTaiKhoan.getIdTK(),
+                            MyAppication.mViTri.getVitri(), MyAppication.mViTri.getVido(), MyAppication.mViTri.getKinhdo());
 
-                MyAppication.mDao.CapNhatViTriTK(MyAppication.mTaiKhoan.getIdTK(),
-                        MyAppication.mTaiKhoan.getVitri().getVitri(), MyAppication.mTaiKhoan.getVitri().getVido(), MyAppication.mTaiKhoan.getVitri().getKinhdo());
-                Toast.makeText(this, "Cập nhật tài khoản thành công", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Cập nhật tài khoản thành công", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "Vui lòng chọn vị trí", Toast.LENGTH_SHORT).show();
+                }
             } else {
                 Toast.makeText(this, "Hãy điền đủ các trường", Toast.LENGTH_SHORT).show();
             }
         });
-
+        imgB_LayViTri_ttnd.setOnClickListener(view -> {
+            Intent intent = new Intent(ThongTinNguoiDung.this, LayViTri.class);
+            startActivity(intent);
+        });
     }
 
     @Override
@@ -107,7 +117,11 @@ public class ThongTinNguoiDung extends AppCompatActivity {
         imgV_HinhTK_ttnd.setImageBitmap(key.Byte2Bitmap(MyAppication.mTaiKhoan.getHinhTK()));
         editT_SDT_ttnd.setText(MyAppication.mTaiKhoan.getSdtTK());
         editT_Ten_ttnd.setText(MyAppication.mTaiKhoan.getTenTK());
-        editT_ViTri_ttnd.setText(MyAppication.mTaiKhoan.getVitri().getVitri());
+        if (MyAppication.mViTri != null){
+            editT_ViTri_ttnd.setText(MyAppication.mViTri.getVitri());
+        } else {
+            editT_ViTri_ttnd.setText(MyAppication.mTaiKhoan.getVitri().getVitri());
+        }
     }
 
     @Override
@@ -141,7 +155,6 @@ public class ThongTinNguoiDung extends AppCompatActivity {
             imgV_HinhTK_ttnd.setImageBitmap(bitmap);
         }
 
-
         if (requestCode == key.REQUEST_CODE_FOLDER && resultCode == RESULT_OK && data != null) {
             Uri uri = data.getData();
             try {
@@ -160,6 +173,7 @@ public class ThongTinNguoiDung extends AppCompatActivity {
 
         imgV_HinhTK_ttnd = findViewById(R.id.imgV_HinhTK_ttnd);
         txtL_SDT_ttnd = findViewById(R.id.txtL_SDT_ttnd);
+        imgB_LayViTri_ttnd = findViewById(R.id.imgB_LayViTri_ttnd);
 
         btn_Folder_ttnd = findViewById(R.id.btn_Folder_ttnd);
         btn_Camera_ttnd = findViewById(R.id.btn_Camera_ttnd);

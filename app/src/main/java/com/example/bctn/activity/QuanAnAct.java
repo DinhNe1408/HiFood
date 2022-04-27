@@ -24,7 +24,7 @@ public class QuanAnAct extends AppCompatActivity {
 
     private TabLayout tab_qa;
     private ViewPager2 viewPage2_qa;
-    private TextView txtV_Ten_qa, txtV_ViTri_qa, txtV_Sao_QA, txtV_TGian_QA;
+    private TextView txtV_Ten_qa, txtV_ViTri_qa, txtV_Sao_QA, txtV_TGian_QA, tvtV_KhCach_qa;
     private ImageView imgV_Hinh_qa, imgV_Thich_qa;
     public static quanan quanan;
     private int IDQA;
@@ -46,7 +46,7 @@ public class QuanAnAct extends AppCompatActivity {
         viewPage2_qa.setAdapter(tabQuanAnAdap);
         viewPage2_qa.setUserInputEnabled(false);
         new TabLayoutMediator(tab_qa, viewPage2_qa, (tab, position) -> {
-            switch (position){
+            switch (position) {
                 case 1:
                     tab.setText("Đánh giá");
                     break;
@@ -67,6 +67,35 @@ public class QuanAnAct extends AppCompatActivity {
             }
         }
 
+        String url = key.url1 + quanan.getVitriQA().getKinhdo() + "%2C" +
+                quanan.getVitriQA().getVido() + "%3B" +
+                MyAppication.mTaiKhoan.getCurVitri().getKinhdo() + "%2C" +
+                MyAppication.mTaiKhoan.getCurVitri().getVido() + key.url2 + key.token_mapbox;
+
+//        RequestQueue requestQueue = Volley.newRequestQueue(mContext);
+//        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+//            @Override
+//            public void onResponse(JSONObject response) {
+//                try {
+//                    JSONArray jsonItems = response.getJSONArray("routes");
+//                    double Time = 0;
+//                    double Distance = 0;
+//
+//                    // 0  là thời gian ngắn nhất  1 là quảng đường ngắn nhất
+//                    JSONObject jsonItem = jsonItems.getJSONObject(1);
+//                    Time = jsonItem.getDouble("duration");
+//                    Distance = jsonItem.getDouble("distance");
+//                    //Toast.makeText(mContext, String.valueOf(Time), Toast.LENGTH_SHORT).show();
+//                    tvtV_KhCach_qa.setText(key.Km2Met(Distance));
+//                    txtV_TGian_QA.setText(key.Second2Min(Time));
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }, error -> Toast.makeText(mContext, "Lỗi", Toast.LENGTH_SHORT).show()
+//        );
+//        requestQueue.add(jsonObjectRequest);
+
         imgV_Thich_qa.setColorFilter(getResources().getColor(R.color.hifood1));
 
         imgV_Thich_qa.setOnClickListener(view -> {
@@ -83,19 +112,12 @@ public class QuanAnAct extends AppCompatActivity {
                 isThich = !isThich;
                 imgV_Thich_qa.setColorFilter(getResources().getColor(R.color.hifood1));
             } else {
-                gotoDangNhap(this);
+                Toast.makeText(this, "Bạn chưa đăng nhập", Toast.LENGTH_SHORT).show();
             }
         });
-
-
+        //imgV_Hinh_qa.setImageBitmap(key.Byte2Bitmap(quanan.getHinhQA()));
         txtV_Ten_qa.setText(quanan.getTenQA());
         txtV_ViTri_qa.setText(quanan.getVitriQA().getVitri());
-
-    }
-
-    public void gotoDangNhap(Context mContext){
-        Intent intent = new Intent(mContext, DangNhapAct.class);
-        startActivity(intent);
     }
 
     private void AnhXa() {
@@ -109,5 +131,6 @@ public class QuanAnAct extends AppCompatActivity {
         txtV_ViTri_qa = findViewById(R.id.txtV_ViTri_qa);
         txtV_TGian_QA = findViewById(R.id.txtV_TGian_qa);
         txtV_Sao_QA = findViewById(R.id.txtV_Sao_qa);
+        tvtV_KhCach_qa = findViewById(R.id.tvtV_KhCach_qa);
     }
 }

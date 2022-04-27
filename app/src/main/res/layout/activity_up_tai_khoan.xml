@@ -103,22 +103,40 @@
                     android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/txtL_ViTri_uptk"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="20dp"
-                android:hint="Địa chỉ"
-                app:endIconMode="clear_text">
+                android:orientation="horizontal">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editT_ViTri_uptk"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/txtL_ViTri_uptk"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_toStartOf="@+id/imgB_LayViTri_uptk"
+                    android:enabled="false"
+                    android:hint="Địa chỉ">
 
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editT_ViTri_uptk"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <ImageButton
+                    android:id="@+id/imgB_LayViTri_uptk"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:backgroundTint="@color/hifood1"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_round_add_location_alt_24"
+                    app:tint="@color/white" />
+            </RelativeLayout>
 
             <CheckBox
                 android:id="@+id/checkB_KhoaTK_uptk"
@@ -126,7 +144,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="20dp"
-                android:text="Khóa tài khoản"/>
+                android:text="Khóa tài khoản" />
 
             <Button
                 android:id="@+id/btn_XacNhan_uptk"
@@ -135,8 +153,8 @@
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="20dp"
-                android:text="Xác nhận"
-                android:background="@drawable/bg_button"/>
+                android:background="@drawable/bg_button"
+                android:text="Xác nhận" />
 
         </LinearLayout>
     </ScrollView>

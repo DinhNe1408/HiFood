@@ -40,7 +40,6 @@ public class Menu_op1_Adap extends RecyclerView.Adapter<Menu_op1_Adap.Menu_op1_A
 
         holder.txtV_NoiDungMenu_op1.setText(mKey.getNoidungMenu());
         holder.imgV_HinhMenu_op1.setImageResource(mKey.getHinhMenu());
-        //holder.relativeMenu_op1.setBackgroundColor(mContext.getColor(mKey.getBgMenu()));
 
         holder.relativeMenu_op1.setOnClickListener(view -> {
             switch (mKey.getIdMenu()) {

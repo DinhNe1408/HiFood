@@ -6,6 +6,9 @@ public class vitri implements Serializable {
     private String vitri;
     private double vido, kinhdo;
 
+    public vitri() {
+    }
+
     public vitri(String vitri, double vido, double kinhdo) {
         this.vitri = vitri;
         this.vido = vido;

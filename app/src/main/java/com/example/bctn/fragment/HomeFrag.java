@@ -1,6 +1,11 @@
 package com.example.bctn.fragment;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -11,28 +16,38 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.bctn.MyAppication;
 import com.example.bctn.R;
 import com.example.bctn.activity.TimKiemAct;
+import com.example.bctn.activity.TrangChuAct;
 import com.example.bctn.adapter.TablayoutAdapter.TabHomeAdap;
 import com.example.bctn.adapter.Slide_TC;
 import com.example.bctn.adapter.TheLoaiAdap;
 import com.example.bctn.domain.slide_tc;
 import com.example.bctn.domain.theloai;
+import com.example.bctn.domain.vitri;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import me.relex.circleindicator.CircleIndicator3;
 
-public class HomeFrag extends Fragment{
+public class HomeFrag extends Fragment {
 
     private View mView;
     private TabLayout tab_home_1;
@@ -47,11 +62,11 @@ public class HomeFrag extends Fragment{
     private RecyclerView recV_TheLoai_home;
     private TabHomeAdap tabHomeAdap;
     // Autorun Slide
-    private final Handler mHandler =  new Handler();
+    private final Handler mHandler = new Handler();
     private final Runnable mRunnable = new Runnable() {
         @Override
         public void run() {
-            if (viewPage2_Slide.getCurrentItem() == mListSlide.size() - 1 ) {
+            if (viewPage2_Slide.getCurrentItem() == mListSlide.size() - 1) {
                 viewPage2_Slide.setCurrentItem(0);
             } else {
                 viewPage2_Slide.setCurrentItem(viewPage2_Slide.getCurrentItem() + 1);
@@ -63,7 +78,7 @@ public class HomeFrag extends Fragment{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.frag_home,container,false);
+        mView = inflater.inflate(R.layout.frag_home, container, false);
 
         AnhXa();
         mListSlide = getListSlide();
@@ -78,13 +93,16 @@ public class HomeFrag extends Fragment{
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
                 mHandler.removeCallbacks(mRunnable);
-                mHandler.postDelayed(mRunnable,3000);
+                mHandler.postDelayed(mRunnable, 3000);
             }
         });
-
+        if (MyAppication.mTaiKhoan.getCurVitri() != null) {
+            txtV_ViTri_home.setText(MyAppication.mTaiKhoan.getCurVitri().getVitri());
+        }
         mListTL = getListTL();
-        TheLoaiAdap theLoaiAdap = new TheLoaiAdap(mView.getContext(),mListTL );
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(mView.getContext(), 2,RecyclerView.HORIZONTAL,false);
+
+        TheLoaiAdap theLoaiAdap = new TheLoaiAdap(mView.getContext(), mListTL);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(mView.getContext(), 2, RecyclerView.HORIZONTAL, false);
         recV_TheLoai_home.setLayoutManager(gridLayoutManager);
         recV_TheLoai_home.setAdapter(theLoaiAdap);
 
@@ -92,7 +110,7 @@ public class HomeFrag extends Fragment{
         viewPage2_home_2.setAdapter(tabHomeAdap);
 
         new TabLayoutMediator(tab_home_1, viewPage2_home_2, (tab, position) -> {
-            switch (position){
+            switch (position) {
                 case 1:
                     tab.setText("Bán chạy");
                     break;
@@ -110,7 +128,7 @@ public class HomeFrag extends Fragment{
         editT_TimKiem.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-                if (b){
+                if (b) {
                     Intent intent = new Intent(mView.getContext(), TimKiemAct.class);
                     getContext().startActivity(intent);
                 }
@@ -155,20 +173,20 @@ public class HomeFrag extends Fragment{
 
     private List<theloai> getListTL() {
         List<theloai> mList = new ArrayList<>();
-        mList.add(new theloai(1,R.drawable.w42419,"Nước"));
-        mList.add(new theloai(2,R.drawable.e42419,"Nước"));
-        mList.add(new theloai(3,R.drawable.w42419,"Nước"));
-        mList.add(new theloai(4,R.drawable.e42419,"Nước"));
+        mList.add(new theloai(1, R.drawable.w42419, "Nước"));
+        mList.add(new theloai(2, R.drawable.e42419, "Nước"));
+        mList.add(new theloai(3, R.drawable.w42419, "Nước"));
+        mList.add(new theloai(4, R.drawable.e42419, "Nước"));
 
-        mList.add(new theloai(5,R.drawable.w42419,"Nước"));
-        mList.add(new theloai(6,R.drawable.e42419,"Nước"));
-        mList.add(new theloai(7,R.drawable.w42419,"Nước"));
-        mList.add(new theloai(8,R.drawable.e42419,"Nước"));
+        mList.add(new theloai(5, R.drawable.w42419, "Nước"));
+        mList.add(new theloai(6, R.drawable.e42419, "Nước"));
+        mList.add(new theloai(7, R.drawable.w42419, "Nước"));
+        mList.add(new theloai(8, R.drawable.e42419, "Nước"));
 
-        mList.add(new theloai(5,R.drawable.w42419,"Nước"));
-        mList.add(new theloai(6,R.drawable.e42419,"Nước"));
-        mList.add(new theloai(7,R.drawable.w42419,"Nước"));
-        mList.add(new theloai(8,R.drawable.e42419,"Nước"));
+        mList.add(new theloai(5, R.drawable.w42419, "Nước"));
+        mList.add(new theloai(6, R.drawable.e42419, "Nước"));
+        mList.add(new theloai(7, R.drawable.w42419, "Nước"));
+        mList.add(new theloai(8, R.drawable.e42419, "Nước"));
 
         return mList;
     }

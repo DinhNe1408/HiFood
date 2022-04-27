@@ -26,6 +26,8 @@ import android.widget.Toast;
 import com.example.bctn.MyAppication;
 import com.example.bctn.R;
 import com.example.bctn.activity.DangKy2Act;
+import com.example.bctn.activity.LayViTri;
+import com.example.bctn.activity.quanan.ThongTinQA;
 import com.example.bctn.domain.key;
 import com.example.bctn.domain.taikhoan;
 import com.example.bctn.domain.vitri;
@@ -41,6 +43,7 @@ public class UpTaiKhoan extends AppCompatActivity {
     private ImageView imgV_HinhTK_uptk;
     private Button btn_Folder_uptk, btn_Camera_uptk, btn_XacNhan_uptk;
     private CheckBox checkB_KhoaTK_uptk;
+    private ImageButton imgB_LayViTri_uptk;
     private TextInputLayout txtL_SDT_uptk;
     private TextInputEditText editT_SDT_uptk, editT_MatKhau_uptk, editT_Ten_uptk, editT_ViTri_uptk;
     private taikhoan mtaikhoan;
@@ -64,6 +67,7 @@ public class UpTaiKhoan extends AppCompatActivity {
         if (loai.equals(key.key_Them)) {
             txtV_toolbar_title.setText("Thêm tài khoản");
             mtaikhoan = new taikhoan();
+            MyAppication.mViTri = null;
         } else {
             txtV_toolbar_title.setText("Chỉnh sửa tài khoản");
             int IDTK = intent.getIntExtra(key.key_IDTK, -1);
@@ -74,9 +78,18 @@ public class UpTaiKhoan extends AppCompatActivity {
             mtaikhoan = MyAppication.mDao.GetTK(IDTK);
             setText(key.Byte2Bitmap(mtaikhoan.getHinhTK()), mtaikhoan.getSdtTK(),
                     mtaikhoan.getMkTK(), mtaikhoan.getTenTK(), mtaikhoan.getVitri().getVitri(), mtaikhoan.isKhoa());
+            MyAppication.mViTri = mtaikhoan.getVitri();
         }
 
         SuKien();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (MyAppication.mViTri != null){
+            editT_ViTri_uptk.setText(MyAppication.mViTri.getVitri());
+        }
     }
 
     private void SuKien() {
@@ -94,60 +107,70 @@ public class UpTaiKhoan extends AppCompatActivity {
 
         btn_XacNhan_uptk.setOnClickListener(view -> {
             if (editT_SDT_uptk.getText() != null && editT_MatKhau_uptk.getText() != null
-                    && editT_Ten_uptk.getText() != null && editT_ViTri_uptk.getText() != null &&
-                    editT_SDT_uptk.getText().length() != 0 && editT_MatKhau_uptk.getText().length() != 0
-                    && editT_Ten_uptk.getText().length() != 0 && editT_ViTri_uptk.getText().length() != 0) {
+                    && editT_Ten_uptk.getText() != null
+                    && editT_SDT_uptk.getText().length() != 0 && editT_MatKhau_uptk.getText().length() != 0
+                    && editT_Ten_uptk.getText().length() != 0) {
+                if (editT_ViTri_uptk.getText() != null && editT_ViTri_uptk.getText().length() != 0){
+                    mtaikhoan.setSdtTK(editT_SDT_uptk.getText().toString().trim());
+                    mtaikhoan.setMkTK(editT_MatKhau_uptk.getText().toString().trim());
 
-                mtaikhoan.setSdtTK(editT_SDT_uptk.getText().toString().trim());
-                mtaikhoan.setMkTK(editT_MatKhau_uptk.getText().toString().trim());
+                    if (loai.equals(key.key_Them)) {
+                        if (key.isSDT(mtaikhoan.getSdtTK())) {
+                            if (!MyAppication.mDao.isExistTK(mtaikhoan.getSdtTK())) {
+                                if (key.isMk(mtaikhoan.getMkTK())) {
 
-                if (loai.equals(key.key_Them)) {
-                    if (key.isSDT(mtaikhoan.getSdtTK())) {
-                        if (!MyAppication.mDao.isExistTK(mtaikhoan.getSdtTK())) {
-                            if (key.isMk(mtaikhoan.getMkTK())) {
+                                    mtaikhoan.setTenTK(editT_Ten_uptk.getText().toString().trim());
+                                    mtaikhoan.setVitri(new vitri(editT_ViTri_uptk.getText().toString().trim(), 0.0, 0.0));
+                                    mtaikhoan.setRole("user");
+                                    mtaikhoan.setKhoa(checkB_KhoaTK_uptk.isChecked());
+                                    mtaikhoan.setHinhTK(key.BitmapDrawable2Byte((BitmapDrawable) imgV_HinhTK_uptk.getDrawable()));
 
-                                mtaikhoan.setTenTK(editT_Ten_uptk.getText().toString().trim());
-                                mtaikhoan.setVitri(new vitri(editT_ViTri_uptk.getText().toString().trim(), 0.0, 0.0));
-                                mtaikhoan.setRole("user");
-                                mtaikhoan.setKhoa(checkB_KhoaTK_uptk.isChecked());
-                                mtaikhoan.setHinhTK(key.BitmapDrawable2Byte((BitmapDrawable) imgV_HinhTK_uptk.getDrawable()));
+                                    MyAppication.mDao.TaoTK(mtaikhoan.getSdtTK(), mtaikhoan.getMkTK(), mtaikhoan.getTenTK(), mtaikhoan.getRole());
+                                    int IDTK = MyAppication.mDao.IDTK(mtaikhoan.getSdtTK(), mtaikhoan.getMkTK());
+                                    mtaikhoan.setIdTK(IDTK);
 
-                                MyAppication.mDao.TaoTK(mtaikhoan.getSdtTK(), mtaikhoan.getMkTK(), mtaikhoan.getTenTK(), mtaikhoan.getRole());
-                                int IDTK = MyAppication.mDao.IDTK(mtaikhoan.getSdtTK(), mtaikhoan.getMkTK());
-                                mtaikhoan.setIdTK(IDTK);
-
-                                MyAppication.mDao.CapNhatHinhTK(mtaikhoan.getIdTK(), mtaikhoan.getHinhTK());
-                                MyAppication.mDao.CapNhatViTriTK(mtaikhoan.getIdTK(), mtaikhoan.getVitri().getVitri(), mtaikhoan.getVitri().getVido(), mtaikhoan.getVitri().getKinhdo());
-                                Toast.makeText(this, "Tạo tài khoản thành công", Toast.LENGTH_SHORT).show();
+                                    MyAppication.mDao.CapNhatHinhTK(mtaikhoan.getIdTK(), mtaikhoan.getHinhTK());
+                                    MyAppication.mDao.CapNhatViTriTK(mtaikhoan.getIdTK(), MyAppication.mViTri.getVitri(), MyAppication.mViTri.getVido(), MyAppication.mViTri.getKinhdo());
+                                    Toast.makeText(this, "Tạo tài khoản thành công", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(this, "Mật khẩu phải dài hơn 8 ký tự, có chữ in hoa, chữ thường và số", Toast.LENGTH_SHORT).show();
+                                }
                             } else {
-                                Toast.makeText(this, "Mật khẩu phải dài hơn 8 ký tự, có chữ in hoa, chữ thường và số", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(this, "Số điện thoại đã được sử dụng", Toast.LENGTH_SHORT).show();
                             }
                         } else {
-                            Toast.makeText(this, "Số điện thoại đã được sử dụng", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "Vui lòng nhập đúng định dạng Số điện thoại ", Toast.LENGTH_SHORT).show();
                         }
                     } else {
-                        Toast.makeText(this, "Vui lòng nhập đúng định dạng Số điện thoại ", Toast.LENGTH_SHORT).show();
+                        if (key.isMk(mtaikhoan.getMkTK())) {
+                            mtaikhoan.setTenTK(editT_Ten_uptk.getText().toString().trim());
+                            mtaikhoan.setVitri(new vitri(editT_ViTri_uptk.getText().toString().trim(), 0.0, 0.0));
+                            mtaikhoan.setRole("user");
+                            mtaikhoan.setKhoa(checkB_KhoaTK_uptk.isChecked());
+                            mtaikhoan.setHinhTK(key.BitmapDrawable2Byte((BitmapDrawable) imgV_HinhTK_uptk.getDrawable()));
+
+                            MyAppication.mDao.CapNhatTK(mtaikhoan.getIdTK(), mtaikhoan.getSdtTK(), mtaikhoan.getMkTK(), mtaikhoan.getTenTK(), mtaikhoan.getRole(), mtaikhoan.isKhoa());
+                            MyAppication.mDao.CapNhatHinhTK(mtaikhoan.getIdTK(), mtaikhoan.getHinhTK());
+
+                            MyAppication.mDao.CapNhatViTriTK(mtaikhoan.getIdTK(), MyAppication.mViTri.getVitri(), MyAppication.mViTri.getVido(), MyAppication.mViTri.getKinhdo());
+                            Toast.makeText(this, "Cập nhật tài khoản thành công", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(this, "Mật khẩu phải dài hơn 8 ký tự, có chữ in hoa, chữ thường và số", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 } else {
-                    if (key.isMk(mtaikhoan.getMkTK())) {
-                        mtaikhoan.setTenTK(editT_Ten_uptk.getText().toString().trim());
-                        mtaikhoan.setVitri(new vitri(editT_ViTri_uptk.getText().toString().trim(), 0.0, 0.0));
-                        mtaikhoan.setRole("user");
-                        mtaikhoan.setKhoa(checkB_KhoaTK_uptk.isChecked());
-                        mtaikhoan.setHinhTK(key.BitmapDrawable2Byte((BitmapDrawable) imgV_HinhTK_uptk.getDrawable()));
-
-                        MyAppication.mDao.CapNhatTK(mtaikhoan.getIdTK(), mtaikhoan.getSdtTK(), mtaikhoan.getMkTK(), mtaikhoan.getTenTK(), mtaikhoan.getRole(), mtaikhoan.isKhoa());
-                        MyAppication.mDao.CapNhatHinhTK(mtaikhoan.getIdTK(), mtaikhoan.getHinhTK());
-                        MyAppication.mDao.CapNhatViTriTK(mtaikhoan.getIdTK(), mtaikhoan.getVitri().getVitri(), mtaikhoan.getVitri().getVido(), mtaikhoan.getVitri().getKinhdo());
-                        Toast.makeText(this, "Cập nhật tài khoản thành công", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(this, "Mật khẩu phải dài hơn 8 ký tự, có chữ in hoa, chữ thường và số", Toast.LENGTH_SHORT).show();
-                    }
+                    Toast.makeText(this, "Vui lòng chọn vị trí", Toast.LENGTH_SHORT).show();
                 }
+
             } else {
                 Toast.makeText(this, "Hãy điền đủ các trường", Toast.LENGTH_SHORT).show();
             }
 
+        });
+
+        imgB_LayViTri_uptk.setOnClickListener(view -> {
+            Intent intent = new Intent(UpTaiKhoan.this, LayViTri.class);
+            startActivity(intent);
         });
     }
 
@@ -210,12 +233,12 @@ public class UpTaiKhoan extends AppCompatActivity {
 
         btn_Folder_uptk = findViewById(R.id.btn_Folder_uptk);
         btn_Camera_uptk = findViewById(R.id.btn_Camera_uptk);
-
         btn_XacNhan_uptk = findViewById(R.id.btn_XacNhan_uptk);
 
         checkB_KhoaTK_uptk = findViewById(R.id.checkB_KhoaTK_uptk);
 
         txtL_SDT_uptk = findViewById(R.id.txtL_SDT_uptk);
+        imgB_LayViTri_uptk = findViewById(R.id.imgB_LayViTri_uptk);
 
         editT_SDT_uptk = findViewById(R.id.editT_SDT_uptk);
         editT_MatKhau_uptk = findViewById(R.id.editT_MatKhau_uptk);
