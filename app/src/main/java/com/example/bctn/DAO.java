@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
+import android.util.Log;
 
 import com.example.bctn.activity.DanhGia;
 import com.example.bctn.domain.ctdh;
@@ -14,7 +15,10 @@ import com.example.bctn.domain.key;
 import com.example.bctn.domain.monan;
 import com.example.bctn.domain.quanan;
 import com.example.bctn.domain.taikhoan;
+import com.example.bctn.domain.thongke;
 import com.example.bctn.domain.vitri;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.PieEntry;
 
 import java.net.PortUnreachableException;
 import java.util.ArrayList;
@@ -175,10 +179,40 @@ public class DAO {
         }
         return -1;
     }
+
+    public List<taikhoan> GetListTKQA() {
+        List<taikhoan> taikhoanList = new ArrayList<>();
+        Cursor tro = mDatabase.Get("SELECT A.IDTK, A.SDT, A.MatKhau, A.TenTK, A.HinhTK, A.DiaChi, A.ViDo, A.KinhDo, " +
+                "A.Quyen,A.Khoa FROM TaiKhoan A WHERE A.Quyen = 'dinner' AND IDTK NOT IN(SELECT IDTK FROM QuanAn)");
+        while (tro.moveToNext()) {
+            taikhoanList.add(new taikhoan(tro.getInt(0),
+                    tro.getString(1),
+                    tro.getString(2),
+                    tro.getString(3),
+                    tro.getBlob(4),
+                    new vitri(tro.getString(5),
+                            tro.getDouble(6),
+                            tro.getDouble(7)),
+                    tro.getString(8),
+                    tro.getInt(9) == 1));
+        }
+        return taikhoanList;
+    }
     // endregion
 
 
     // region Quán Ăn
+
+    public quanan TTQA_DG(int IDDH) {
+        Cursor tro = mDatabase.Get("SELECT B.IDQA, B.TenQA, B.HinhQA, B.DiaChiQA, B.ViDoQA, B.KinhDoQA " +
+                "FROM DonHang A, QuanAn B WHERE A.IDQA = B.IDQA AND A.IDDH = " + IDDH);
+        tro.moveToNext();
+        return new quanan(tro.getInt(0),
+                tro.getString(1),
+                tro.getBlob(2),
+                new vitri(tro.getString(3), tro.getDouble(4), tro.getDouble(5)));
+    }
+
     public quanan QA(int IDQA) {
 
         List<monan> list = new ArrayList<>();
@@ -198,7 +232,8 @@ public class DAO {
                     tro2.getBlob(2),
                     new vitri(tro2.getString(3), tro2.getDouble(4), tro2.getDouble(5)),
                     tro2.getInt(6) == 1,
-                    list
+                    list,
+                    tro2.getInt(7)
             );
         }
         return null;
@@ -206,13 +241,30 @@ public class DAO {
 
     public List<quanan> ListQAGanBan() {
         List<quanan> list = new ArrayList<>();
-        Cursor tro = mDatabase.Get("SELECT * FROM QuanAn WHERE Khoa = 0 LIMIT 8 ");
+        Cursor tro = mDatabase.Get("SELECT * FROM QuanAn WHERE Khoa = 0 LIMIT 8");
         while (tro.moveToNext()) {
             list.add(new quanan(
                     tro.getInt(0),
                     tro.getString(1),
                     tro.getBlob(2),
                     new vitri(tro.getString(3), tro.getDouble(4), tro.getDouble(5))
+            ));
+        }
+        return list;
+    }
+
+    public List<quanan> ListQADanhGiaTot() {
+        List<quanan> list = new ArrayList<>();
+        Cursor tro = mDatabase.Get("SELECT A.IDQA, A.TenQA, A.HinhQA, A.DiaChiQA, A.ViDoQA, A.KinhDoQA,(SELECT IFNULL(AVG(B.SaoDG),0) " +
+                "FROM DanhGia B, DonHang C WHERE B.IDDH = C.IDDH AND C.IDQA = A.IDQA) AS SaoQA FROM QuanAn A " +
+                "WHERE Khoa = 0 ORDER BY SaoQA DESC LIMIT 8");
+        while (tro.moveToNext()) {
+            list.add(new quanan(
+                    tro.getInt(0),
+                    tro.getString(1),
+                    tro.getBlob(2),
+                    new vitri(tro.getString(3), tro.getDouble(4), tro.getDouble(5)),
+                    tro.getDouble(6)
             ));
         }
         return list;
@@ -238,14 +290,14 @@ public class DAO {
         return tro.getInt(0) + 1;
     }
 
-    public void TaoQA(int IDQA, String TenQA) {
-        mDatabase.Query("INSERT INTO QuanAn( IDQA, TenQA, Khoa) VALUES ("
-                + IDQA + " ,'" + TenQA + "', " + 0 + ")");
+    public void TaoQA(int IDQA, String TenQA, int IDTK) {
+        mDatabase.Query("INSERT INTO QuanAn( IDQA, TenQA, Khoa, IDTK) VALUES ("
+                + IDQA + " ,'" + TenQA + "', " + 0 + "," + IDTK + ")");
     }
 
-    public void CapNhatQA(int IDQA, String TenQA, boolean Khoa) {
+    public void CapNhatQA(int IDQA, String TenQA, boolean Khoa, int IDTK) {
         mDatabase.Query("UPDATE QuanAn SET TenQA = '"
-                + TenQA + "', Khoa = " + (Khoa ? 1 : 0) + " WHERE IDQA = " + IDQA);
+                + TenQA + "', Khoa = " + (Khoa ? 1 : 0) + ", IDTK =" + IDTK + " WHERE IDQA = " + IDQA);
     }
 
     public void CapNhatViTriQA(int IDQA, String DiaChiQA, double ViDoQA, double KinhDoQA) {
@@ -359,7 +411,7 @@ public class DAO {
         Cursor tro = mDatabase.Get("SELECT * FROM DonHang WHERE IDDH = " + IDDH + " AND TTGiao ='" + TTGiao + "'");
 
         while (tro.moveToNext()) {
-            Cursor tro2 = mDatabase.Get("SELECT B.IDMA,HinhMA,TenMA, GiaMa, SoLuong, GhiChu" +
+            Cursor tro2 = mDatabase.Get("SELECT B.IDMA,C.HinhMA,C.TenMA, C.GiaMa, B.SoLuong, B.GhiChu" +
                     "  FROM DonHang A,CTDonHang B, MonAn C WHERE A.IDDH = B.IDDH AND C.IDMA = B.IDMA AND C.IDQA = A.IDQA AND A.IDDH =" + IDDH);
             Map<Integer, ctdh> ctdhMap = new HashMap<>();
             while (tro2.moveToNext()) {
@@ -470,14 +522,14 @@ public class DAO {
                 + "' WHERE IDDH = " + IDDH);
     }
 
-    public void ThemMonAninDH(int IDDH, int IDMA, int SoL, String GhiChu) {
-        mDatabase.Query("INSERT INTO CTDonHang( IDDH, IDMA, SoLuong, GhiChu) VALUES ( "
-                + IDDH + " , " + IDMA + " , " + SoL + " ,'" + GhiChu + "')");
+    public void ThemMonAninDH(int IDDH, int IDMA, int SoL, double GiaMA, String GhiChu) {
+        mDatabase.Query("INSERT INTO CTDonHang( IDDH, IDMA, SoLuong, GiaMA, GhiChu) VALUES ( "
+                + IDDH + " , " + IDMA + " , " + SoL + " , " + GiaMA + " ,'" + GhiChu + "')");
     }
 
-    public void CapNhatMonAninDH(int IDDH, int IDMA, int SoL, String GhiChu) {
-        mDatabase.Query("UPDATE CTDonHang SET SoLuong = "
-                + SoL + " , GhiChu = '" + GhiChu + "' WHERE IDDH = " + IDDH + " AND IDMA = " + IDMA);
+    public void CapNhatMonAninDH(int IDDH, int IDMA, int SoL, double GiaMA, String GhiChu) {
+        mDatabase.Query("UPDATE CTDonHang SET SoLuong = " + SoL +
+                ", GiaMA = " + GiaMA + " , GhiChu = '" + GhiChu + "' WHERE IDDH = " + IDDH + " AND IDMA = " + IDMA);
     }
 
     public void XoaMonAninDH(int IDDH, int IDMA) {
@@ -517,16 +569,18 @@ public class DAO {
         mDatabase.Query("DELETE FROM YeuThich WHERE IDTK = " + IDTK + " AND IDQA = " + IDQA);
     }
 
-    public List<quanan> ListQAYT(int idTK) {
+    public List<quanan> ListQAYT(int IDTK) {
         List<quanan> list = new ArrayList<>();
-        Cursor tro = mDatabase.Get("SELECT * FROM QuanAn B, YeuThich A WHERE  A.IDTK = "
-                + idTK + " AND A.IDQA = B.IDQA ORDER BY ThoiGian DESC");
+        Cursor tro = mDatabase.Get("SELECT  A.IDQA, A.TenQA, A.HinhQA, A.DiaChiQA, A.ViDoQA, A.KinhDoQA," +
+                "(SELECT IFNULL(AVG(B.SaoDG),0) FROM DanhGia B, DonHang C WHERE B.IDDH = C.IDDH AND C.IDQA = A.IDQA) AS SaoQA " +
+                "FROM QuanAn A, YeuThich B WHERE  B.IDTK = " + IDTK + " AND A.IDQA = B.IDQA ORDER BY ThoiGian DESC");
         while (tro.moveToNext()) {
             list.add(new quanan(
                     tro.getInt(0),
                     tro.getString(1),
                     tro.getBlob(2),
-                    new vitri(tro.getString(3), 0, 0)));
+                    new vitri(tro.getString(3), 4, 5),
+                    tro.getDouble(6)));
         }
 
         return list;
@@ -554,5 +608,48 @@ public class DAO {
         tro.moveToNext();
         return new danhgia(tro.getString(0), tro.getDouble(1));
     }
+    // endregion
+
+
+    // region Thống kê
+
+    public ArrayList<thongke> ThongKe(String ThangNam) { // * C.GiaMA có thể nhân thêm ngay số lượng
+        Cursor tro = mDatabase.Get("SELECT A.IDQA, A.TenQA, " +
+                "(SELECT IFNULL(SUM(B.TongTien),0)  FROM DonHang B WHERE A.IDQA = B.IDQA AND TTGiao = 'HoanThanh' " +
+                "AND strftime('%Y %m',TGDat) = '" + ThangNam + "') AS DoanhThu FROM QuanAn A WHERE DoanhThu > 0 ORDER BY DoanhThu DESC LIMIT 20");
+        ArrayList<thongke> thongke = new ArrayList<>();
+        while (tro.moveToNext()) {
+            thongke.add(new thongke(tro.getString(1), tro.getDouble(2)));
+        }
+        return thongke;
+    }
+
+    public ArrayList<PieEntry> ThongKeQA(int IDQA, String Ngay) { // * C.GiaMA có thể nhân thêm ngay số lượng
+        Cursor tro = mDatabase.Get("SELECT C.IDMA,D.TenMA, IFNULL(SUM(C.SoLuong),0) " +
+                "FROM CTDonHang C, MonAn D,DonHang E WHERE E.IDDH = C.IDDH AND C.IDMA = D.IDMA AND " +
+                " strftime('%Y %m %d',E.TGDat) = '" + Ngay + "' AND E.TTGiao Like 'HoanThanh' " +
+                " AND C.IDMA IN (SELECT DISTINCT(IDMA) FROM DonHang A, MonAn B WHERE A.IDQA = B.IDQA AND A.IDQA = "
+                + IDQA + ") GROUP BY C.IDMA");
+        ArrayList<PieEntry> pieEntries = new ArrayList<>();
+        while (tro.moveToNext()) {
+            pieEntries.add(new PieEntry(tro.getInt(2), tro.getString(1)));
+        }
+        return pieEntries;
+    }
+
+    public int TongDonHangQA(int IDQA, String Ngay) {
+        Cursor tro = mDatabase.Get("SELECT IFNULL(SUM(IDDH),0) AS TongDon FROM DonHang " +
+                "WHERE TTGiao Like 'HoanThanh' AND IDQA = " + IDQA + " AND strftime('%Y %m %d',TGDat) = '" + Ngay + "'");
+        tro.moveToNext();
+        return tro.getInt(0);
+    }
+
+    public double TongDoanhThuQA(int IDQA, String Ngay) {
+        Cursor tro = mDatabase.Get("SELECT IFNULL(SUM(TongTien),0) AS TongDon FROM DonHang " +
+                "WHERE TTGiao Like 'HoanThanh' AND IDQA = " + IDQA + " AND strftime('%Y %m %d',TGDat) = '" + Ngay + "'");
+        tro.moveToNext();
+        return tro.getDouble(0);
+    }
+
     // endregion
 }

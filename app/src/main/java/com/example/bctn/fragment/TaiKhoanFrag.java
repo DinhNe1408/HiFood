@@ -44,8 +44,7 @@ public class TaiKhoanFrag extends Fragment {
 
         mListKey = new ArrayList<>();
         mListKey.add(new menu_option(key.key_ThongTinNguoiDung, R.drawable.ic_round_person_outline_24, 0, "Thông tin cá nhân"));
-        mListKey.add(new menu_option(key.key_GOPY, 0, 0, "Góp ý"));
-        mListKey.add(new menu_option(key.key_GIOITHIEU, 0, 0, "Giới thiệu"));
+        mListKey.add(new menu_option(key.key_GIOITHIEU, R.drawable.ic_round_info_24, 0, "Giới thiệu"));
         mListKey.add(new menu_option(key.key_CAIDAT, R.drawable.ic_round_settings_24, 0, "Cài đặt"));
         if (MyAppication.mTaiKhoan.getIdTK() != -1) {
 

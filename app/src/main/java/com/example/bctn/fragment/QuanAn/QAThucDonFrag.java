@@ -65,7 +65,7 @@ public class QAThucDonFrag extends Fragment {
         //getData_RecV();
 
         relative1_QA.setOnClickListener(view -> {
-            if (MyAppication.mTaiKhoan.getIdTK() != -1){
+            if (MyAppication.mTaiKhoan.getIdTK() != -1) {
                 if (mDonhang.getTongSoLuong() > 0) {
                     Intent intent = new Intent(getContext(), ThanhToanAct.class);
                     intent.putExtra(key.key_IDDH, IDDH);
@@ -126,26 +126,27 @@ public class QAThucDonFrag extends Fragment {
         super.onPause();
 
         if (MyAppication.mTaiKhoan.getIdTK() != -1) {
+            // Lấy mã đơn hàng
             int IDDH = MyAppication.mDao.isExistDonNhap(MyAppication.mTaiKhoan.getIdTK(), quanan.getIdQA(), key.key_dh_Nhap);
             if (IDDH != -1) {
-                if (mDonhang.getCthdMap().size() > 0){
-                    MyAppication.mDao.CapNhatDH(IDDH,mDonhang.getTongTienMAMap(),mDonhang.getTongTienMAMap(), key.DateFormatSQL(Calendar.getInstance().getTime()), key.key_dh_Nhap);
+                if (mDonhang.getCthdMap().size() > 0) {
+                    MyAppication.mDao.CapNhatDH(IDDH, mDonhang.getTongTienMAMap(), mDonhang.getTongTienMAMap(), key.DateFormatSQL(Calendar.getInstance().getTime()), key.key_dh_Nhap);
                 } else {
                     MyAppication.mDao.XoaDH(IDDH);
                 }
 
             } else {
-                if (mDonhang.getCthdMap().size() > 0){
+                if (mDonhang.getCthdMap().size() > 0) {
                     IDDH = MyAppication.mDao.TaoIDDH();
-                    MyAppication.mDao.TaoDonHang(IDDH, MyAppication.mTaiKhoan.getIdTK(), quanan.getIdQA(),mDonhang.getTongTienMAMap(),mDonhang.getTongTienMAMap(), key.key_dh_Nhap);
+                    MyAppication.mDao.TaoDonHang(IDDH, MyAppication.mTaiKhoan.getIdTK(), quanan.getIdQA(), mDonhang.getTongTienMAMap(), mDonhang.getTongTienMAMap(), key.key_dh_Nhap);
                 }
             }
 
             for (ctdh cthd : mDonhang.getCthdMap().values()) {
                 if (!MyAppication.mDao.isExistMonAninDH(IDDH, cthd.getIDMA())) {
-                    MyAppication.mDao.ThemMonAninDH(IDDH, cthd.getIDMA(), cthd.getSLMA(), cthd.getGhiChu());
+                    MyAppication.mDao.ThemMonAninDH(IDDH, cthd.getIDMA(), cthd.getSLMA(), cthd.getGiaMA(), cthd.getGhiChu());
                 } else {
-                    MyAppication.mDao.CapNhatMonAninDH(IDDH, cthd.getIDMA(), cthd.getSLMA(), cthd.getGhiChu());
+                    MyAppication.mDao.CapNhatMonAninDH(IDDH, cthd.getIDMA(), cthd.getSLMA(), cthd.getGiaMA(), cthd.getGhiChu());
                 }
             }
 

@@ -38,7 +38,6 @@ public class QuanAn1Adap extends RecyclerView.Adapter<QuanAn1Adap.QuanAn1AdapVie
     public QuanAn1Adap(Context mContext, List<quanan> mList) {
         this.mContext = mContext;
         this.mList = mList;
-
     }
 
     @NonNull
@@ -55,7 +54,7 @@ public class QuanAn1Adap extends RecyclerView.Adapter<QuanAn1Adap.QuanAn1AdapVie
         holder.hinhQA_1.setImageBitmap(key.Byte2Bitmap(quanan.getHinhQA()));
         holder.tenQA_1.setText(quanan.getTenQA());
         holder.vitriQA_1.setText(quanan.getVitriQA().getVitri());
-        //holder.saoQA_1.setText();
+        holder.saoQA_1.setText(String.format("%.1f",quanan.getSaoQA()));
 
         holder.relative_ma.setOnClickListener(view -> {
             Intent mIntent = new Intent(mContext, QuanAnAct.class);
@@ -64,6 +63,7 @@ public class QuanAn1Adap extends RecyclerView.Adapter<QuanAn1Adap.QuanAn1AdapVie
             mContext.startActivity(mIntent);
         });
 
+        key.setTextViewDrawableColor(holder.khcachQA_qa1, R.color.location);
 //        String url = key.url1 + quanan.getVitriQA().getKinhdo() + "%2C" +
 //                quanan.getVitriQA().getVido() + "%3B" +
 //                MyAppication.mTaiKhoan.getCurVitri().getKinhdo() + "%2C" +
@@ -92,6 +92,7 @@ public class QuanAn1Adap extends RecyclerView.Adapter<QuanAn1Adap.QuanAn1AdapVie
 //        }, error -> Toast.makeText(mContext, "Lỗi", Toast.LENGTH_SHORT).show()
 //        );
 //        requestQueue.add(jsonObjectRequest);
+        Log.e("tag","" + quanan.getSaoQA());
     }
 
     @Override

@@ -13,4 +13,8 @@
     <color name="hifood4">#9E9E9E</color>
     <color name="hifood5">#D6EEE8</color>
     <color name="hifood6">#F8F8F8</color>
+
+    <color name="timer">#659F21</color>
+    <color name="star">#FFC107</color>
+    <color name="location">#0F9FB1</color>
 </resources>

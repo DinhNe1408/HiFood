@@ -70,7 +70,7 @@ public class ThanhToanAct extends AppCompatActivity {
         mDonhang.setTenNN(MyAppication.mTaiKhoan.getTenTK());
         mDonhang.setSDTNN(MyAppication.mTaiKhoan.getSdtTK());
         mDonhang.setVitriDH("Số 6 Trần Văn Ơn, Thủ Dầu Một, Bình Dương");
-        //mDonhang.setVitriDH(MyAppication.mTaiKhoan.getCurVitri().getVitri());
+        mDonhang.setVitriDH(MyAppication.mTaiKhoan.getCurVitri().getVitri());
 
         setData();
         Calendar betime = Calendar.getInstance();

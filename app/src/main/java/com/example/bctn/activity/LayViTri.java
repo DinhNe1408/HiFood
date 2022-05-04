@@ -8,22 +8,17 @@ import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.bctn.MyAppication;
 import com.example.bctn.R;
-import com.example.bctn.activity.admin.QuanTri;
-import com.example.bctn.domain.key;
-import com.example.bctn.domain.taikhoan;
 import com.example.bctn.domain.vitri;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -48,8 +43,7 @@ public class LayViTri extends AppCompatActivity implements OnMapReadyCallback {
     private ImageButton imgB_Mylocation_lvt;
     private FusedLocationProviderClient fusedLocationProviderClient;
     private Button btn_lvt;
-    vitri newVitri;
-
+    private vitri newVitri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +55,46 @@ public class LayViTri extends AppCompatActivity implements OnMapReadyCallback {
                 .findFragmentById(R.id.googlemap_lvt);
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        SuKien();
 
+        mapFragment.getMapAsync(this);
+
+        // Lấy vị trí hiện tại nếu không được truyền vào vị trí trước đó
+        if (ActivityCompat.checkSelfPermission(LayViTri.this,
+                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
+                @Override
+                public void onComplete(@NonNull Task<Location> task) {
+                    Location location = task.getResult();
+                    if (location != null) {
+                        mapFragment.getMapAsync(new OnMapReadyCallback() {
+                            @Override
+                            public void onMapReady(@NonNull GoogleMap googleMap) {
+                                mMap = googleMap;
+                                mMap.clear();
+                                LatLng latLng;
+                                if (MyAppication.mViTri != null) {
+                                    latLng = new LatLng(MyAppication.mViTri.getVido(), MyAppication.mViTri.getKinhdo());
+                                } else {
+                                    latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                                }
+
+                                GetPoint(latLng);
+
+                                MarkerOptions options = new MarkerOptions().position(latLng);
+                                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));
+                                googleMap.addMarker(options);
+                            }
+                        });
+                    }
+                }
+            });
+        } else {
+            ActivityCompat.requestPermissions(LayViTri.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
+        }
+    }
+
+    private void SuKien() {
         searchV_lvt.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -112,8 +145,6 @@ public class LayViTri extends AppCompatActivity implements OnMapReadyCallback {
             GetLocation();
         });
 
-        mapFragment.getMapAsync(this);
-
         btn_lvt.setOnClickListener(view -> {
             new AlertDialog.Builder(LayViTri.this)
                     .setIcon(android.R.drawable.ic_dialog_alert)
@@ -129,40 +160,6 @@ public class LayViTri extends AppCompatActivity implements OnMapReadyCallback {
                     .setNegativeButton("Không", null)
                     .show();
         });
-        if (ActivityCompat.checkSelfPermission(LayViTri.this,
-                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
-                @Override
-                public void onComplete(@NonNull Task<Location> task) {
-                    Location location = task.getResult();
-                    if (location != null) {
-                        mapFragment.getMapAsync(new OnMapReadyCallback() {
-                            @Override
-                            public void onMapReady(@NonNull GoogleMap googleMap) {
-                                mMap = googleMap;
-                                mMap.clear();
-                                LatLng latLng;
-                                if (MyAppication.mViTri != null) {
-                                    latLng = new LatLng(MyAppication.mViTri.getVido(), MyAppication.mViTri.getKinhdo());
-                                    Log.e("Load", MyAppication.mViTri.getVitri() +
-                                            MyAppication.mViTri.getVido() + " = " + MyAppication.mViTri.getKinhdo());
-                                } else {
-                                    latLng = new LatLng(location.getLatitude(), location.getLongitude());
-                                }
-
-                                GetPoint(latLng);
-
-                                MarkerOptions options = new MarkerOptions().position(latLng);
-                                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));
-                                googleMap.addMarker(options);
-                            }
-                        });
-                    }
-                }
-            });
-        } else {
-            ActivityCompat.requestPermissions(LayViTri.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
-        }
     }
 
     private void AnhXa() {

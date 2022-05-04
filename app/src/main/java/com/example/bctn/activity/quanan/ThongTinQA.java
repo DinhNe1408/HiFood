@@ -15,9 +15,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -27,25 +25,19 @@ import android.widget.Toast;
 import com.example.bctn.MyAppication;
 import com.example.bctn.R;
 import com.example.bctn.activity.LayViTri;
-import com.example.bctn.activity.admin.UpQuanAn;
 import com.example.bctn.domain.key;
 import com.example.bctn.domain.quanan;
-import com.example.bctn.domain.vitri;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 
 public class ThongTinQA extends AppCompatActivity {
 
     private Toolbar tool3_ThongTinQA;
-    private LinearLayout iclu_get_img_ttqa;
     private ImageView imgV_HinhQA_ttqa;
     private ImageButton imgB_LayViTri_ttqa;
     private Button btn_Folder_ttqa, btn_Camera_ttqa, btn_XacNhan_ttqa;
-    private TextInputLayout txtL_TenQA_ttqa, txtL_ViTri_ttqa;
     private TextInputEditText editT_TenQA_ttqa, editT_ViTri_ttqa;
     private quanan mQuanan;
 
@@ -54,8 +46,9 @@ public class ThongTinQA extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thong_tin_qa);
         AnhXa();
-        tool3_ThongTinQA.setNavigationOnClickListener(view -> onBackPressed());
+
         TextView txtV_toolbar_title = tool3_ThongTinQA.findViewById(R.id.txtV_toolbar_title);
+        txtV_toolbar_title.setText("Thông tin quán ăn");
 
         Intent intent = getIntent();
         int IDQA = intent.getIntExtra(key.key_IDQA, -1);
@@ -63,13 +56,16 @@ public class ThongTinQA extends AppCompatActivity {
             return;
 
         mQuanan = MyAppication.mDao.QA(IDQA);
-
-        editT_TenQA_ttqa.setText(mQuanan.getTenQA());
-        editT_ViTri_ttqa.setText(mQuanan.getVitriQA().getVitri());
         MyAppication.mViTri = mQuanan.getVitriQA();
+        editT_TenQA_ttqa.setText(mQuanan.getTenQA());
         imgV_HinhQA_ttqa.setImageBitmap(key.Byte2Bitmap(mQuanan.getHinhQA()));
-        txtV_toolbar_title.setText("Thông tin quán ăn");
         SuKien();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        MyAppication.mViTri = null;
     }
 
     @Override
@@ -81,6 +77,8 @@ public class ThongTinQA extends AppCompatActivity {
     }
 
     private void SuKien() {
+        tool3_ThongTinQA.setNavigationOnClickListener(view -> onBackPressed());
+
         btn_Camera_ttqa.setOnClickListener(view -> ActivityCompat.requestPermissions(
                 ThongTinQA.this,
                 new String[]{Manifest.permission.CAMERA},
@@ -99,7 +97,7 @@ public class ThongTinQA extends AppCompatActivity {
                     mQuanan.setTenQA(editT_TenQA_ttqa.getText().toString().trim());
                     mQuanan.setHinhQA(key.BitmapDrawable2Byte((BitmapDrawable) imgV_HinhQA_ttqa.getDrawable()));
 
-                    MyAppication.mDao.CapNhatQA(mQuanan.getIdQA(), mQuanan.getTenQA(), mQuanan.isKhoa());
+                    MyAppication.mDao.CapNhatQA(mQuanan.getIdQA(), mQuanan.getTenQA(), mQuanan.isKhoa(), mQuanan.getIDTK());
 
                     MyAppication.mDao.CapNhatViTriQA(mQuanan.getIdQA(), MyAppication.mViTri.getVitri(), MyAppication.mViTri.getVido(), MyAppication.mViTri.getKinhdo());
                     MyAppication.mDao.CapNhatHinhQA(mQuanan.getIdQA(), mQuanan.getHinhQA());
@@ -167,15 +165,12 @@ public class ThongTinQA extends AppCompatActivity {
     private void AnhXa() {
         tool3_ThongTinQA = findViewById(R.id.tool3_ThongTinQA);
 
-        iclu_get_img_ttqa = findViewById(R.id.iclu_get_img_ttqa);
+        LinearLayout iclu_get_img_ttqa = findViewById(R.id.iclu_get_img_ttqa);
         imgV_HinhQA_ttqa = iclu_get_img_ttqa.findViewById(R.id.imgV_Hinh);
         btn_Folder_ttqa = iclu_get_img_ttqa.findViewById(R.id.btn_Folder);
         btn_Camera_ttqa = iclu_get_img_ttqa.findViewById(R.id.btn_Camera);
 
         btn_XacNhan_ttqa = findViewById(R.id.btn_XacNhan_ttqa);
-
-        txtL_TenQA_ttqa = findViewById(R.id.txtL_TenQA_ttqa);
-        txtL_ViTri_ttqa = findViewById(R.id.txtL_ViTri_ttqa);
 
         editT_TenQA_ttqa = findViewById(R.id.editT_TenQA_ttqa);
         editT_ViTri_ttqa = findViewById(R.id.editT_ViTri_ttqa);

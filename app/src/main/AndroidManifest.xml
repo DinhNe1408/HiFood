@@ -18,6 +18,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BCTN">
         <activity
+            android:name=".activity.quanan.ThongKeQA"
+            android:exported="false" />
+        <activity
+            android:name=".activity.QuenMatKhau2Act"
+            android:exported="false" />
+        <activity
+            android:name=".activity.QuenMatKhau1Act"
+            android:exported="false" />
+        <activity
             android:name=".activity.LayViTri"
             android:exported="false" />
 

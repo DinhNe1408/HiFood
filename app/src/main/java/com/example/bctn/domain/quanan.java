@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class quanan implements Serializable {
-    private int idQA;
+    private int idQA, IDTK;
     private String tenQA, thgianQA;
     private byte[] hinhQA;
     private vitri vitriQA;
@@ -13,6 +13,7 @@ public class quanan implements Serializable {
     private boolean Khoa;
 
     public quanan() {
+        this.IDTK = -2;
     }
 
     public quanan(int idQA, String tenQA, byte[] hinhQA, vitri vitriQA) {
@@ -22,21 +23,31 @@ public class quanan implements Serializable {
         this.vitriQA = vitriQA;
     }
 
+    public quanan(int idQA, String tenQA, byte[] hinhQA, vitri vitriQA, double saoQA) {
+        this.idQA = idQA;
+        this.tenQA = tenQA;
+        this.hinhQA = hinhQA;
+        this.vitriQA = vitriQA;
+        this.saoQA = saoQA;
+    }
+
     public quanan(int idQA, String tenQA, byte[] hinhQA, vitri vitriQA, List<monan> dsMA) {
         this.idQA = idQA;
         this.tenQA = tenQA;
         this.hinhQA = hinhQA;
         this.vitriQA = vitriQA;
         this.dsMA = dsMA;
+
     }
 
-    public quanan(int idQA, String tenQA, byte[] hinhQA, vitri vitriQA, boolean Khoa, List<monan> dsMA) {
+    public quanan(int idQA, String tenQA, byte[] hinhQA, vitri vitriQA, boolean Khoa, List<monan> dsMA,int IDTK) {
         this.idQA = idQA;
         this.tenQA = tenQA;
         this.hinhQA = hinhQA;
         this.vitriQA = vitriQA;
         this.Khoa = Khoa;
         this.dsMA = dsMA;
+        this.IDTK = IDTK;
     }
 
     public int getIdQA() {
@@ -109,5 +120,13 @@ public class quanan implements Serializable {
 
     public void setKhoa(boolean khoa) {
         Khoa = khoa;
+    }
+
+    public int getIDTK() {
+        return IDTK;
+    }
+
+    public void setIDTK(int IDTK) {
+        this.IDTK = IDTK;
     }
 }

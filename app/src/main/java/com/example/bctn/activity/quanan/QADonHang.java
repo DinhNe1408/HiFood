@@ -2,33 +2,15 @@ package com.example.bctn.activity.quanan;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.app.Dialog;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.bctn.MyAppication;
 import com.example.bctn.R;
-import com.example.bctn.adapter.RecyclerAdapter.DsDH_qadh_Adap;
-import com.example.bctn.adapter.RecyclerAdapter.DsMA_tddh_Adap;
 import com.example.bctn.adapter.TablayoutAdapter.TabQADonHangAdap;
-import com.example.bctn.adapter.TablayoutAdapter.TabYeuThichAdap;
-import com.example.bctn.domain.ctdh;
-import com.example.bctn.domain.donhang;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class QADonHang extends AppCompatActivity {
 

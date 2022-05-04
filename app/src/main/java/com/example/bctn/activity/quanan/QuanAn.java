@@ -8,23 +8,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.example.bctn.MyAppication;
 import com.example.bctn.R;
-import com.example.bctn.activity.admin.QuanTri;
 import com.example.bctn.adapter.Menu_op2_Adap;
 import com.example.bctn.domain.key;
 import com.example.bctn.domain.menu_option;
-import com.example.bctn.domain.quanan;
 import com.example.bctn.domain.taikhoan;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class QuanAn extends AppCompatActivity {
-
 
     private Toolbar tool3_QuanAn;
     private RecyclerView recV_QuanAnMenu;
@@ -42,10 +38,11 @@ public class QuanAn extends AppCompatActivity {
             return;
 
         List<menu_option> menu_optionList = new ArrayList<>();
-        menu_optionList.add(new menu_option(key.key_ThongTinQA, "Thông tin quán ăn"));
-        menu_optionList.add(new menu_option(key.key_QLMonAn, "Quản lý món ăn"));
-        menu_optionList.add(new menu_option(key.key_DonHangQA, "Đơn hàng"));
-        menu_optionList.add(new menu_option(key.key_DANGXUAT, "Đăng xuất"));
+        menu_optionList.add(new menu_option(key.key_ThongTinQA, R.drawable.ic_round_store_mall_directory_24, 0, "Thông tin quán ăn"));
+        menu_optionList.add(new menu_option(key.key_QLMonAn, R.drawable.ic_round_restaurant_24, 0, "Quản lý món ăn"));
+        menu_optionList.add(new menu_option(key.key_DonHangQA, R.drawable.ic_round_receipt_long_24, 0, "Đơn hàng"));
+        menu_optionList.add(new menu_option(key.key_ThongKeQA, R.drawable.ic_round_query_stats_24, 0, "Thống kê"));
+        menu_optionList.add(new menu_option(key.key_DANGXUAT, R.drawable.ic_round_logout_24, 0, "Đăng xuất"));
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         Menu_op2_Adap menu_op2_adap = new Menu_op2_Adap(this, menu_optionList);
@@ -59,8 +56,7 @@ public class QuanAn extends AppCompatActivity {
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle("Thông báo")
                 .setMessage("Bạn có chắc muốn đăng xuất?")
-                .setPositiveButton("Có", new DialogInterface.OnClickListener()
-                {
+                .setPositiveButton("Có", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         MyAppication.mTaiKhoan = new taikhoan();

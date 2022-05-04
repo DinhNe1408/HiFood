@@ -5,10 +5,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.bctn.fragment.Home.HBanChayFrag;
+import com.example.bctn.fragment.Home.HDanhGiaFrag;
 import com.example.bctn.fragment.Home.HGanBanFrag;
-import com.example.bctn.fragment.Home.HKhuyenMaiFrag;
-import com.example.bctn.fragment.Home.HPhoBienFrag;
 
 public class TabHomeAdap extends FragmentStateAdapter {
     public TabHomeAdap(@NonNull FragmentActivity fragmentActivity) {
@@ -20,7 +18,7 @@ public class TabHomeAdap extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position){
             case 1:
-                return new HBanChayFrag();
+                return new HDanhGiaFrag();
 //            case 2:
 //                return new HPhoBienFrag();
 //            case 3:

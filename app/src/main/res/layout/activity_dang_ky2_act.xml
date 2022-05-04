@@ -13,11 +13,20 @@
         android:orientation="vertical"
         android:paddingBottom="50dp">
 
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="-5dp"
+            android:src="@drawable/khongchu" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="@string/dangky"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
             android:textSize="28sp" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -26,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginHorizontal="15dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="40dp"
             android:hint="@string/nhapsdt"
             app:endIconMode="clear_text"
             app:startIconDrawable="@drawable/ic_round_smartphone_24">
@@ -36,7 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
-                android:maxLength="10"/>
+                android:maxLength="10" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button

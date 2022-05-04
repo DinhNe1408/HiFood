@@ -68,7 +68,7 @@ public class UpMonAn extends AppCompatActivity {
             mMonan = MyAppication.mDao.MA(IDMA);
             txtV_toolbar_title.setText("Chỉnh sửa món ăn");
             editT_TenMA_upma.setText(mMonan.getTenMA());
-            editT_GiaMa_upma.setText(String.valueOf(mMonan.getGiaMA()));
+            editT_GiaMa_upma.setText(String.valueOf((int) mMonan.getGiaMA()));
             checkB_Khoa_upma.setChecked(mMonan.isKhoa());
             imgV_Hinh.setImageBitmap(key.Byte2Bitmap(mMonan.getHinhMA()));
         }

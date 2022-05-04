@@ -31,6 +31,14 @@ public class ctdh implements Serializable {
         this.GhiChu = ghiChu;
     }
 
+    public byte[] getHinhMA() {
+        return HinhMA;
+    }
+
+    public void setHinhMA(byte[] hinhMA) {
+        HinhMA = hinhMA;
+    }
+
     public String getTenMA() {
         return TenMA;
     }

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
 
+import android.util.Log;
 import android.widget.Button;
 
 import android.widget.TextView;
@@ -24,7 +25,6 @@ import com.google.android.material.textfield.TextInputLayout;
 
 public class DangNhapAct extends AppCompatActivity {
     private TextInputEditText editT_SDT_dn, editT_MK_dn;
-    //private TextInputLayout txtL_SDT_dn, txtL_MK_dn;
     private TextView txtV_TaoTK_dn;
     private Button btn_DN_dn;
 
@@ -47,7 +47,6 @@ public class DangNhapAct extends AppCompatActivity {
                     if (!mTaikhoan.isKhoa()) {
                         MyAppication.mTaiKhoan = mTaikhoan;
                         MyAppication.mTaiKhoan.setCurVitri(MyAppication.curViTri);
-
                         if (mTaikhoan.getRole().equals("user")) {
                             Intent mIntent = new Intent(DangNhapAct.this, TrangChuAct.class);
                             startActivity(mIntent);
@@ -58,7 +57,7 @@ public class DangNhapAct extends AppCompatActivity {
                             Intent mIntent = new Intent(DangNhapAct.this, QuanTri.class);
                             startActivity(mIntent);
 
-                        } else if (mTaikhoan.getRole().equals("diner")){
+                        } else if (mTaikhoan.getRole().equals("dinner")){
                             if(MyAppication.mDao.isQAKhoa(mTaikhoan.getIdTK()) == 0){
                                 MyAppication.mTaiKhoan.setIDQA(MyAppication.mDao.TKQA(mTaikhoan.getIdTK()));
                                 Intent mIntent = new Intent(DangNhapAct.this, QuanAn.class);
@@ -68,7 +67,6 @@ public class DangNhapAct extends AppCompatActivity {
                             }
 
                         }
-
                     } else {
                         Toast.makeText(this, "Tài khoản của bạn đã bị khóa.", Toast.LENGTH_SHORT).show();
                     }
@@ -89,6 +87,13 @@ public class DangNhapAct extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        editT_MK_dn.setText("");
+        editT_SDT_dn.setText("");
+    }
+
     private void AnhXa() {
         btn_DN_dn = findViewById(R.id.btn_DN_dn);
         txtV_TaoTK_dn = findViewById(R.id.txtV_TaoTK_dn);
@@ -96,7 +101,5 @@ public class DangNhapAct extends AppCompatActivity {
         editT_SDT_dn = findViewById(R.id.editT_SDT_dn);
         editT_MK_dn = findViewById(R.id.editT_MK_dn);
 
-        //txtL_SDT_dn = findViewById(R.id.txtL_SDT_dn);
-        //txtL_MK_dn = findViewById(R.id.txtL_MK_dn);
     }
 }

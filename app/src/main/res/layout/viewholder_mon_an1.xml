@@ -12,7 +12,7 @@
         android:layout_height="75dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:src="@drawable/w42419" />
+        android:scaleType="centerCrop"/>
 
     <TextView
         android:id="@+id/txtV_TenMA_ma1"
@@ -68,9 +68,9 @@
                 android:layout_height="35dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/hifood1"
+                android:scaleType="center"
                 android:src="@drawable/ic_round_remove_24"
-                app:tint="@color/white"
-                android:scaleType="center"/>
+                app:tint="@color/white" />
 
             <TextView
                 android:id="@+id/txtV_SoL_ma1"
@@ -87,10 +87,9 @@
                 android:layout_weight="1"
                 android:backgroundTint="@color/hifood1"
                 android:src="@drawable/ic_round_add_24"
-                app:tint="@color/white"/>
+                app:tint="@color/white" />
         </LinearLayout>
     </RelativeLayout>
-
 
 
 </RelativeLayout>

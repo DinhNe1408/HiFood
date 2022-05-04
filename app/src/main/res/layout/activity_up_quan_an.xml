@@ -56,8 +56,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     android:layout_toStartOf="@+id/imgB_LayViTri_upqa"
-                    android:hint="Địa chỉ"
-                    android:enabled="false">
+                    android:enabled="false"
+                    android:hint="Địa chỉ">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/editT_ViTri_upqa"
@@ -77,24 +77,62 @@
                     app:tint="@color/white" />
             </RelativeLayout>
 
+            <RelativeLayout
+                android:id="@+id/relative1_upqa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_getdate"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/txtV_MaTK_upqa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginEnd="10dp"
+                    android:layout_toStartOf="@+id/imgV1_upqa"
+                    android:text="Mã tài khoản: " />
+
+                <TextView
+                    android:id="@+id/txtV_TenTK_upqa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtV_MaTK_upqa"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_toStartOf="@+id/imgV1_upqa"
+                    android:text="Họ và tên: " />
+
+                <ImageView
+                    android:id="@+id/imgV1_upqa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_round_arrow_drop_down_24" />
+            </RelativeLayout>
+
             <CheckBox
                 android:id="@+id/checkB_KhoaQA_upqa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="20dp"
-                android:text="Khóa quán ăn"/>
+                android:text="Khóa quán ăn" />
 
 
             <Button
                 android:id="@+id/btn_XacNhan_upqa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="30dp"
-                android:layout_marginHorizontal="15dp"
                 android:text="Xác nhận" />
-
 
         </LinearLayout>
     </ScrollView>

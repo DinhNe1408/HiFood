@@ -1,10 +1,14 @@
 package com.example.bctn.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,7 +28,7 @@ public class QuanAnAct extends AppCompatActivity {
 
     private TabLayout tab_qa;
     private ViewPager2 viewPage2_qa;
-    private TextView txtV_Ten_qa, txtV_ViTri_qa, txtV_Sao_QA, txtV_TGian_QA, tvtV_KhCach_qa;
+    private TextView txtV_Ten_qa, txtV_ViTri_qa, txtV_Sao_qa, txtV_TGian_qa, tvtV_KhCach_qa;
     private ImageView imgV_Hinh_qa, imgV_Thich_qa;
     public static quanan quanan;
     private int IDQA;
@@ -67,10 +71,10 @@ public class QuanAnAct extends AppCompatActivity {
             }
         }
 
-        String url = key.url1 + quanan.getVitriQA().getKinhdo() + "%2C" +
-                quanan.getVitriQA().getVido() + "%3B" +
-                MyAppication.mTaiKhoan.getCurVitri().getKinhdo() + "%2C" +
-                MyAppication.mTaiKhoan.getCurVitri().getVido() + key.url2 + key.token_mapbox;
+//        String url = key.url1 + quanan.getVitriQA().getKinhdo() + "%2C" +
+//                quanan.getVitriQA().getVido() + "%3B" +
+//                MyAppication.mTaiKhoan.getCurVitri().getKinhdo() + "%2C" +
+//                MyAppication.mTaiKhoan.getCurVitri().getVido() + key.url2 + key.token_mapbox;
 
 //        RequestQueue requestQueue = Volley.newRequestQueue(mContext);
 //        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
@@ -96,7 +100,6 @@ public class QuanAnAct extends AppCompatActivity {
 //        );
 //        requestQueue.add(jsonObjectRequest);
 
-        imgV_Thich_qa.setColorFilter(getResources().getColor(R.color.hifood1));
 
         imgV_Thich_qa.setOnClickListener(view -> {
             if (MyAppication.mTaiKhoan.getIdTK() != -1) {
@@ -110,15 +113,18 @@ public class QuanAnAct extends AppCompatActivity {
                     Toast.makeText(QuanAnAct.this, "Đã thêm vào yêu thích", Toast.LENGTH_SHORT).show();
                 }
                 isThich = !isThich;
-                imgV_Thich_qa.setColorFilter(getResources().getColor(R.color.hifood1));
             } else {
                 Toast.makeText(this, "Bạn chưa đăng nhập", Toast.LENGTH_SHORT).show();
             }
         });
+        key.setTextViewDrawableColor(tvtV_KhCach_qa, R.color.location);
+
         //imgV_Hinh_qa.setImageBitmap(key.Byte2Bitmap(quanan.getHinhQA()));
         txtV_Ten_qa.setText(quanan.getTenQA());
         txtV_ViTri_qa.setText(quanan.getVitriQA().getVitri());
     }
+
+
 
     private void AnhXa() {
         tab_qa = findViewById(R.id.tab_qa);
@@ -129,8 +135,8 @@ public class QuanAnAct extends AppCompatActivity {
 
         txtV_Ten_qa = findViewById(R.id.txtV_Ten_qa);
         txtV_ViTri_qa = findViewById(R.id.txtV_ViTri_qa);
-        txtV_TGian_QA = findViewById(R.id.txtV_TGian_qa);
-        txtV_Sao_QA = findViewById(R.id.txtV_Sao_qa);
+        txtV_TGian_qa = findViewById(R.id.txtV_TGian_qa);
+        txtV_Sao_qa = findViewById(R.id.txtV_Sao_qa);
         tvtV_KhCach_qa = findViewById(R.id.tvtV_KhCach_qa);
     }
 }

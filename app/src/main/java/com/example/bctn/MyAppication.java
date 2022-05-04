@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 
 import com.example.bctn.domain.key;
+import com.example.bctn.domain.quanan;
 import com.example.bctn.domain.taikhoan;
 import com.example.bctn.domain.vitri;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -36,6 +37,7 @@ public class MyAppication extends Application {
     public static DAO mDao;
     public static taikhoan mTaiKhoan;
     public static vitri mViTri, curViTri;
+
     @Override
     public void onCreate() {
         super.onCreate();

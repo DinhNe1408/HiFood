@@ -16,7 +16,8 @@
             android:layout_height="75dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:src="@drawable/khongchu" />
+            android:src="@drawable/khongchu"
+            android:scaleType="centerCrop"/>
 
         <TextView
             android:id="@+id/txtV_TenMA_ma2"

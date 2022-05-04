@@ -101,10 +101,10 @@ public class HomeFrag extends Fragment {
         }
         mListTL = getListTL();
 
-        TheLoaiAdap theLoaiAdap = new TheLoaiAdap(mView.getContext(), mListTL);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(mView.getContext(), 2, RecyclerView.HORIZONTAL, false);
-        recV_TheLoai_home.setLayoutManager(gridLayoutManager);
-        recV_TheLoai_home.setAdapter(theLoaiAdap);
+//        TheLoaiAdap theLoaiAdap = new TheLoaiAdap(mView.getContext(), mListTL);
+//        GridLayoutManager gridLayoutManager = new GridLayoutManager(mView.getContext(), 2, RecyclerView.HORIZONTAL, false);
+//        recV_TheLoai_home.setLayoutManager(gridLayoutManager);
+//        recV_TheLoai_home.setAdapter(theLoaiAdap);
 
         tabHomeAdap = new TabHomeAdap(getActivity());
         viewPage2_home_2.setAdapter(tabHomeAdap);
@@ -112,7 +112,7 @@ public class HomeFrag extends Fragment {
         new TabLayoutMediator(tab_home_1, viewPage2_home_2, (tab, position) -> {
             switch (position) {
                 case 1:
-                    tab.setText("Bán chạy");
+                    tab.setText("Đánh giá");
                     break;
                 case 2:
                     tab.setText("Phổ biến");
@@ -153,7 +153,7 @@ public class HomeFrag extends Fragment {
     private void AnhXa() {
         viewPage2_Slide = mView.findViewById(R.id.viewPage2_Slide);
         circleIndicator3 = mView.findViewById(R.id.Indicator3_Slide);
-        recV_TheLoai_home = mView.findViewById(R.id.recV_TheLoai_home);
+        //recV_TheLoai_home = mView.findViewById(R.id.recV_TheLoai_home);
 
         viewPage2_home_2 = mView.findViewById(R.id.viewPage2_home_2);
         tab_home_1 = mView.findViewById(R.id.tab_home_1);

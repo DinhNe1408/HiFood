@@ -40,7 +40,8 @@ public class DsMA_tt_Adap extends RecyclerView.Adapter<DsMA_tt_Adap.DsMA_tt_Adap
             return;
         }
 
-        holder.imgV_HinhMA_tt.setImageResource(R.drawable.w42419);
+
+        holder.imgV_HinhMA_tt.setImageBitmap(key.Byte2Bitmap(ctdh.getHinhMA()));
         holder.txtV_TenMA_tt.setText(ctdh.getTenMA());
         holder.GiaMA_tt.setText(key.Dou2Money(ctdh.getGiaMA()));
         holder.txtV_SLMA_tt.setText(String.format("x%d", ctdh.getSLMA()));

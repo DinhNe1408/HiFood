@@ -8,15 +8,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.icu.text.SimpleDateFormat;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.text.Spanned;
 import android.util.Log;
+import android.widget.TextView;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.text.HtmlCompat;
 
 import com.example.bctn.R;
@@ -57,8 +62,10 @@ public class key {
     public static final int key_QLDonHang = 980;
     public static final int key_ThongKe = 983;
     public static final int key_ThongTinQA = 678;
+    public static final int key_ThongKeQA = 3421;
     public static final int key_QLMonAn = 7091;
     public static final int key_DonHangQA = 3021;
+
 
     // Đơn hàng
     public static final String key_dh_HoanThanh = "HoanThanh";
@@ -71,6 +78,7 @@ public class key {
     public static final String key_IDDH = "IDDH";
     public static final String key_IDMA = "IDMA";
     public static final String key_TTGiao = "TTGiao";
+    public static final String key_SDT = "SDT";
 
     public static final String key_LoaiCS = "LoaiCS";
     public static final String key_Them = "Them";
@@ -82,6 +90,21 @@ public class key {
         return LocalDateTime.parse(time, formatter);
     }
 
+    public static String addZero(int x) {
+        if (x < 10) {
+            return "0" + x;
+        } else {
+            return String.valueOf(x);
+        }
+    }
+
+    public static void setTextViewDrawableColor(TextView textView, int color) {
+        for (Drawable drawable : textView.getCompoundDrawables()) {
+            if (drawable != null) {
+                drawable.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(textView.getContext(), color), PorterDuff.Mode.SRC_IN));
+            }
+        }
+    }
 
     public static byte[] BitmapDrawable2Byte(BitmapDrawable bitmapDrawable) {
         Bitmap bitmap = bitmapDrawable.getBitmap();
@@ -92,22 +115,22 @@ public class key {
     }
 
 
-    public static String DateFormat(Date date){
+    public static String DateFormat(Date date) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        return  simpleDateFormat.format(date);
+        return simpleDateFormat.format(date);
     }
 
-    public static String DateTimeFormat(Date date){
+    public static String DateTimeFormat(Date date) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm dd/MM/yyyy");
-        return  simpleDateFormat.format(date);
+        return simpleDateFormat.format(date);
     }
 
-    public static String DateFormatSQL(Date date){
+    public static String DateFormatSQL(Date date) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        return  simpleDateFormat.format(date);
+        return simpleDateFormat.format(date);
     }
 
-    public static Date DateFromSQL(String date){
+    public static Date DateFromSQL(String date) {
         Date temp = null;
         try {
             return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(date);
@@ -117,13 +140,13 @@ public class key {
         return temp;
     }
 
-    public static String Km2Met(double QuangDuong){
+    public static String Km2Met(double QuangDuong) {
         double Km = QuangDuong / 1000;
 
         return String.format("%.01f km", Km);
     }
 
-    public static String Second2Min(double ThoiGian){
+    public static String Second2Min(double ThoiGian) {
         double Min = ThoiGian / 60;
 
         return String.format("%.0f p", Min);

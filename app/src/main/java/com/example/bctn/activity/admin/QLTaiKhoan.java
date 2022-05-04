@@ -32,6 +32,7 @@ public class QLTaiKhoan extends AppCompatActivity {
     private SearchView iTimkiem;
     private DsTK_qltk_Adap dsTK_qltk_adap;
     private List<taikhoan> taikhoanList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,8 +53,8 @@ public class QLTaiKhoan extends AppCompatActivity {
 
     @Override
     protected void onStart() {
-        taikhoanList =  MyAppication.mDao.GetListTK();
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+        taikhoanList = MyAppication.mDao.GetListTK();
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         dsTK_qltk_adap = new DsTK_qltk_Adap(this, taikhoanList);
 
         recV_DSTaiKhoan.setAdapter(dsTK_qltk_adap);
@@ -91,7 +92,7 @@ public class QLTaiKhoan extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.iAdd:
                 Intent intent = new Intent(QLTaiKhoan.this, UpTaiKhoan.class);
-                intent.putExtra("LoaiCS", key.key_Them);
+                intent.putExtra(key.key_LoaiCS, key.key_Them);
                 startActivity(intent);
                 return true;
             case R.id.iTimkiem:

@@ -7,19 +7,29 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +38,9 @@ import com.example.bctn.R;
 import com.example.bctn.activity.DangKy2Act;
 import com.example.bctn.activity.LayViTri;
 import com.example.bctn.activity.quanan.ThongTinQA;
+import com.example.bctn.adapter.QuyenAdapter;
 import com.example.bctn.domain.key;
+import com.example.bctn.domain.quanan;
 import com.example.bctn.domain.taikhoan;
 import com.example.bctn.domain.vitri;
 import com.google.android.material.textfield.TextInputEditText;
@@ -37,6 +49,8 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UpTaiKhoan extends AppCompatActivity {
 
@@ -49,6 +63,9 @@ public class UpTaiKhoan extends AppCompatActivity {
     private taikhoan mtaikhoan;
     private String loai;
     private Toolbar tool3_QLTaiKhoan_Up;
+    private Spinner spinner_Quyen_uptk;
+    private QuyenAdapter quyenAdapter;
+    private List<String> strQuyen = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +75,12 @@ public class UpTaiKhoan extends AppCompatActivity {
 
         tool3_QLTaiKhoan_Up.setNavigationOnClickListener(view -> onBackPressed());
         TextView txtV_toolbar_title = tool3_QLTaiKhoan_Up.findViewById(R.id.txtV_toolbar_title);
+
+        strQuyen.add("Người dùng");
+        strQuyen.add("Quán ăn");
+
+        quyenAdapter = new QuyenAdapter(this, R.layout.spinner_select, strQuyen);
+        spinner_Quyen_uptk.setAdapter(quyenAdapter);
 
         Intent intent = getIntent();
         loai = intent.getStringExtra(key.key_LoaiCS);
@@ -75,10 +98,21 @@ public class UpTaiKhoan extends AppCompatActivity {
                 return;
 
             txtL_SDT_uptk.setEnabled(false);
+
             mtaikhoan = MyAppication.mDao.GetTK(IDTK);
+            if (mtaikhoan.getRole().equals("user")) {
+                spinner_Quyen_uptk.setSelection(0);
+            } else if (mtaikhoan.getRole().equals("dinner")) {
+                spinner_Quyen_uptk.setSelection(1);
+            }
             setText(key.Byte2Bitmap(mtaikhoan.getHinhTK()), mtaikhoan.getSdtTK(),
                     mtaikhoan.getMkTK(), mtaikhoan.getTenTK(), mtaikhoan.getVitri().getVitri(), mtaikhoan.isKhoa());
-            MyAppication.mViTri = mtaikhoan.getVitri();
+
+            if (mtaikhoan.getVitri().getVitri() != null) {
+                MyAppication.mViTri = mtaikhoan.getVitri();
+            } else {
+                MyAppication.mViTri = null;
+            }
         }
 
         SuKien();
@@ -87,7 +121,7 @@ public class UpTaiKhoan extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        if (MyAppication.mViTri != null){
+        if (MyAppication.mViTri != null) {
             editT_ViTri_uptk.setText(MyAppication.mViTri.getVitri());
         }
     }
@@ -110,7 +144,7 @@ public class UpTaiKhoan extends AppCompatActivity {
                     && editT_Ten_uptk.getText() != null
                     && editT_SDT_uptk.getText().length() != 0 && editT_MatKhau_uptk.getText().length() != 0
                     && editT_Ten_uptk.getText().length() != 0) {
-                if (editT_ViTri_uptk.getText() != null && editT_ViTri_uptk.getText().length() != 0){
+                if (editT_ViTri_uptk.getText() != null && editT_ViTri_uptk.getText().length() != 0) {
                     mtaikhoan.setSdtTK(editT_SDT_uptk.getText().toString().trim());
                     mtaikhoan.setMkTK(editT_MatKhau_uptk.getText().toString().trim());
 
@@ -120,8 +154,6 @@ public class UpTaiKhoan extends AppCompatActivity {
                                 if (key.isMk(mtaikhoan.getMkTK())) {
 
                                     mtaikhoan.setTenTK(editT_Ten_uptk.getText().toString().trim());
-                                    mtaikhoan.setVitri(new vitri(editT_ViTri_uptk.getText().toString().trim(), 0.0, 0.0));
-                                    mtaikhoan.setRole("user");
                                     mtaikhoan.setKhoa(checkB_KhoaTK_uptk.isChecked());
                                     mtaikhoan.setHinhTK(key.BitmapDrawable2Byte((BitmapDrawable) imgV_HinhTK_uptk.getDrawable()));
 
@@ -144,14 +176,12 @@ public class UpTaiKhoan extends AppCompatActivity {
                     } else {
                         if (key.isMk(mtaikhoan.getMkTK())) {
                             mtaikhoan.setTenTK(editT_Ten_uptk.getText().toString().trim());
-                            mtaikhoan.setVitri(new vitri(editT_ViTri_uptk.getText().toString().trim(), 0.0, 0.0));
-                            mtaikhoan.setRole("user");
                             mtaikhoan.setKhoa(checkB_KhoaTK_uptk.isChecked());
                             mtaikhoan.setHinhTK(key.BitmapDrawable2Byte((BitmapDrawable) imgV_HinhTK_uptk.getDrawable()));
 
                             MyAppication.mDao.CapNhatTK(mtaikhoan.getIdTK(), mtaikhoan.getSdtTK(), mtaikhoan.getMkTK(), mtaikhoan.getTenTK(), mtaikhoan.getRole(), mtaikhoan.isKhoa());
                             MyAppication.mDao.CapNhatHinhTK(mtaikhoan.getIdTK(), mtaikhoan.getHinhTK());
-
+                            Log.e("Quyen", mtaikhoan.getRole());
                             MyAppication.mDao.CapNhatViTriTK(mtaikhoan.getIdTK(), MyAppication.mViTri.getVitri(), MyAppication.mViTri.getVido(), MyAppication.mViTri.getKinhdo());
                             Toast.makeText(this, "Cập nhật tài khoản thành công", Toast.LENGTH_SHORT).show();
                         } else {
@@ -172,6 +202,28 @@ public class UpTaiKhoan extends AppCompatActivity {
             Intent intent = new Intent(UpTaiKhoan.this, LayViTri.class);
             startActivity(intent);
         });
+
+        spinner_Quyen_uptk.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (quyenAdapter.getItem(i).equals("Người dùng")) {
+                    mtaikhoan.setRole("user");
+                } else if (quyenAdapter.getItem(i).equals("Quán ăn")) {
+                    mtaikhoan.setRole("dinner");
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        MyAppication.mViTri = null;
+        super.onBackPressed();
     }
 
     private void setText(Bitmap hinhTK, String sdtTK, String mk, String tenTK, String vitri, boolean isKhoa) {
@@ -244,5 +296,6 @@ public class UpTaiKhoan extends AppCompatActivity {
         editT_MatKhau_uptk = findViewById(R.id.editT_MatKhau_uptk);
         editT_Ten_uptk = findViewById(R.id.editT_Ten_uptk);
         editT_ViTri_uptk = findViewById(R.id.editT_ViTri_uptk);
+        spinner_Quyen_uptk = findViewById(R.id.spinner_Quyen_uptk);
     }
 }

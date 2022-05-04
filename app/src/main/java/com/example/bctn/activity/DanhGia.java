@@ -18,6 +18,9 @@ import com.example.bctn.MyAppication;
 import com.example.bctn.R;
 import com.example.bctn.domain.danhgia;
 import com.example.bctn.domain.key;
+import com.example.bctn.domain.quanan;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DanhGia extends AppCompatActivity {
 
@@ -25,7 +28,10 @@ public class DanhGia extends AppCompatActivity {
     private Button btn_GuiDG;
     private EditText editT_NoiDungDG;
     private RatingBar rate3_SaoDG;
+    private CircleImageView imgV_HinhQA_dg;
+    private TextView txtV_TenQA_dg, txtV_DiaChiQA_dg;
     int IDDH;
+    quanan mQuanAn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,13 +46,18 @@ public class DanhGia extends AppCompatActivity {
         if (IDDH == -1 || danhgia == -1)
             return;
 
+        mQuanAn = MyAppication.mDao.TTQA_DG(IDDH);
 
         tool3_DanhGia.setNavigationOnClickListener(view -> onBackPressed());
         TextView txtV_toolbar_title = tool3_DanhGia.findViewById(R.id.txtV_toolbar_title);
         txtV_toolbar_title.setText("Đánh giá");
 
+        imgV_HinhQA_dg.setImageBitmap(key.Byte2Bitmap(mQuanAn.getHinhQA()));
+        txtV_TenQA_dg.setText(mQuanAn.getTenQA());
+        txtV_DiaChiQA_dg.setText(mQuanAn.getVitriQA().getVitri());
+
         danhgia danhGia = new danhgia();
-        if (danhgia == 1){
+        if (danhgia == 1) {
             danhGia = MyAppication.mDao.DG(IDDH);
             editT_NoiDungDG.setEnabled(false);
             rate3_SaoDG.setEnabled(false);
@@ -54,7 +65,6 @@ public class DanhGia extends AppCompatActivity {
             editT_NoiDungDG.setText(danhGia.getNoiDungDG());
             btn_GuiDG.setVisibility(View.INVISIBLE);
         }
-
 
         SuKien();
     }
@@ -76,5 +86,9 @@ public class DanhGia extends AppCompatActivity {
 
         editT_NoiDungDG = findViewById(R.id.editT_NoiDungDG);
         rate3_SaoDG = findViewById(R.id.rate3_SaoDG);
+
+        imgV_HinhQA_dg = findViewById(R.id.imgV_HinhQA_dg);
+        txtV_TenQA_dg = findViewById(R.id.txtV_TenQA_dg);
+        txtV_DiaChiQA_dg = findViewById(R.id.txtV_DiaChiQA_dg);
     }
 }

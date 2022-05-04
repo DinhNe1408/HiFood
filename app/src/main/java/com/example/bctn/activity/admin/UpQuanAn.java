@@ -5,22 +5,34 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,8 +40,10 @@ import com.example.bctn.MyAppication;
 import com.example.bctn.R;
 import com.example.bctn.activity.LayViTri;
 import com.example.bctn.activity.quanan.ThongTinQA;
+import com.example.bctn.adapter.ChonTKAdap;
 import com.example.bctn.domain.key;
 import com.example.bctn.domain.quanan;
+import com.example.bctn.domain.taikhoan;
 import com.example.bctn.domain.vitri;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -37,6 +51,8 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UpQuanAn extends AppCompatActivity {
 
@@ -50,6 +66,12 @@ public class UpQuanAn extends AppCompatActivity {
     private CheckBox checkB_KhoaQA_upqa;
     private String loai;
     private quanan mQuanan;
+    private static TextView txtV_MaTK_upqa;
+    private static TextView txtV_TenTK_upqa;
+    private RelativeLayout relative1_upqa;
+    static ChonTKAdap chonTKAdap;
+    static Dialog dialog;
+    private static taikhoan newTK;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +102,11 @@ public class UpQuanAn extends AppCompatActivity {
             checkB_KhoaQA_upqa.setChecked(mQuanan.isKhoa());
             txtV_toolbar_title.setText("Chỉnh sửa quán ăn");
         }
-
+        newTK = MyAppication.mDao.GetTK(mQuanan.getIDTK());
+        if (newTK != null) {
+            txtV_MaTK_upqa.setText("Mã tài khoản: " + newTK.getIdTK() + " - " + newTK.getSdtTK());
+            txtV_TenTK_upqa.setText("Họ và tên: " + newTK.getTenTK());
+        }
         SuKien();
     }
 
@@ -115,10 +141,10 @@ public class UpQuanAn extends AppCompatActivity {
 
                     if (loai.equals(key.key_Them)) {
                         mQuanan.setIdQA(MyAppication.mDao.TaoIDQA());
-                        MyAppication.mDao.TaoQA(mQuanan.getIdQA(), mQuanan.getTenQA());
+                        MyAppication.mDao.TaoQA(mQuanan.getIdQA(), mQuanan.getTenQA(), newTK.getIdTK());
                         Toast.makeText(this, "Tạo quán ăn thành công", Toast.LENGTH_SHORT).show();
                     } else {
-                        MyAppication.mDao.CapNhatQA(mQuanan.getIdQA(), mQuanan.getTenQA(), mQuanan.isKhoa());
+                        MyAppication.mDao.CapNhatQA(mQuanan.getIdQA(), mQuanan.getTenQA(), mQuanan.isKhoa(), newTK.getIdTK());
                         Toast.makeText(this, "Cập nhật quán ăn thành công", Toast.LENGTH_SHORT).show();
                     }
                     MyAppication.mDao.CapNhatViTriQA(mQuanan.getIdQA(), MyAppication.mViTri.getVitri(), MyAppication.mViTri.getVido(), MyAppication.mViTri.getKinhdo());
@@ -138,6 +164,51 @@ public class UpQuanAn extends AppCompatActivity {
             Intent intent = new Intent(UpQuanAn.this, LayViTri.class);
             startActivity(intent);
         });
+
+        relative1_upqa.setOnClickListener(view -> {
+            dialog = new Dialog(this);
+            dialog.setContentView(R.layout.dialog_chon_tk);
+            dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+            EditText editT_ChonTK = dialog.findViewById(R.id.editT_ChonTK);
+            RecyclerView recV_DSChonTK = dialog.findViewById(R.id.recV_DSChonTK);
+
+            editT_ChonTK.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    chonTKAdap.getFilter().filter(charSequence);
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+
+                }
+            });
+
+            List<taikhoan> taikhoanList = MyAppication.mDao.GetListTKQA();
+            chonTKAdap = new ChonTKAdap(this, taikhoanList);
+            recV_DSChonTK.setAdapter(chonTKAdap);
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+            recV_DSChonTK.setLayoutManager(linearLayoutManager);
+            RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+            recV_DSChonTK.addItemDecoration(itemDecoration);
+
+            dialog.show();
+        });
+    }
+
+    @SuppressLint("SetTextI18n")
+    public static void dismiss() {
+        newTK = MyAppication.mDao.GetTK(chonTKAdap.getIDTK());
+        txtV_MaTK_upqa.setText("Mã tài khoản: " + newTK.getIdTK() + " - " + newTK.getSdtTK());
+        txtV_TenTK_upqa.setText("Họ và tên: " + newTK.getTenTK());
+        dialog.dismiss();
     }
 
     @Override
@@ -201,5 +272,8 @@ public class UpQuanAn extends AppCompatActivity {
         editT_ViTri_upqa = findViewById(R.id.editT_ViTri_upqa);
 
         checkB_KhoaQA_upqa = findViewById(R.id.checkB_KhoaQA_upqa);
+        txtV_MaTK_upqa = findViewById(R.id.txtV_MaTK_upqa);
+        txtV_TenTK_upqa = findViewById(R.id.txtV_TenTK_upqa);
+        relative1_upqa = findViewById(R.id.relative1_upqa);
     }
 }

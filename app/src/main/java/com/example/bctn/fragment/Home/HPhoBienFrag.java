@@ -31,7 +31,7 @@ public class HPhoBienFrag extends Fragment {
         AnhXa();
         mDao = new DAO(getContext());
 
-        getData_RecV();
+        //getData_RecV();
         return mView;
     }
 

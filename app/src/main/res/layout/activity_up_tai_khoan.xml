@@ -138,6 +138,58 @@
                     app:tint="@color/white" />
             </RelativeLayout>
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:id="@+id/txtV1_uptk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="Quyền :"
+                    android:textSize="16sp" />
+
+                <Spinner
+                    android:id="@+id/spinner_Quyen_uptk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/txtV1_uptk"
+                    android:background="@android:color/transparent" />
+            </RelativeLayout>
+
+<!--            <RelativeLayout-->
+<!--                android:id="@+id/relative1_uptk"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginHorizontal="15dp"-->
+<!--                android:layout_marginTop="20dp">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txtV2_uptk"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:text="Quán ăn:"-->
+<!--                    android:textSize="16sp" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txtV_ChonQuanAn_uptk"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_marginStart="10dp"-->
+<!--                    android:layout_toEndOf="@+id/txtV2_uptk"-->
+<!--                    android:background="@drawable/bg_getdate"-->
+<!--                    android:drawableEnd="@drawable/ic_round_arrow_drop_down_24"-->
+<!--                    android:padding="10dp"-->
+<!--                    android:textSize="16sp" />-->
+<!--            </RelativeLayout>-->
+
             <CheckBox
                 android:id="@+id/checkB_KhoaTK_uptk"
                 android:layout_width="wrap_content"

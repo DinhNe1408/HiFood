@@ -28,7 +28,8 @@
             android:layout_marginTop="5dp"
             android:layout_marginEnd="10dp"
             android:layout_toEndOf="@+id/hinhQA_qa2"
-            android:text="Tên quán ăn" />
+            android:text="Tên quán ăn"
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/vitriQA_qa2"
@@ -59,12 +60,13 @@
 
             <TextView
                 android:id="@+id/saoQA_qa2"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:drawablePadding="2dp"
+                android:gravity="fill_vertical"
                 android:text="4.1"
-                app:drawableLeftCompat="@drawable/favourite" />
+                app:drawableLeftCompat="@drawable/ic_round_star_24" />
 
             <TextView
                 android:id="@+id/khcachQA_qa2"
@@ -72,6 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
                 android:layout_weight="1"
+                android:gravity="fill_vertical"
                 android:text="2.5km"
                 app:drawableLeftCompat="@drawable/ic_round_location_on_24" />
 
@@ -80,8 +83,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawablePadding="2dp"
+                android:gravity="fill_vertical"
                 android:text="25'"
-                app:drawableStartCompat="@drawable/stopwatch" />
+                app:drawableStartCompat="@drawable/ic_round_timer_24" />
         </LinearLayout>
     </RelativeLayout>
 

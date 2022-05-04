@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -39,6 +40,9 @@ public class HGanBanFrag extends Fragment {
         List<quanan> mListQA = mDao.ListQAGanBan();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         QuanAn1Adap quanAn1Adap = new QuanAn1Adap(getContext(), mListQA);
+        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
+
+        recV_HGanBan.addItemDecoration(itemDecoration);
         recV_HGanBan.setLayoutManager(linearLayoutManager);
         recV_HGanBan.setAdapter(quanAn1Adap);
     }
