@@ -13,6 +13,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -80,7 +81,6 @@ public class LayViTri extends AppCompatActivity implements OnMapReadyCallback {
                                 }
 
                                 GetPoint(latLng);
-
                                 MarkerOptions options = new MarkerOptions().position(latLng);
                                 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));
                                 googleMap.addMarker(options);
@@ -154,6 +154,7 @@ public class LayViTri extends AppCompatActivity implements OnMapReadyCallback {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             MyAppication.mViTri = newVitri;
+                            Log.e("vitri1",newVitri.getVitri());
                             onBackPressed();
                         }
                     })

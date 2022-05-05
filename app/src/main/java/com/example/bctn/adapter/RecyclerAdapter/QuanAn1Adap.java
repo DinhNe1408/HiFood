@@ -54,7 +54,7 @@ public class QuanAn1Adap extends RecyclerView.Adapter<QuanAn1Adap.QuanAn1AdapVie
         holder.hinhQA_1.setImageBitmap(key.Byte2Bitmap(quanan.getHinhQA()));
         holder.tenQA_1.setText(quanan.getTenQA());
         holder.vitriQA_1.setText(quanan.getVitriQA().getVitri());
-        holder.saoQA_1.setText(String.format("%.1f",quanan.getSaoQA()));
+        holder.saoQA_1.setText(String.format("%.01f",quanan.getSaoQA()));
 
         holder.relative_ma.setOnClickListener(view -> {
             Intent mIntent = new Intent(mContext, QuanAnAct.class);
@@ -92,7 +92,6 @@ public class QuanAn1Adap extends RecyclerView.Adapter<QuanAn1Adap.QuanAn1AdapVie
 //        }, error -> Toast.makeText(mContext, "Lỗi", Toast.LENGTH_SHORT).show()
 //        );
 //        requestQueue.add(jsonObjectRequest);
-        Log.e("tag","" + quanan.getSaoQA());
     }
 
     @Override

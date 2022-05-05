@@ -84,13 +84,16 @@ public class ThongTinNguoiDung extends AppCompatActivity {
                 if (editT_ViTri_ttnd.getText() != null && editT_ViTri_ttnd.getText().length() != 0) {
                     MyAppication.mTaiKhoan.setSdtTK(editT_SDT_ttnd.getText().toString().trim());
                     MyAppication.mTaiKhoan.setTenTK(editT_Ten_ttnd.getText().toString().trim());
+                    MyAppication.mTaiKhoan.setVitri(MyAppication.mViTri);
+                    MyAppication.mTaiKhoan.setHinhTK(key.BitmapDrawable2Byte((BitmapDrawable) imgV_HinhTK_ttnd.getDrawable()));
 
                     MyAppication.mDao.CapNhatTK(MyAppication.mTaiKhoan.getIdTK(), MyAppication.mTaiKhoan.getSdtTK(), MyAppication.mTaiKhoan.getMkTK(),
                             MyAppication.mTaiKhoan.getTenTK(), MyAppication.mTaiKhoan.getRole(), MyAppication.mTaiKhoan.isKhoa());
 
-                    MyAppication.mTaiKhoan.setHinhTK(key.BitmapDrawable2Byte((BitmapDrawable) imgV_HinhTK_ttnd.getDrawable()));
+                    MyAppication.mTaiKhoan.setHinhTK(MyAppication.mTaiKhoan.getHinhTK());
 
                     MyAppication.mDao.CapNhatHinhTK(MyAppication.mTaiKhoan.getIdTK(), MyAppication.mTaiKhoan.getHinhTK());
+
 
                     MyAppication.mDao.CapNhatViTriTK(MyAppication.mTaiKhoan.getIdTK(),
                             MyAppication.mViTri.getVitri(), MyAppication.mViTri.getVido(), MyAppication.mViTri.getKinhdo());

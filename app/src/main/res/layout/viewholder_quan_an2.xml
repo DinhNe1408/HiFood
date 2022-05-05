@@ -18,7 +18,8 @@
             android:layout_marginTop="5dp"
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="5dp"
-            android:src="@drawable/w42419" />
+            android:padding="5dp"
+            android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/tenQA_qa2"
@@ -65,7 +66,7 @@
                 android:layout_weight="1"
                 android:drawablePadding="2dp"
                 android:gravity="fill_vertical"
-                android:text="4.1"
+                android:text="0,0"
                 app:drawableLeftCompat="@drawable/ic_round_star_24" />
 
             <TextView
@@ -75,7 +76,7 @@
                 android:layout_marginEnd="5dp"
                 android:layout_weight="1"
                 android:gravity="fill_vertical"
-                android:text="2.5km"
+                android:text="0,0 km"
                 app:drawableLeftCompat="@drawable/ic_round_location_on_24" />
 
             <TextView
@@ -84,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:drawablePadding="2dp"
                 android:gravity="fill_vertical"
-                android:text="25'"
+                android:text="0 p"
                 app:drawableStartCompat="@drawable/ic_round_timer_24" />
         </LinearLayout>
     </RelativeLayout>

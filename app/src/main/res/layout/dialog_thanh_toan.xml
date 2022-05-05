@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
@@ -52,18 +53,38 @@
         android:layout_margin="10dp"
         android:background="@drawable/bg_white_border_edittext"
         android:hint="Số điện thoại"
+        android:inputType="number"
         android:maxLines="1"
-        android:padding="10dp"
-        android:inputType="number"/>
+        android:padding="10dp" />
 
-    <EditText
-        android:id="@+id/txtV_ViTri_dialog_tt"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/bg_white_border_edittext"
-        android:hint="Nơi giao hàng"
-        android:padding="10dp" />
+        android:layout_margin="10dp">
+
+        <EditText
+            android:id="@+id/txtV_ViTri_dialog_tt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_toStartOf="@+id/imgB_LayViTri_tt"
+            android:background="@drawable/bg_white_border_edittext"
+            android:hint="Nơi giao hàng"
+            android:padding="10dp"
+            android:enabled="false"/>
+
+        <ImageButton
+            android:id="@+id/imgB_LayViTri_tt"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:backgroundTint="@color/hifood1"
+            android:scaleType="center"
+            android:src="@drawable/ic_round_add_location_alt_24"
+            app:tint="@color/white" />
+    </RelativeLayout>
+
 
     <Button
         android:id="@+id/btn_LuuThongTin_dialog_tt"

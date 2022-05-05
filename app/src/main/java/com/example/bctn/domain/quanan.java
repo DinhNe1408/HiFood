@@ -50,6 +50,16 @@ public class quanan implements Serializable {
         this.IDTK = IDTK;
     }
 
+    public quanan(int idQA, String tenQA, byte[] hinhQA, vitri vitriQA, boolean Khoa, List<monan> dsMA, double SaoQA) {
+        this.idQA = idQA;
+        this.tenQA = tenQA;
+        this.hinhQA = hinhQA;
+        this.vitriQA = vitriQA;
+        this.Khoa = Khoa;
+        this.dsMA = dsMA;
+        this.saoQA = SaoQA;
+    }
+
     public int getIdQA() {
         return idQA;
     }

@@ -77,6 +77,7 @@
                 android:drawableStart="@drawable/ic_round_star_24"
                 android:drawablePadding="2dp"
                 android:gravity="center_vertical"
+                android:inputType="number"
                 android:text="4.1" />
 
             <TextView
@@ -86,7 +87,7 @@
                 android:layout_marginEnd="5dp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="2.5km"
+                android:text="0.0km"
                 app:drawableLeftCompat="@drawable/ic_round_location_on_24" />
 
             <TextView
@@ -97,7 +98,7 @@
                 android:drawableStart="@drawable/ic_round_timer_24"
                 android:drawablePadding="2dp"
                 android:gravity="center_vertical"
-                android:text="25'"
+                android:text="0 p"
                 android:tint="@color/hifood1" />
         </LinearLayout>
 

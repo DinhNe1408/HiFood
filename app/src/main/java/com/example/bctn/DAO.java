@@ -213,10 +213,38 @@ public class DAO {
                 new vitri(tro.getString(3), tro.getDouble(4), tro.getDouble(5)));
     }
 
+    public quanan ThongTinQA(int IDQA) {
+
+        List<monan> list = new ArrayList<>();
+        Cursor tro1 = mDatabase.Get("SELECT * FROM MonAn WHERE Khoa = 0 AND IDQA = " + IDQA);
+        while (tro1.moveToNext()) {
+            list.add(new monan(tro1.getInt(1),
+                    tro1.getBlob(2),
+                    tro1.getString(3),
+                    tro1.getDouble(4)));
+        }
+
+        Cursor tro2 = mDatabase.Get("SELECT A.IDQA, A.TenQA, A.HinhQA, A.DiaChiQA, A.ViDoQA, A.KinhDoQA, A.Khoa, " +
+                "(SELECT IFNULL(AVG(B.SaoDG),0) FROM DanhGia B, DonHang C WHERE B.IDDH = C.IDDH AND C.IDQA = A.IDQA) AS SaoQA" +
+                " FROM QuanAn A WHERE IDQA = " + IDQA);
+        while (tro2.moveToNext()) {
+            return new quanan(
+                    tro2.getInt(0),
+                    tro2.getString(1),
+                    tro2.getBlob(2),
+                    new vitri(tro2.getString(3), tro2.getDouble(4), tro2.getDouble(5)),
+                    tro2.getInt(6) == 1,
+                    list,
+                    tro2.getDouble(7)
+            );
+        }
+        return null;
+    }
+
     public quanan QA(int IDQA) {
 
         List<monan> list = new ArrayList<>();
-        Cursor tro1 = mDatabase.Get("SELECT * FROM MonAn WHERE IDQA = " + IDQA);
+        Cursor tro1 = mDatabase.Get("SELECT * FROM MonAn WHERE Khoa = 0 AND IDQA = " + IDQA);
         while (tro1.moveToNext()) {
             list.add(new monan(tro1.getInt(1),
                     tro1.getBlob(2),
@@ -241,13 +269,16 @@ public class DAO {
 
     public List<quanan> ListQAGanBan() {
         List<quanan> list = new ArrayList<>();
-        Cursor tro = mDatabase.Get("SELECT * FROM QuanAn WHERE Khoa = 0 LIMIT 8");
+        Cursor tro = mDatabase.Get("SELECT A.IDQA, A.TenQA, A.HinhQA, A.DiaChiQA, A.ViDoQA, A.KinhDoQA,(SELECT IFNULL(AVG(B.SaoDG),0) " +
+                "FROM DanhGia B, DonHang C WHERE B.IDDH = C.IDDH AND C.IDQA = A.IDQA) AS SaoQA FROM QuanAn A " +
+                "WHERE Khoa = 0 LIMIT 8");
         while (tro.moveToNext()) {
             list.add(new quanan(
                     tro.getInt(0),
                     tro.getString(1),
                     tro.getBlob(2),
-                    new vitri(tro.getString(3), tro.getDouble(4), tro.getDouble(5))
+                    new vitri(tro.getString(3), tro.getDouble(4), tro.getDouble(5)),
+                    tro.getDouble(6)
             ));
         }
         return list;

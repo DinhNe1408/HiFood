@@ -229,4 +229,26 @@ public class key {
     private static int getThongbaoID() {
         return (int) new Date().getTime();
     }
+
+    public static double CheckGiam(double TongDonHang) {
+        if (TongDonHang >= 1000000) {
+            return 80000;
+        } else if (TongDonHang >= 800000) {
+            return 60000;
+        } else if (TongDonHang >= 500000) {
+            return 40000;
+        } else if (TongDonHang >= 200000) {
+            return 20000;
+        } else {
+            return 0;
+        }
+    }
+
+    public static double CheckPhiVC(int Km){
+        if (Km > 0 && Km <= 3){
+            return 150000;
+        } else {
+            return ((Km - 3) * 3000) + 15000;
+        }
+    }
 }
