@@ -10,8 +10,10 @@
         android:id="@+id/txtV_toolbar_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:text="Tiêu đề"
-        android:textSize="20sp"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:textSize="18sp"
         android:layout_gravity="center_horizontal"/>
 </androidx.appcompat.widget.Toolbar>

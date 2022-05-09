@@ -10,6 +10,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -97,7 +98,7 @@ public class QuanAnAct extends AppCompatActivity {
                     double Distance = 0;
 
                     // 0  là thời gian ngắn nhất  1 là quảng đường ngắn nhất
-                    JSONObject jsonItem = jsonItems.getJSONObject(1);
+                    JSONObject jsonItem = jsonItems.getJSONObject(0);
                     Time = jsonItem.getDouble("duration");
                     Distance = jsonItem.getDouble("distance");
                     quanan.setKhcachQA(Distance / 1000);

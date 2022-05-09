@@ -71,7 +71,6 @@ public class QLQuanAn extends AppCompatActivity {
         try {
             position = dsQA_qlqa_adap.getPosition();
         } catch (Exception e) {
-            Log.d("TAG", e.getLocalizedMessage(), e);
             return super.onContextItemSelected(item);
         }
         switch (item.getItemId()) {

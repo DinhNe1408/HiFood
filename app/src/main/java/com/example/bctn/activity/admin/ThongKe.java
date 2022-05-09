@@ -89,7 +89,7 @@ public class ThongKe extends AppCompatActivity {
         BarData barData = new BarData(barDataSet);
         bar_ThongKe_tkqtv.setFitBars(true);
         bar_ThongKe_tkqtv.setData(barData);
-        bar_ThongKe_tkqtv.getDescription().setText("Ví dụ bar");
+        bar_ThongKe_tkqtv.getDescription().setText("VNĐ");
 
         XAxis xAxis = bar_ThongKe_tkqtv.getXAxis();
         xAxis.setValueFormatter(new IndexAxisValueFormatter(lableName));

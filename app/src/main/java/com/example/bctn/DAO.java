@@ -2,6 +2,7 @@ package com.example.bctn;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.util.Log;
@@ -42,11 +43,11 @@ public class DAO {
 
     public List<quanan> TimKiem(String timkiem) {
         List<quanan> quananList = new ArrayList<>();
-        Cursor tro = mDatabase.Get("SELECT * FROM QuanAn A WHERE TenQA Like '%" + timkiem
-                + "%' OR EXISTS (SELECT * FROM MonAn B WHERE TenMA Like '%" + timkiem + "%' AND A.IDQA = B.IDQA) LIMIT 50 ");
+        Cursor tro = mDatabase.Get("SELECT * FROM QuanAn A WHERE Khoa = 0 AND TenQA Like '%" + timkiem
+                + "%' OR EXISTS (SELECT * FROM MonAn B WHERE Khoa = 0 TenMA Like '%" + timkiem + "%' AND A.IDQA = B.IDQA) LIMIT 50 ");
         while (tro.moveToNext()) {
             List<monan> monanList = new ArrayList<>();
-            Cursor tro2 = mDatabase.Get("SELECT * FROM MonAn WHERE TenMA Like '%" + timkiem + "%' AND IDQA = " + tro.getInt(0));
+            Cursor tro2 = mDatabase.Get("SELECT * FROM MonAn WHERE Khoa = 0 AND TenMA Like '%" + timkiem + "%' AND IDQA = " + tro.getInt(0));
 
             while (tro2.moveToNext()) {
                 monanList.add(new monan(tro2.getInt(1),
@@ -327,8 +328,8 @@ public class DAO {
     }
 
     public void CapNhatQA(int IDQA, String TenQA, boolean Khoa, int IDTK) {
-        mDatabase.Query("UPDATE QuanAn SET TenQA = '"
-                + TenQA + "', Khoa = " + (Khoa ? 1 : 0) + ", IDTK =" + IDTK + " WHERE IDQA = " + IDQA);
+        mDatabase.Query("UPDATE QuanAn SET TenQA = "
+                + DatabaseUtils.sqlEscapeString(TenQA) + ", Khoa = " + (Khoa ? 1 : 0) + ", IDTK =" + IDTK + " WHERE IDQA = " + IDQA);
     }
 
     public void CapNhatViTriQA(int IDQA, String DiaChiQA, double ViDoQA, double KinhDoQA) {
@@ -669,7 +670,7 @@ public class DAO {
     }
 
     public int TongDonHangQA(int IDQA, String Ngay) {
-        Cursor tro = mDatabase.Get("SELECT IFNULL(SUM(IDDH),0) AS TongDon FROM DonHang " +
+        Cursor tro = mDatabase.Get("SELECT IFNULL(COUNT(IDDH),0) AS TongDon FROM DonHang " +
                 "WHERE TTGiao Like 'HoanThanh' AND IDQA = " + IDQA + " AND strftime('%Y %m %d',TGDat) = '" + Ngay + "'");
         tro.moveToNext();
         return tro.getInt(0);

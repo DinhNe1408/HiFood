@@ -22,6 +22,7 @@ public class DangKy2Act extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_dang_ky2_act);
         AnhXa();
 

@@ -114,7 +114,6 @@ public class key {
         return byteArray.toByteArray();
     }
 
-
     public static String DateFormat(Date date) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         return simpleDateFormat.format(date);
@@ -246,9 +245,9 @@ public class key {
 
     public static double CheckPhiVC(int Km){
         if (Km > 0 && Km <= 3){
-            return 150000;
+            return 15000;
         } else {
-            return ((Km - 3) * 3000) + 15000;
+            return ((Km - 3) * 5000) + 15000;
         }
     }
 }

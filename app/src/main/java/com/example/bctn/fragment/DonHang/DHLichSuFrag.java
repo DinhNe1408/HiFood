@@ -31,7 +31,7 @@ import java.util.TimeZone;
 public class DHLichSuFrag extends Fragment {
 
     private View mView;
-    private TextView txtV_ChonNgay;
+    //private TextView txtV_ChonNgay;
     private RecyclerView recV_DHLichSu;
 
     @Nullable
@@ -40,35 +40,35 @@ public class DHLichSuFrag extends Fragment {
         mView = inflater.inflate(R.layout.frag_dh_lich_su, container, false);
         AnhXa();
 
-        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
-        calendar.add(Calendar.MONTH, -1);
-        Long befor = calendar.getTimeInMillis();
-        calendar.clear();
-
-
-        Long today = MaterialDatePicker.todayInUtcMilliseconds();
-
-        MaterialDatePicker.Builder<Pair<Long, Long>> builder = MaterialDatePicker.Builder.dateRangePicker();
-        builder.setCalendarConstraints(new CalendarConstraints.Builder().setEnd(today).build());
-        builder.setTitleText("Chọn ngày");
-        builder.setSelection(new Pair<>(befor, today));
-
-        final MaterialDatePicker materialDatePicker = builder.build();
+//        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+//        calendar.add(Calendar.MONTH, -1);
+//        Long befor = calendar.getTimeInMillis();
+//        calendar.clear();
+//
+//
+//        Long today = MaterialDatePicker.todayInUtcMilliseconds();
+//
+//        MaterialDatePicker.Builder<Pair<Long, Long>> builder = MaterialDatePicker.Builder.dateRangePicker();
+//        builder.setCalendarConstraints(new CalendarConstraints.Builder().setEnd(today).build());
+//        builder.setTitleText("Chọn ngày");
+//        builder.setSelection(new Pair<>(befor, today));
+//
+//        final MaterialDatePicker materialDatePicker = builder.build();
 
         //txtV_ChonNgay.setText(materialDatePicker.getHeaderText());
-        txtV_ChonNgay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                materialDatePicker.show(getParentFragmentManager(), "ChonNgay");
-            }
-        });
+//        txtV_ChonNgay.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                materialDatePicker.show(getParentFragmentManager(), "ChonNgay");
+//            }
+//        });
 
-        materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
-            @Override
-            public void onPositiveButtonClick(Object selection) {
-                txtV_ChonNgay.setText(materialDatePicker.getHeaderText());
-            }
-        });
+//        materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
+//            @Override
+//            public void onPositiveButtonClick(Object selection) {
+//                txtV_ChonNgay.setText(materialDatePicker.getHeaderText());
+//            }
+//        });
 
         return mView;
     }
@@ -91,7 +91,7 @@ public class DHLichSuFrag extends Fragment {
     }
 
     private void AnhXa() {
-        txtV_ChonNgay = mView.findViewById(R.id.txtV_ChonNgay);
+        //txtV_ChonNgay = mView.findViewById(R.id.txtV_ChonNgay);
         recV_DHLichSu = mView.findViewById(R.id.recV_DHLichSu);
     }
 }

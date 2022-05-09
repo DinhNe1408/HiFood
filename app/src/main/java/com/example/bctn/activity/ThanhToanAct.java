@@ -147,7 +147,7 @@ public class ThanhToanAct extends AppCompatActivity {
 
         tool3_ThanhToan.setNavigationOnClickListener(view -> onBackPressed());
         txtV_toolbar_title = tool3_ThanhToan.findViewById(R.id.txtV_toolbar_title);
-        txtV_toolbar_title.setText("Thanh toán");
+        txtV_toolbar_title.setText("Đặt hàng");
 
         setThongTinNN();
         txtV_tongTienMA_tt.setText(key.Dou2Money(mDonhang.getTongTienMA()));
@@ -201,7 +201,7 @@ public class ThanhToanAct extends AppCompatActivity {
                     aftime.add(Calendar.MINUTE, 5 - x);
 
                     mDonhang.setPhiVC(key.CheckPhiVC((int) Distance / 1000));
-
+                    Log.e("PhiVC",mDonhang.getPhiVC() + " = " + Distance );
                     phiVC_tt.setText(key.Dou2Money(mDonhang.getPhiVC()));
                     mDonhang.setTongDH(mDonhang.getTongTienMAMap() + mDonhang.getPhiVC() - mDonhang.getTienGiam());
                     txtV_ThoiGianNhan_tt.setText("Thời gian giao: " + key.DateTimeFormat(aftime.getTime()));
@@ -263,6 +263,7 @@ public class ThanhToanAct extends AppCompatActivity {
                     mDonhang.setSDTNN(txtV_SDT_dialog_tt.getText().toString());
                     mDonhang.setVitriDH(txtV_ViTri_dialog_tt.getText().toString());
                     setThongTinNN();
+                    dialog.dismiss();
                     Toast.makeText(this, "Thông tin người nhận đã được cập nhật", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(this, "Vui lòng nhập đúng định dạng Số điện thoại ", Toast.LENGTH_SHORT).show();

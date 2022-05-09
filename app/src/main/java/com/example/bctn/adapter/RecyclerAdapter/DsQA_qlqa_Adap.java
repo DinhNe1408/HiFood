@@ -2,6 +2,7 @@ package com.example.bctn.adapter.RecyclerAdapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -17,6 +18,8 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bctn.R;
+import com.example.bctn.activity.admin.QLQuanAn;
+import com.example.bctn.activity.admin.UpQuanAn;
 import com.example.bctn.domain.key;
 import com.example.bctn.domain.quanan;
 
@@ -68,8 +71,12 @@ public class DsQA_qlqa_Adap extends RecyclerView.Adapter<DsQA_qlqa_Adap.DsQA_qlq
         }
 
         holder.itemView.setOnClickListener(v -> {
-            setPosition(holder.getPosition());
-            holder.itemView.performLongClick();
+            Intent intent = new Intent(mContext, UpQuanAn.class);
+            intent.putExtra(key.key_LoaiCS, key.key_Sua);
+            intent.putExtra(key.key_IDQA, quanan.getIdQA());
+            mContext.startActivity(intent);
+//            setPosition(holder.getPosition());
+//            holder.itemView.performLongClick();
         });
     }
 
@@ -113,7 +120,7 @@ public class DsQA_qlqa_Adap extends RecyclerView.Adapter<DsQA_qlqa_Adap.DsQA_qlq
         return 0;
     }
 
-    public static class DsQA_qlqa_Viewholder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
+    public static class DsQA_qlqa_Viewholder extends RecyclerView.ViewHolder {// implements View.OnCreateContextMenuListener {
 
         private CardView cardView_qlqa;
         private ImageView imgV_HinhQA_qlqa;
@@ -128,14 +135,14 @@ public class DsQA_qlqa_Adap extends RecyclerView.Adapter<DsQA_qlqa_Adap.DsQA_qlq
             txtV_TenQA_qlqa = itemView.findViewById(R.id.txtV_TenTK_qltk);
             txtV_Vitri_qlqa = itemView.findViewById(R.id.txtV_SDT_qltk);
 
-            itemView.setOnCreateContextMenuListener(this);
+            //itemView.setOnCreateContextMenuListener(this);
             cardView_qlqa.setOnClickListener(view -> cardView_qlqa.showContextMenu());
         }
 
-        @Override
-        public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo) {
-            contextMenu.add(contextMenu.NONE, R.id.iSua, contextMenu.NONE, "Sửa quán ăn");
-            contextMenu.add(contextMenu.NONE, R.id.iQuanLy, contextMenu.NONE, "Quản lý món ăn");
-        }
+//        @Override
+//        public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo) {
+//            contextMenu.add(contextMenu.NONE, R.id.iSua, contextMenu.NONE, "Sửa quán ăn");
+//            contextMenu.add(contextMenu.NONE, R.id.iQuanLy, contextMenu.NONE, "Quản lý món ăn");
+//        }
     }
 }

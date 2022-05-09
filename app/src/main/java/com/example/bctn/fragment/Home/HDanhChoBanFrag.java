@@ -1,6 +1,7 @@
 package com.example.bctn.fragment.Home;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,14 +12,18 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.chaquo.python.PyObject;
+import com.chaquo.python.Python;
+import com.chaquo.python.android.AndroidPlatform;
 import com.example.bctn.DAO;
+import com.example.bctn.MyAppication;
 import com.example.bctn.R;
 import com.example.bctn.adapter.RecyclerAdapter.QuanAn1Adap;
 import com.example.bctn.domain.quanan;
 
 import java.util.List;
 
-public class HPhoBienFrag extends Fragment {
+public class HDanhChoBanFrag extends Fragment {
 
     private View mView;
     private DAO mDao;
@@ -27,9 +32,25 @@ public class HPhoBienFrag extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.frag_h_pho_bien, container, false);
+        mView = inflater.inflate(R.layout.frag_h_danh_cho_ban, container, false);
         AnhXa();
         mDao = new DAO(getContext());
+        if (MyAppication.mTaiKhoan.getIdTK() == - 1){
+
+        } else {
+            if (!Python.isStarted()) {
+                Python.start(new AndroidPlatform(getContext()));
+            }
+            Python py = Python.getInstance();
+            final PyObject pyobj = py.getModule("BCTN_HTGY");
+            PyObject obj = pyobj.callAttr("BCTN_HTGY", MyAppication.mTaiKhoan.getIdTK());
+            String goiy = "";
+            List<PyObject> list = obj.asList();
+            for (int i = 0; i < list.size(); i++) {
+                goiy = " || " + list.get(i);
+            }
+            Log.e("DSQuan", goiy);
+        }
 
         //getData_RecV();
         return mView;

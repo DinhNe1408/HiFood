@@ -16,7 +16,6 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             android:text="HiFood"
-
             android:textColor="@color/white"
             android:textSize="24dp" />
 
@@ -33,7 +32,7 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:background="@drawable/bg_avatar"
-                android:src="@drawable/w42419" />
+                android:src="@drawable/khongchu" />
 
             <TextView
                 android:id="@+id/txtV_TenTK_tk"

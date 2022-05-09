@@ -12,9 +12,9 @@
         android:title="@string/yeuthich"
         android:icon="@drawable/ic_round_favorite_24"/>
 
-    <item android:id="@+id/ThongBao"
-        android:title="@string/thongbao"
-        android:icon="@drawable/ic_round_notifications_24"/>
+<!--    <item android:id="@+id/ThongBao"-->
+<!--        android:title="@string/thongbao"-->
+<!--        android:icon="@drawable/ic_round_notifications_24"/>-->
 
     <item android:id="@+id/ThongTin"
         android:title="@string/thongtin"

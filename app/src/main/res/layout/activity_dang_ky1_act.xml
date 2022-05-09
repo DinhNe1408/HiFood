@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="@string/taotk"
+            android:text="@string/dangky"
             android:textAllCaps="true"
             android:textColor="@color/black"
             android:textSize="28dp" />
@@ -36,7 +36,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="40dp"
-            android:text="hifood@gmail.com" />
+            android:text="0000000000" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/txtL_HoTen_dk1"

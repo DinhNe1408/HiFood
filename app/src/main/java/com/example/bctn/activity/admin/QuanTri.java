@@ -59,7 +59,7 @@ public class QuanTri extends AppCompatActivity {
         List<menu_option> menu_optionList = new ArrayList<>();
         menu_optionList.add(new menu_option(key.key_QLTaiKhoan, R.drawable.ic_round_person_24, 0, "Quản lý tài khoản"));
         menu_optionList.add(new menu_option(key.key_QLQuanAn, R.drawable.ic_round_store_mall_directory_24, 0, "Quản lý quán ăn"));
-        menu_optionList.add(new menu_option(key.key_QLDonHang, R.drawable.ic_round_receipt_long_24, 0, "Quản lý đơn hàng"));
+        //menu_optionList.add(new menu_option(key.key_QLDonHang, R.drawable.ic_round_receipt_long_24, 0, "Quản lý đơn hàng"));
         menu_optionList.add(new menu_option(key.key_ThongKe, R.drawable.ic_round_query_stats_24, 0, "Thống kê"));
         menu_optionList.add(new menu_option(key.key_DANGXUAT, R.drawable.ic_round_logout_24, 0, "Đăng xuất"));
 

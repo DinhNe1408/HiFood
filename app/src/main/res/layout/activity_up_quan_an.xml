@@ -132,7 +132,8 @@
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="30dp"
-                android:text="Xác nhận" />
+                android:text="Xác nhận"
+                android:background="@drawable/bg_button"/>
 
         </LinearLayout>
     </ScrollView>

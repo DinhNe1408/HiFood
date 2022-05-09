@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bctn.R;
@@ -52,12 +53,15 @@ public class DsMA_qlma_Adap extends RecyclerView.Adapter<DsMA_qlma_Adap.DsMA_qlm
         holder.txtV_TenMA_ma2.setText(monan.getTenMA());
         holder.txtV_GiaMa_ma2.setText(key.Dou2Money(monan.getGiaMA()));
 
+        if (monan.isKhoa()){
+            holder.cardView_qlma.setBackgroundColor(ContextCompat.getColor(mContext, R.color.hifood4));
+        }
         holder.cardView_qlma.setOnClickListener(view -> {
             Intent intent = new Intent(mContext, UpMonAn.class);
 
             intent.putExtra(key.key_LoaiCS, key.key_Sua);
             intent.putExtra(key.key_IDQA, IDQA);
-            intent.putExtra(key.key_IDMA,monan.getIdMA());
+            intent.putExtra(key.key_IDMA, monan.getIdMA());
             mContext.startActivity(intent);
         });
     }

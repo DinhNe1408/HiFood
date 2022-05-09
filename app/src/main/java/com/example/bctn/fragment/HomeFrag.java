@@ -115,7 +115,7 @@ public class HomeFrag extends Fragment {
                     tab.setText("Đánh giá");
                     break;
                 case 2:
-                    tab.setText("Phổ biến");
+                    tab.setText("Dành cho bạn");
                     break;
                 case 3:
                     tab.setText("Khuyến mãi");

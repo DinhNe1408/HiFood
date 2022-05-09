@@ -8,17 +8,28 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.bctn.MyAppication;
 import com.example.bctn.R;
 import com.example.bctn.activity.QuanAnAct;
 import com.example.bctn.domain.key;
 import com.example.bctn.domain.monan;
 import com.example.bctn.domain.quanan;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -84,6 +95,35 @@ public class TimKiem1Adap extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
             timKiemViewHolder.recV_DSMonAn_qa2.setAdapter(timKiem2Adap);
             timKiemViewHolder.recV_DSMonAn_qa2.setLayoutManager(linearLayoutManager);
+
+//            String url = key.url1 + quanan.getVitriQA().getKinhdo() + "%2C" +
+//                    quanan.getVitriQA().getVido() + "%3B" +
+//                    MyAppication.mTaiKhoan.getCurVitri().getKinhdo() + "%2C" +
+//                    MyAppication.mTaiKhoan.getCurVitri().getVido() + key.url2 + key.token_mapbox;
+//
+//            RequestQueue requestQueue = Volley.newRequestQueue(mContext);
+//            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+//                @Override
+//                public void onResponse(JSONObject response) {
+//                    try {
+//                        JSONArray jsonItems = response.getJSONArray("routes");
+//                        double Time = 0;
+//                        double Distance = 0;
+//
+//                        // 0  là thời gian ngắn nhất  1 là quảng đường ngắn nhất
+//                        JSONObject jsonItem = jsonItems.getJSONObject(1);
+//                        Time = jsonItem.getDouble("duration");
+//                        Distance = jsonItem.getDouble("distance");
+//                        //Toast.makeText(mContext, String.valueOf(Time), Toast.LENGTH_SHORT).show();
+//                        timKiemViewHolder.khcachQA_qa2.setText(key.Km2Met(Distance));
+//                        timKiemViewHolder.tgianQA_qa2.setText(key.Second2Min(Time));
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }, error -> Toast.makeText(mContext, "Lỗi", Toast.LENGTH_SHORT).show()
+//            );
+//            requestQueue.add(jsonObjectRequest);
         }
     }
 
@@ -107,12 +147,15 @@ public class TimKiem1Adap extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public class TimKiemViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView hinhQA_qa2;
-        private TextView tenQA_qa2, vitriQA_qa2;
+        private TextView tenQA_qa2, vitriQA_qa2, saoQA_qa2, khcachQA_qa2, tgianQA_qa2;
         private RecyclerView recV_DSMonAn_qa2;
 
         public TimKiemViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            saoQA_qa2 = itemView.findViewById(R.id.saoQA_qa2);
+            tgianQA_qa2 = itemView.findViewById(R.id.tgianQA_qa2);
+            khcachQA_qa2 = itemView.findViewById(R.id.khcachQA_qa2);
             hinhQA_qa2 = itemView.findViewById(R.id.hinhQA_qa2);
             tenQA_qa2 = itemView.findViewById(R.id.tenQA_qa2);
             vitriQA_qa2 = itemView.findViewById(R.id.vitriQA_qa2);

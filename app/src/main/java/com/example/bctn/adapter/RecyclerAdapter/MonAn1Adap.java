@@ -131,6 +131,7 @@ public class MonAn1Adap extends RecyclerView.Adapter<MonAn1Adap.MonAn1AdapViewHo
         btn_LuuGhiChu_dialog.setOnClickListener(view -> {
             if (txtV_GhiChu_dialog.getText().length() != 0) {
                 QAThucDonFrag.CapNhapGhiChuMonAn(IDMA, txtV_GhiChu_dialog.getText().toString());
+                dialog.dismiss();
                 Toast.makeText(mContext, "Ghi chú đã được cập nhật", Toast.LENGTH_SHORT).show();
             }
         });

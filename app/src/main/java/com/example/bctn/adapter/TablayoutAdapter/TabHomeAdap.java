@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.example.bctn.fragment.Home.HDanhChoBanFrag;
 import com.example.bctn.fragment.Home.HDanhGiaFrag;
 import com.example.bctn.fragment.Home.HGanBanFrag;
 
@@ -19,8 +20,8 @@ public class TabHomeAdap extends FragmentStateAdapter {
         switch (position){
             case 1:
                 return new HDanhGiaFrag();
-//            case 2:
-//                return new HPhoBienFrag();
+            case 2:
+                return new HDanhChoBanFrag();
 //            case 3:
 //                return new HKhuyenMaiFrag();
             default:
@@ -30,6 +31,6 @@ public class TabHomeAdap extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 2;
+        return 3;
     }
 }

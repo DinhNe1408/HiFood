@@ -61,7 +61,7 @@ public class QAThucDonFrag extends Fragment {
             SoLuong();
         }
 
-        Toast.makeText(mView.getContext(), String.valueOf(IDDH), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(mView.getContext(), String.valueOf(IDDH), Toast.LENGTH_SHORT).show();
         //getData_RecV();
 
         relative1_QA.setOnClickListener(view -> {
@@ -164,19 +164,19 @@ public class QAThucDonFrag extends Fragment {
         getData_RecV();
     }
 
-    private void OpenBotSheet() {
-        View view = getLayoutInflater().inflate(R.layout.bottomsheet_gio_hang, null);
-        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(mView.getContext());
-        bottomSheetDialog.setContentView(view);
-        bottomSheetDialog.show();
-        ImageButton imgB_Dong = view.findViewById(R.id.imgB_Dong);
+//    private void OpenBotSheet() {
+//        View view = getLayoutInflater().inflate(R.layout.bottomsheet_gio_hang, null);
+//        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(mView.getContext());
+//        bottomSheetDialog.setContentView(view);
+//        bottomSheetDialog.show();
+//        ImageButton imgB_Dong = view.findViewById(R.id.imgB_Dong);
+//
+//        //bottomSheetDialog.set
+//        imgB_Dong.setOnClickListener(view1 -> {
+//            bottomSheetDialog.dismiss();
+//        });
 
-        //bottomSheetDialog.set
-        imgB_Dong.setOnClickListener(view1 -> {
-            bottomSheetDialog.dismiss();
-        });
-
-    }
+//    }
 
     private void AnhXa() {
         recV_ThucDon_QA = mView.findViewById(R.id.recV_ThucDon_QA);

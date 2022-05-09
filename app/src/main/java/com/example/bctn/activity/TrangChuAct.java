@@ -69,9 +69,9 @@ public class TrangChuAct extends AppCompatActivity {
                     case R.id.YeuThich:
                         selFragment = new YeuThichFrag();
                         break;
-                    case R.id.ThongBao:
-                        selFragment = new ThongBaoFrag();
-                        break;
+//                    case R.id.ThongBao:
+//                        selFragment = new ThongBaoFrag();
+//                        break;
                     case R.id.ThongTin:
                         selFragment = new TaiKhoanFrag();
                         break;

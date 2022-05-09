@@ -3,6 +3,8 @@ package com.example.bctn.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
@@ -16,6 +18,7 @@ import com.example.bctn.R;
 import com.example.bctn.domain.key;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.io.ByteArrayOutputStream;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,6 +31,7 @@ public class DangKy1Act extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_dang_ky1_act);
 
         AnhXa();
@@ -46,6 +50,9 @@ public class DangKy1Act extends AppCompatActivity {
                 if (key.isMk(mk)) {
                     if (mk.equals(nlmk)) {
                         MyAppication.mDao.TaoTK(sdt, mk, editT_HoTen_dk1.getText().toString(), "user");
+                        int IDTK = MyAppication.mDao.IDTK(sdt, mk);
+
+                        MyAppication.mDao.CapNhatHinhTK(IDTK, key.BitmapDrawable2Byte((BitmapDrawable) getResources().getDrawable(R.drawable.khongchu)));
                         Intent mIntent = new Intent(DangKy1Act.this, DangNhapAct.class);
                         startActivity(mIntent);
                     } else {
