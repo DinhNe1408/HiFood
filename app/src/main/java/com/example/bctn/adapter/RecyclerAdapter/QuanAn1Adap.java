@@ -81,7 +81,6 @@ public class QuanAn1Adap extends RecyclerView.Adapter<QuanAn1Adap.QuanAn1AdapVie
                     JSONObject jsonItem = jsonItems.getJSONObject(0);
                     Time = jsonItem.getDouble("duration");
                     Distance = jsonItem.getDouble("distance");
-                    //Toast.makeText(mContext, String.valueOf(Time), Toast.LENGTH_SHORT).show();
                     holder.khcachQA_qa1.setText(key.Km2Met(Distance));
                     holder.tgianQA_qa1.setText(key.Second2Min(Time));
                 } catch (JSONException e) {

@@ -199,12 +199,13 @@ public class LayViTri extends AppCompatActivity implements OnMapReadyCallback {
     }
 
     private void GetPoint(LatLng latLng) {
+
         Geocoder geocoder = new Geocoder(LayViTri.this,
                 Locale.getDefault());
         try {
             List<Address> addresses = geocoder.getFromLocation(
                     latLng.latitude, latLng.longitude, 1);
-
+            Log.e("Hmm", addresses.get(0).getAddressLine(0));
             newVitri = new vitri(addresses.get(0).getAddressLine(0), addresses.get(0).getLatitude(), addresses.get(0).getLongitude());
         } catch (IOException e) {
             e.printStackTrace();

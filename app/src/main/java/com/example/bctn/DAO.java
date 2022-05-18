@@ -44,7 +44,7 @@ public class DAO {
     public List<quanan> TimKiem(String timkiem) {
         List<quanan> quananList = new ArrayList<>();
         Cursor tro = mDatabase.Get("SELECT * FROM QuanAn A WHERE Khoa = 0 AND TenQA Like '%" + timkiem
-                + "%' OR EXISTS (SELECT * FROM MonAn B WHERE Khoa = 0 TenMA Like '%" + timkiem + "%' AND A.IDQA = B.IDQA) LIMIT 50 ");
+                + "%' OR EXISTS (SELECT * FROM MonAn B WHERE Khoa = 0 AND TenMA Like '%" + timkiem + "%' AND A.IDQA = B.IDQA) LIMIT 50 ");
         while (tro.moveToNext()) {
             List<monan> monanList = new ArrayList<>();
             Cursor tro2 = mDatabase.Get("SELECT * FROM MonAn WHERE Khoa = 0 AND TenMA Like '%" + timkiem + "%' AND IDQA = " + tro.getInt(0));
@@ -263,6 +263,22 @@ public class DAO {
                     tro2.getInt(6) == 1,
                     list,
                     tro2.getInt(7)
+            );
+        }
+        return null;
+    }
+
+    public quanan DanhChoBanQA(String IDQA) {
+        Cursor tro = mDatabase.Get("SELECT A.IDQA, A.TenQA, A.HinhQA, A.DiaChiQA, A.ViDoQA, A.KinhDoQA,(SELECT IFNULL(AVG(B.SaoDG),0) " +
+                "FROM DanhGia B, DonHang C WHERE B.IDDH = C.IDDH AND C.IDQA = A.IDQA) AS SaoQA FROM QuanAn A " +
+                "WHERE IDQA = " + IDQA);
+        while (tro.moveToNext()) {
+            return new quanan(
+                    tro.getInt(0),
+                    tro.getString(1),
+                    tro.getBlob(2),
+                    new vitri(tro.getString(3), tro.getDouble(4), tro.getDouble(5)),
+                    tro.getDouble(6)
             );
         }
         return null;
@@ -611,7 +627,7 @@ public class DAO {
                     tro.getInt(0),
                     tro.getString(1),
                     tro.getBlob(2),
-                    new vitri(tro.getString(3), 4, 5),
+                    new vitri(tro.getString(3), tro.getDouble(4), tro.getDouble(5)),
                     tro.getDouble(6)));
         }
 

@@ -24,36 +24,26 @@ df_new = columns
 
 ratingCount = (df_new. groupby(by=['IDQA'])['SAODG'].count().reset_index().rename(columns={'SAODG': 'totalRatingCount'})[['IDQA', 'totalRatingCount']])
 
-x = ratingCount.groupby('totalRatingCount').count()
-plt.hist(ratingCount['totalRatingCount'], bins=20, edgecolor='black')
-# plt.show()
 rating_with_totalRatingCount = df_new.merge(ratingCount, left_on = 'IDQA', right_on = 'IDQA', how = 'left')
 
-popularity_threshold = 10
-rating_popular = rating_with_totalRatingCount.query('totalRatingCount >= @popularity_threshold')
-
-
-user_rating_pivot = rating_popular.pivot_table(index='IDQA', columns='IDTK', values='SAODG').fillna(0)
+user_rating_pivot = rating_with_totalRatingCount.pivot_table(index='IDQA', columns='IDTK', values='SAODG').fillna(0)
 user_rating_matrix = csr_matrix(user_rating_pivot.values)
 
-def BCTN_HTGY(address):
-    add = str(address)
+def BCTN_HTGY(IDTK):
     model_knn = NearestNeighbors(metric='cosine', algorithm='brute')
     model_knn.fit(user_rating_matrix)
-    query = add
-    query_index = np.random.choice(user_rating_pivot.shape[0])
+    query_index = 0
     for i in range(len(user_rating_pivot)):
-        if ( user_rating_pivot.index[i] == query ):
-            print("Vị trí:",i)
+        if ( user_rating_pivot.index[i] == IDTK ):
+            query_index = i
             break
 
-    print(type(query_index),query_index)
-    distances, indices = model_knn.kneighbors(user_rating_pivot.iloc[query_index, :].values.reshape(1, -1), n_neighbors=1)
+    distances, indices = model_knn.kneighbors(user_rating_pivot.iloc[query_index, :].values.reshape(1, -1), n_neighbors=9)
     array_best = []
     for i in range(0, len(distances.flatten())):
         if i == 0:
-            array_best.append(user_rating_pivot.index[query_index])
             print('Recommendations for {0}:\n'.format(user_rating_pivot.index[query_index], distances.flatten()[-i]))
         else:
+            array_best.append(user_rating_pivot.index[indices.flatten()[-i]])
             print('{0}: {1}, with distance of {2}.'.format(i, user_rating_pivot.index[indices.flatten()[-i]], distances.flatten()[-i]))
     return array_best

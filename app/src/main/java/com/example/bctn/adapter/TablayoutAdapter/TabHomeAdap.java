@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.example.bctn.MyAppication;
 import com.example.bctn.fragment.Home.HDanhChoBanFrag;
 import com.example.bctn.fragment.Home.HDanhGiaFrag;
 import com.example.bctn.fragment.Home.HGanBanFrag;
@@ -31,6 +32,9 @@ public class TabHomeAdap extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
+        if (MyAppication.mTaiKhoan.getIdTK() == -1){
+            return 2;
+        }
         return 3;
     }
 }

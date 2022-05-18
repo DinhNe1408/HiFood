@@ -21,6 +21,7 @@ import com.example.bctn.R;
 import com.example.bctn.adapter.RecyclerAdapter.QuanAn1Adap;
 import com.example.bctn.domain.quanan;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HDanhChoBanFrag extends Fragment {
@@ -38,28 +39,28 @@ public class HDanhChoBanFrag extends Fragment {
         if (MyAppication.mTaiKhoan.getIdTK() == - 1){
 
         } else {
+            List<quanan> quananList = new ArrayList<>();
+
             if (!Python.isStarted()) {
                 Python.start(new AndroidPlatform(getContext()));
             }
             Python py = Python.getInstance();
             final PyObject pyobj = py.getModule("BCTN_HTGY");
             PyObject obj = pyobj.callAttr("BCTN_HTGY", MyAppication.mTaiKhoan.getIdTK());
-            String goiy = "";
             List<PyObject> list = obj.asList();
             for (int i = 0; i < list.size(); i++) {
-                goiy = " || " + list.get(i);
+                quananList.add(MyAppication.mDao.DanhChoBanQA(String.valueOf(list.get(i))));
             }
-            Log.e("DSQuan", goiy);
+            getData_RecV(quananList);
         }
 
         //getData_RecV();
         return mView;
     }
 
-    private void getData_RecV() {
-        List<quanan> mListQA = mDao.ListQAGanBan();
+    private void getData_RecV(List<quanan> quananList) {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        QuanAn1Adap quanAn1Adap = new QuanAn1Adap(getContext(), mListQA);
+        QuanAn1Adap quanAn1Adap = new QuanAn1Adap(getContext(), quananList);
         recV_HPhoBien.setLayoutManager(linearLayoutManager);
         recV_HPhoBien.setAdapter(quanAn1Adap);
     }

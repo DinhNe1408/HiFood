@@ -40,7 +40,6 @@ public class YTGanBanFrag extends Fragment {
         rec_YT_GanBan.addItemDecoration(itemDecoration);
         rec_YT_GanBan.setLayoutManager(linearLayoutManager);
         rec_YT_GanBan.setAdapter(quanAn1Adap);
-
     }
 
     private void AnhXa() {
